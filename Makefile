@@ -3,9 +3,9 @@ NAME        = minirt
 
 # Compiler and Flags
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g -I./inc
-LDFLAGS     = -lreadline
+CFLAGS      = -Wall -Wextra -Werror -g 
 INCLUDES    = -Iinc -Ilibft
+LDFLAGS		= -lm
 
 # Library Paths
 LIBFT       = libft/libft.a
@@ -14,9 +14,9 @@ LIBFT       = libft/libft.a
 SRC_DIR     = src
 OBJ_DIR     = obj
 
-# Source Files - no final trocar pelos nomes dos arquivos
+# Source Files 
 SRCS 		= $(shell find $(SRC_DIR) -name "*.c")
-# Object Files (generated using patsubst)
+# Object Files 
 OBJS        = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 # Default target
@@ -37,17 +37,17 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Build the libft library
 $(LIBFT):
-	$(MAKE) -C inc/libft
+	$(MAKE) -C libft
 
 # Clean object files
 clean:
 	rm -rf $(OBJ_DIR)
-	$(MAKE) -C inc/libft clean
+	$(MAKE) -C libft clean
 
 # Remove objects and executable
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C inc/libft fclean
+	$(MAKE) -C libft fclean
 
 # Rebuild everything
 re: fclean all
