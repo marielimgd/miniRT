@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:09:57 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/14 20:42:23 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/19 12:26:26 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 static void parse_elements(char **tokens, char *line, t_scene *scene)
 {
-	if (ft_strcmp(tokens[0], "A") == 0) // Ambient light
+	if (ft_strcmp(tokens[0], "A") == 0) //ambient light
 		parse_ambient_light(tokens, scene);
-	else if (ft_strcmp(tokens[0], "C") == 0) // Camera
+	else if (ft_strcmp(tokens[0], "C") == 0) //camera
 		parse_camera(tokens, scene);
-	else if (ft_strcmp(tokens[0], "L") == 0) // Light
+	else if (ft_strcmp(tokens[0], "L") == 0) //light
 		parse_light(tokens, scene);
-	else if (ft_strcmp(tokens[0], "SP") == 0) // Sphere
+	else if (ft_strcmp(tokens[0], "sp") == 0) // Sphere
 		parse_sphere(tokens, scene);
-	else if (ft_strcmp(tokens[0], "CY") == 0) // Cylinder
+	else if (ft_strcmp(tokens[0], "cy") == 0) //cylinder
 		parse_cylinder(tokens, scene);
 	else
 		parse_error("Unknown element type in scene file\n");
