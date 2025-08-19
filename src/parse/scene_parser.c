@@ -6,11 +6,10 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 13:14:39 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/19 13:27:13 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "parser.h"
 #include "scene.h"
 

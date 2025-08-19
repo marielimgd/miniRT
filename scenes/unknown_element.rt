@@ -1,40 +1,19 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    unknown_element.rt                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/29 18:39:36 by marielidias       #+#    #+#              #
-#    Updated: 2025/08/19 13:57:27 by mmariano         ###   ########.fr        #
+#    Created: 2025/08/19 12:49:14 by mmariano          #+#    #+#              #
+#    Updated: 2025/08/19 16:15:37 by mmariano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I../includes
-AR = ar rcs
-RM = rm -f
-
-SRCS = $(shell find . -name "*.c")
-
-OBJS = $(SRCS:.c=.o)
-
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	$(AR) $@ $^
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-clean:
-	$(RM) $(OBJS)
-
-fclean: clean
-	$(RM) $(NAME)
-
-re: fclean all
-
-.PHONY: all clean fclean re
+A  0.5 255,255,255
+C  +0.0,+2.0,+4.0   +0.0,-0.25,-1.0   100
+L  +0.0,+4.0,+3.0   0.1     255,255,255
+#objects
+pl +0.0,+0.0,+0.0   +0.0,+1.0,+0.0   140,118,206
+sq -2.0,+1.0,-1.0   +1.0,+0.0,+0.0   4.0    0,176,240
+tr -2.0,+0.2,+1.0   +2.0,+0.2,+1.0   +0.0,+0.1,-4.0   68,194,164

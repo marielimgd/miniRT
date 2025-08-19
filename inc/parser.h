@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:54:36 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 13:20:06 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:44:42 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void 		parse_scene(char *file, t_scene *scene);
 void 		parse_camera(char **tokens, t_scene *scene);
 void 		parse_ambient_light(char **tokens, t_scene *scene);
 void 		parse_light(char **tokens, t_scene *scene);
+void		parse_plane(char **tokens, t_scene *scene);
 void 		parse_sphere(char **tokens, t_scene *scene);
 void 		parse_cylinder(char **tokens, t_scene *scene);
 void 		parse_error(char *message);

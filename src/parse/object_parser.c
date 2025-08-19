@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 13:14:06 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:45:28 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,33 @@
 #include "parser.h"
 #include "libft.h"
 
-void 	parse_sphere(char**tokens, t_scene *scene)
+void parse_plane(char **tokens, t_scene *scene)
+{
+    t_object    *plane;
+    t_vector    normal;
+
+    if (count_tokens(tokens) != 4)
+        parse_error("Invalid plane parameters");
+    plane = malloc(sizeof(t_object));
+    if (!plane)
+        parse_error("Memory allocation failed for a new plane");
+    plane->type = PLANE;
+    plane->origin = string_to_vector(tokens[1]);
+    normal = string_to_vector(tokens[2]);
+    plane->color = parse_colors(tokens[3]);
+    if (normal.x < -1.0 || normal.x > 1.0 ||
+        normal.y < -1.0 || normal.y > 1.0 ||
+        normal.z < -1.0 || normal.z > 1.0)
+    {
+        free(plane);
+        parse_error("Plane normal vector values must be in range [-1.0, 1.0]");
+    }
+    plane->normal = normal;
+    ft_lstadd_back(&scene->objects, ft_lstnew(plane));
+    
+}
+
+void 	parse_sphere(char **tokens, t_scene *scene)
 {
 	t_object    *sphere;
     double      diameter;
@@ -56,15 +82,15 @@ void 	parse_cylinder(char**tokens, t_scene *scene)
 
     cylinder->origin = string_to_vector(tokens[1]);
 	cylinder->cylinder.orientation = string_to_vector(tokens[2]);
+    diameter = ft_atof(tokens[3]);
+	height = ft_atof(tokens[4]);
     cylinder->color = parse_colors(tokens[5]);
     if (diameter <= 0.0 || height <= 0.0)
     {
         free(cylinder);
         parse_error("Cylinder diameter and height must be greater than 0");
     }
-	diameter = ft_atof(tokens[3]);
     cylinder->cylinder.diameter = diameter;
-	height = ft_atof(tokens[4]);
     cylinder->cylinder.height = height;
     ft_lstadd_back(&scene->objects, ft_lstnew(cylinder)); //new cylinder
 }

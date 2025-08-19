@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:03:13 by marielidias       #+#    #+#             */
-/*   Updated: 2025/08/14 20:29:10 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:21:42 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ size_t				ft_strlcpy(char *dest, const char *src, size_t destsize);
 size_t				ft_strlcat(char *dest, const char *src, size_t destsize);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-char				*ft_strchr(const char *str, int c);
+char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *str, int c);
 int					ft_strncmp(const char *str1, const char *str2, size_t n);
 void				*ft_memchr(const void *str, int c, size_t n);
@@ -58,7 +58,7 @@ char				*ft_strdup(const char *src);
 
 // --- PART 2 ---
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(char *s1, char *s2);
+char				*ft_strjoin(char *str1, char *str2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);

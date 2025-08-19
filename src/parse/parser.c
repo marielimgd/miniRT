@@ -6,16 +6,15 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:09:57 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 12:26:26 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:43:51 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
-#include "libft.h"
 #include "parser.h"
 
 
-static void parse_elements(char **tokens, char *line, t_scene *scene)
+static void parse_elements(char **tokens, t_scene *scene)
 {
 	if (ft_strcmp(tokens[0], "A") == 0) //ambient light
 		parse_ambient_light(tokens, scene);
@@ -23,12 +22,14 @@ static void parse_elements(char **tokens, char *line, t_scene *scene)
 		parse_camera(tokens, scene);
 	else if (ft_strcmp(tokens[0], "L") == 0) //light
 		parse_light(tokens, scene);
+	else if (ft_strcmp(tokens[0], "pl") == 0) // Plane
+		parse_plane(tokens, scene);
 	else if (ft_strcmp(tokens[0], "sp") == 0) // Sphere
 		parse_sphere(tokens, scene);
 	else if (ft_strcmp(tokens[0], "cy") == 0) //cylinder
 		parse_cylinder(tokens, scene);
 	else
-		parse_error("Unknown element type in scene file\n");
+		printf("Unknown element type in scene file: %s\n", tokens[0]);
 
 }
 
@@ -52,7 +53,7 @@ void parse_scene(char *file, t_scene *scene)
 		tokens = ft_split(line, ' ');
 		if (!tokens)
 			parse_error("Memory allocation failed during parsing\n");
-		parse_elements(tokens, line, scene);
+		parse_elements(tokens, scene);
 		free_tokens(tokens);
 		free(line);
 	}

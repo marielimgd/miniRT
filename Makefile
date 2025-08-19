@@ -1,5 +1,5 @@
 # Project Name
-NAME        = minirt
+NAME        = miniRT
 
 # Compiler and Flags
 CC          = cc
@@ -17,17 +17,17 @@ OBJ_DIR     = obj
 # Source Files 
 SRCS 		= $(shell find $(SRC_DIR) -name "*.c")
 # Object Files 
-OBJS        = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
+OBJS        = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRCS:.c=.o))
 
 # Default target
 all: $(NAME)
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 # Link the final executable
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) $(LIBFT) $(LDFLAGS)
 
 # Compile .c files into .o files; ensure directory exists
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

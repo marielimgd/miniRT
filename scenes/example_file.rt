@@ -1,7 +1,7 @@
-### RESOLUTION (not mandatory)
+### RESOLUTION (inset later)
 ## (width [>0] | height [>0])
 ## size x   size y
-R  800      600
+#R  800      600
 
 ### AMBIENT LIGHTING
 ## (intensity [0.0-1.0] | colour in RGB [0-255])
