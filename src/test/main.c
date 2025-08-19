@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:27:39 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 15:59:37 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:22:58 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,21 @@ int main(int argc, char **argv)
 		ft_putstr_fd("Usage: ./miniRT <scene_file.rt>\n", 2);
 		return (1);
 	}
-
+	FILE *file = fopen(argv[1], "r");
+	if (!file)
+	{
+		ft_putstr_fd("Error: Could not open scene file.\n", 2);
+		return (1);
+	}
+	char buf[1];
+	size_t bytes_read = fread(buf, 1, 1, file);
+	if (bytes_read == 0)
+	{
+		ft_putstr_fd("Error: Scene file is empty.\n", 2);
+		fclose(file);
+		return (1);
+	}
+	fclose(file);
 	init_scene(&scene);
 	printf("\033[0;36m------Scene Initialization------\033[0m\n");
 	printf("Parsing scene file: %s\n", argv[1]);
