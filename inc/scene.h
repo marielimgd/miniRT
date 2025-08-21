@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 14:29:07 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/21 18:29:11 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,27 @@ typedef enum e_object_type
     CYLINDER
 }               t_object_type;
 
+typedef struct s_cylinder_prop
+{
+    t_vector    orientation;
+    double      diameter;
+    double      height;
+}               t_cylinder_prop;
+
+typedef union           u_object_properties
+{
+    double              diameter;
+    t_vector            normal;
+    t_cylinder_prop     cylinder; 
+}                       t_object_properties;
+
 typedef struct s_object
 {
-    t_object_type	type;
-    t_vector		origin;
-    t_color			color;
-    union
-    {
-        double		diameter;   //Sphere
-        t_vector	normal;     //plane
-        struct //cylinder properties
-		{
-            t_vector	orientation;
-            double		diameter;
-            double		height;
-        }   cylinder;
-    };
-} 				t_object;
+    t_object_type       type;
+    t_vector            origin;
+    t_color             color;
+    t_object_properties prop; // Use the named union here
+}                       t_object;
 
 typedef struct s_scene
 {
@@ -80,7 +84,7 @@ typedef struct s_scene
 	t_camera	camera;
 	t_list		*lights; 
 	t_list		*objects;
-	int			has_ambient; // Flag to check if ambient light is set
+	int			has_ambient; // Flag to check if ambient light is already set
 }               t_scene;
 
 #endif

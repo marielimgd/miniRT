@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 15:45:28 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/08/21 18:31:09 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void parse_plane(char **tokens, t_scene *scene)
         free(plane);
         parse_error("Plane normal vector values must be in range [-1.0, 1.0]");
     }
-    plane->normal = normal;
+    plane->prop.normal = normal;
     ft_lstadd_back(&scene->objects, ft_lstnew(plane));
     
 }
@@ -62,7 +62,7 @@ void 	parse_sphere(char **tokens, t_scene *scene)
         free(sphere);
         parse_error("Sphere diameter must be greater than 0");
     }
-    sphere->diameter = diameter;
+    sphere->prop.diameter = diameter;
     ft_lstadd_back(&scene->objects, ft_lstnew(sphere)); //new sphere
 }
 
@@ -81,7 +81,7 @@ void 	parse_cylinder(char**tokens, t_scene *scene)
     cylinder->type = CYLINDER;
 
     cylinder->origin = string_to_vector(tokens[1]);
-	cylinder->cylinder.orientation = string_to_vector(tokens[2]);
+	cylinder->prop.cylinder.orientation = string_to_vector(tokens[2]);
     diameter = ft_atof(tokens[3]);
 	height = ft_atof(tokens[4]);
     cylinder->color = parse_colors(tokens[5]);
@@ -90,7 +90,7 @@ void 	parse_cylinder(char**tokens, t_scene *scene)
         free(cylinder);
         parse_error("Cylinder diameter and height must be greater than 0");
     }
-    cylinder->cylinder.diameter = diameter;
-    cylinder->cylinder.height = height;
+    cylinder->prop.cylinder.diameter = diameter;
+    cylinder->prop.cylinder.height = height;
     ft_lstadd_back(&scene->objects, ft_lstnew(cylinder)); //new cylinder
 }
