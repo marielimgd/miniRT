@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/02 19:29:37 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:51:47 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,5 @@ t_vector	calculate_ray_direction(t_camera *camera, int x, int y)
 	//final ray direction
 	final_dir = add_vectors(add_vectors(multiply_scalar(right, cam_dir.x), \
 		multiply_scalar(up, cam_dir.y)), forward);
-	return (vector_normalize(final_dir));}
+	return (vector_normalize(final_dir));
+}
