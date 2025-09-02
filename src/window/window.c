@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
+/*   Updated: 2025/09/02 18:17:36 by mmariano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	close_window(t_scene *scene)
@@ -16,6 +28,18 @@ int	handle_keypress(int keycode, t_scene *scene)
 	if (keycode == ESC_KEY)
 		close_window(scene);
 	return (0);
+}
+
+void	my_mlx_pixel_put(t_mlx_data *data, int x, int y, t_color color)
+{
+	char	*dst;
+	int		rgb_int;
+
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return ;
+	rgb_int = (color.r << 16) | (color.g << 8) | color.b;
+	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
+	*(unsigned int *)dst = rgb_int;
 }
 
 void	init_window(t_scene *scene)
