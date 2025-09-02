@@ -6,14 +6,13 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 13:27:13 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:42:39 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "scene.h"
+#include "minirt.h"
 
-t_vector string_to_vector(char *str)
+t_vector string_to_vector(char *str, double w)
 {
 	t_vector 	vector;
 	char 		**values;
@@ -29,6 +28,7 @@ t_vector string_to_vector(char *str)
 	vector.x = ft_atof(values[0]);
 	vector.y = ft_atof(values[1]);
 	vector.z = ft_atof(values[2]);
+	vector.w = w;
 	free_tokens(values);
 	return (vector);
 }
@@ -41,9 +41,9 @@ void 	parse_camera(char**tokens, t_scene *scene)
 	if(count_tokens(tokens) != 4)
 		parse_error("Invalid camera parameters");
 
-	scene->camera.origin = string_to_vector(tokens[1]);
+	scene->camera.origin = string_to_vector(tokens[1], 1.0);
 	
-	orientation = string_to_vector(tokens[2]);
+	orientation = string_to_vector(tokens[2], 0.0);
 	if (orientation.x < -1.0 || orientation.x > 1.0 ||
 		orientation.y < -1.0 || orientation.y > 1.0 ||
 		orientation.z < -1.0 || orientation.z > 1.0)
@@ -87,7 +87,7 @@ void 	parse_light(char**tokens, t_scene *scene)
 	if (!light)
 		parse_error("Memory allocation failed for light");
 	
-	light->origin = string_to_vector(tokens[1]);
+	light->origin = string_to_vector(tokens[1], 1.0);
 	brightness = ft_atof(tokens[2]);
 	if (brightness < 0.0 || brightness > 1.0)
 	{

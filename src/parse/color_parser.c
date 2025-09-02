@@ -6,12 +6,11 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:08:15 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 13:26:47 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:42:25 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "scene.h"
+#include "minirt.h"
 
 static void	validate_rgb_values(char **rgb_values)
 {

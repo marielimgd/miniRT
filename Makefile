@@ -3,53 +3,50 @@ NAME        = miniRT
 
 # Compiler and Flags
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g 
-INCLUDES    = -Iinc -Ilibft
-LDFLAGS		= -lm
-
-# Library Paths
-LIBFT       = libft/libft.a
+CFLAGS      = -Wall -Wextra -Werror -g
+INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR)
+LDFLAGS     = -L$(LIBFT_DIR) -lft \
+              -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # Directories
 SRC_DIR     = src
 OBJ_DIR     = obj
+INC_DIR     = inc
+LIBFT_DIR   = libft
+MLX_DIR     = minilibx-linux
 
-# Source Files 
+# Source Files
 SRCS 		= $(shell find $(SRC_DIR) -name "*.c")
-# Object Files 
-OBJS        = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRCS:.c=.o))
+OBJS        = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 # Default target
 all: $(NAME)
 
-valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
-
 # Link the final executable
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) $(LIBFT) $(LDFLAGS)
+$(NAME): $(OBJS)
+	@$(MAKE) -C $(LIBFT_DIR)
+	@$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
+	@echo "miniRT compiled successfully!"
 
-# Compile .c files into .o files; ensure directory exists
+# Compile source files into object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-
-# Build the libft library
-$(LIBFT):
-	$(MAKE) -C libft
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # Clean object files
 clean:
-	rm -rf $(OBJ_DIR)
-	$(MAKE) -C libft clean
+	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@echo "Object files cleaned."
 
-# Remove objects and executable
+# Remove objects and the final executable
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C libft fclean
+	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@echo "Full clean complete."
 
-# Rebuild everything
+# Rebuild everything from scratch
 re: fclean all
 
+# Phony targets are rules that don't represent actual files
 .PHONY: all clean fclean re

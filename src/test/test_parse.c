@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:27:39 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 16:22:58 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:13:16 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 /*--------------------------------Main para testar o parser----------------------------------*/
 
 
-#include "parser.h"
-#include "scene.h"
+#include "minirt.h"
 
-static void	init_scene(t_scene *scene)
+/* static void	init_scene(t_scene *scene)
 {
 	scene->ambient_light = -1.0;
 	scene->has_ambient = 0;
@@ -116,4 +115,4 @@ int main(int argc, char **argv)
     ft_lstclear(&scene.lights, free);
     ft_lstclear(&scene.objects, free);
 	return (0);
-}
+} */

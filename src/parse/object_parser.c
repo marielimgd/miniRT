@@ -6,13 +6,11 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/21 18:31:09 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:42:27 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
-#include "parser.h"
-#include "libft.h"
+#include "minirt.h"
 
 void parse_plane(char **tokens, t_scene *scene)
 {
@@ -25,8 +23,8 @@ void parse_plane(char **tokens, t_scene *scene)
     if (!plane)
         parse_error("Memory allocation failed for a new plane");
     plane->type = PLANE;
-    plane->origin = string_to_vector(tokens[1]);
-    normal = string_to_vector(tokens[2]);
+    plane->origin = string_to_vector(tokens[1], 1.0);
+    normal = string_to_vector(tokens[2], 0.0);
     plane->color = parse_colors(tokens[3]);
     if (normal.x < -1.0 || normal.x > 1.0 ||
         normal.y < -1.0 || normal.y > 1.0 ||
@@ -35,35 +33,32 @@ void parse_plane(char **tokens, t_scene *scene)
         free(plane);
         parse_error("Plane normal vector values must be in range [-1.0, 1.0]");
     }
-    plane->prop.normal = normal;
+    plane->prop.plane.normal = normal;
     ft_lstadd_back(&scene->objects, ft_lstnew(plane));
     
 }
 
-void 	parse_sphere(char **tokens, t_scene *scene)
+void	parse_sphere(char **tokens, t_scene *scene)
 {
-	t_object    *sphere;
-    double      diameter;
+	t_object	*sphere;
+	double		diameter;
 
-    if (count_tokens(tokens) != 4)
-        parse_error("Invalid sphere parameters");
-
-    sphere = malloc(sizeof(t_object));
-    if (!sphere)
-        parse_error("Memory allocation failed for a new sphere");
-    sphere->type = SPHERE;
-
-    sphere->origin = string_to_vector(tokens[1]);
-    diameter = ft_atof(tokens[2]);
-    sphere->color = parse_colors(tokens[3]);
-    
-    if (diameter <= 0.0)
-    {
-        free(sphere);
-        parse_error("Sphere diameter must be greater than 0");
-    }
-    sphere->prop.diameter = diameter;
-    ft_lstadd_back(&scene->objects, ft_lstnew(sphere)); //new sphere
+	if (count_tokens(tokens) != 4)
+		parse_error("Invalid sphere parameters");
+	sphere = malloc(sizeof(t_object));
+	if (!sphere)
+		parse_error("Memory allocation failed for a new sphere");
+	sphere->type = SPHERE;
+	sphere->origin = string_to_vector(tokens[1], 1.0);
+	diameter = ft_atof(tokens[2]);
+	sphere->color = parse_colors(tokens[3]);
+	if (diameter <= 0.0)
+	{
+		free(sphere);
+		parse_error("Sphere diameter must be greater than 0");
+	}
+	sphere->prop.sphere.radius = diameter / 2.0;
+    ft_lstadd_back(&scene->objects, ft_lstnew(sphere));
 }
 
 void 	parse_cylinder(char**tokens, t_scene *scene)
@@ -80,8 +75,8 @@ void 	parse_cylinder(char**tokens, t_scene *scene)
         parse_error("Memory allocation failed for a new cylinder");
     cylinder->type = CYLINDER;
 
-    cylinder->origin = string_to_vector(tokens[1]);
-	cylinder->prop.cylinder.orientation = string_to_vector(tokens[2]);
+    cylinder->origin = string_to_vector(tokens[1], 1.0);
+	cylinder->prop.cylinder.orientation = string_to_vector(tokens[2], 0.0);
     diameter = ft_atof(tokens[3]);
 	height = ft_atof(tokens[4]);
     cylinder->color = parse_colors(tokens[5]);
@@ -92,5 +87,5 @@ void 	parse_cylinder(char**tokens, t_scene *scene)
     }
     cylinder->prop.cylinder.diameter = diameter;
     cylinder->prop.cylinder.height = height;
-    ft_lstadd_back(&scene->objects, ft_lstnew(cylinder)); //new cylinder
+    ft_lstadd_back(&scene->objects, ft_lstnew(cylinder));
 }
