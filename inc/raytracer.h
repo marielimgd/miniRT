@@ -4,6 +4,17 @@
 # include "minirt.h"
 
 // --- Vector Math ---
+double		get_magnitude(t_vector *vector);
+t_vector	*normalization(t_vector *u_vector);
+t_vector	*negative_vector(t_vector *vector);
+double		dot_product(t_vector *a, t_vector *b);
+t_vector	*dot_cross(t_vector *a, t_vector *b);
+int			is_equal(double a, double b);
+t_vector	*add_tuples(t_vector *vector, t_vector *point);
+t_vector	*subtract_tuples(t_vector *vector, t_vector *point);
+t_vector	*scale_tuples_product(t_vector *vector, double scale);
+t_vector	*scale_tuples_divison(t_vector *vector, double scale);
+
 
 
 // --- Rendering ---
