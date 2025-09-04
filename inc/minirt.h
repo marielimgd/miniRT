@@ -134,6 +134,24 @@ typedef struct s_scene
 	t_mlx_data		mlx;
 }					t_scene;
 
+
+// --- Safe Allocation ---
+
+typedef enum e_alloc_type
+{
+	ALLOC_TYPE_GENERIC,
+	ALLOC_TYPE_MTX,
+	ALLOC_TYPE_STRING,
+}	t_alloc_type;
+
+typedef struct s_allocation
+{
+	t_alloc_type	type;
+	void			*ptr;
+	s_allocation	*next;
+}	t_allocation;
+
+
 # include "parser.h"
 # include "window.h"
 # include "raytracer.h"
