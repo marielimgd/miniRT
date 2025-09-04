@@ -6,21 +6,12 @@
 /*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:46:11 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/03 22:23:28 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/03 22:29:09 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-t_color	scale_color(t_color c, float ratio)
-{
-	t_color	color;
-
-	color.red = (int)(c.red * ratio);
-	color.green = (int)(c.green * ratio);
-	color.blue = (int)(c.blue * ratio);
-	return (color);
-}
 /*
 	Calibrar para deixar menor que 255 a maior que 0;
 */
@@ -34,6 +25,17 @@ t_color	max_color(t_color c)
 	return (final);
 }
 
+t_color	scale_color(t_color c, float ratio)
+{
+	t_color	color;
+
+	color.red = (int)(c.red * ratio);
+	color.green = (int)(c.green * ratio);
+	color.blue = (int)(c.blue * ratio);
+	color = max_color(colar);
+	return (color);
+}
+
 t_color	add_color(t_color a; t_color b)
 {
 	t_color	color;
@@ -41,6 +43,28 @@ t_color	add_color(t_color a; t_color b)
 	color.red = a.red + b.red;
 	color.green = a.green + b.green;
 	color.blue = a.blue + b.blue;
+	color = max_color(color);
+	return (color);
+}
+
+t_color	subtract_color(t_color a; t_color b)
+{
+	t_color	color;
+
+	color.red = a.red - b.red;
+	color.green = a.green - b.green;
+	color.blue = a.blue - b.blue;
+	color = max_color(color);
+	return (color);
+}
+
+t_color	multiply_color(t_color a; t_color b)
+{
+	t_color	color;
+
+	color.red = a.red * b.red;
+	color.green = a.green * b.green;
+	color.blue = a.blue * b.blue;
 	color = max_color(color);
 	return (color);
 }
