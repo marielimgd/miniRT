@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   struct_creation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/03 16:29:48 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/04 17:14:26 by mmariano         ###   ########.fr       */
+/*   Created: 2025/09/04 18:52:13 by mmariano          #+#    #+#             */
+/*   Updated: 2025/09/04 18:53:44 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
-void	print_error(char *s)
+t_vector	create_point(double x, double y, double z)
 {
-	printf("\033[1;31m%s\033[0m\n",s);
-	free_all();
+	t_vector	new_point;
+
+	new_point.x = x;
+	new_point.y = y;
+	new_point.z = z;
+	new_point.w = 1.0;
+	return (new_point);
+}
+
+t_vector	create_vector(double x, double y, double z)
+{
+	t_vector	new_vector;
+
+	new_vector.x = x;
+	new_vector.y = y;
+	new_vector.z = z;
+	new_vector.w = 0.0;
+	return (new_vector);
 }

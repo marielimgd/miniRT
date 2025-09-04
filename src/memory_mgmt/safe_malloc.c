@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_malloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/03 20:58:33 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:59:06 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void	free_all(void) // colocar todas as structs que a gente malloca
 	while (alloc)
 	{
 		next = alloc->next;
-		if (type == ALLOC_TYPE_MTX)
-			free_matrix(alloc->ptr);
-		else if (type == ALLOC_TYPE_STRING || type == ALLOC_TYPE_GENERIC)
+		if (alloc->type == ALLOC_TYPE_MTX)
+			//free_matrix(alloc->ptr);
+			free(alloc->ptr);
+		else if (alloc->type == ALLOC_TYPE_STRING || alloc->type == ALLOC_TYPE_GENERIC)
 			free(alloc->ptr);
 		alloc->ptr = NULL;
 		free(alloc);
@@ -42,18 +43,17 @@ void	free_all(void) // colocar todas as structs que a gente malloca
 void	*safe_malloc(size_t size, t_alloc_type u_type)
 {
 	t_allocation	*alloc;
-	t_allocation	*result;
 
 	alloc = get_alloc();
 	while (alloc)
-		alooc = alloc->next;
+		alloc = alloc->next;
 	alloc = malloc(sizeof(t_allocation));
 	if (!alloc)
-		return (print_error("malloc error"));
+		return (print_error("malloc error"), NULL);
 	alloc->ptr = malloc(size);
 	if (!alloc->ptr)
-		return (print_error("malloc error"));
-	alloc->type = type;
+		return (print_error("malloc error"), NULL);
+	alloc->type = u_type;
 	alloc->next = NULL;
 	return (alloc->ptr);
 }

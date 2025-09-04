@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 22:10:55 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/03 20:55:48 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:26:36 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ t_vector	*normalization(t_vector *u_vector)
 	double	magnitute;
 	t_vector	*vector;
 	
+
 	vector = safe_malloc(sizeof(t_vector), 0);
 	if (!vector)
 		return (NULL);
 	magnitute = get_magnitude(u_vector);
-	if(magnitute = 0.0f)
+	if(magnitute == 0.0f)
 	{
 		vector->x = 0.0f;
 		vector->y = 0.0f;
@@ -57,7 +58,7 @@ t_vector	*normalization(t_vector *u_vector)
 t_vector	*negative_vector(t_vector *vector)
 {
 	t_vector	*result;
-	
+
 	result = safe_malloc(sizeof(t_vector), 0);
 	if (!result)
 		return (NULL);
@@ -74,7 +75,7 @@ double	dot_product(t_vector *a, t_vector *b)
 	
 	if ((a->w * b->w) != 0)
 		print_error("Wrong Vector Passed");
-	result = (a->x * b->x) + (a->y * b->y) + (a->z * b->z) + (a->w * b->w);
+	result = (a->x * b->x) + (a->y * b->y) + (a->z * b->z);
 	return (result);
 }
 

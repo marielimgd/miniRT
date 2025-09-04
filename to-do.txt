@@ -27,7 +27,7 @@ Categoria								Subcategoria							Função													Descrição
 [ ]Álgebra Linear						Transformações							rotation_y(radians)										Cria matriz de rotação no eixo Y
 [ ]Álgebra Linear						Transformações							rotation_z(radians)										Cria matriz de rotação no eixo Z
 [ ]Álgebra Linear						Transformações							shearing(xy, xz, yx, yz, zx, zy)						Cria matriz de cisalhamento
-[ ]Geometria							Raios									ray(origin, direction)									Cria um raio com origem e direção
+[X]Geometria							Raios									ray(origin, direction)									Cria um raio com origem e direção
 [ ]Geometria							Raios									position(ray, t)										Calcula posição no raio a uma distância t
 [ ]Geometria							Raios									transform(ray, matrix)									Aplica transformação a um raio
 [ ]Geometria							Formas Primitivas						sphere()												Cria objeto esfera

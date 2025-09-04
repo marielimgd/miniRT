@@ -37,9 +37,9 @@ typedef struct s_vector
 
 typedef struct s_color
 {
-	int				red;
-	int				green;
-	int				blue;
+	int				r;
+	int				g;
+	int				b;
 }					t_color;
 
 // --- Rendering ---
@@ -122,6 +122,19 @@ typedef struct s_object
 	t_object_properties	prop;
 }						t_object;
 
+// --- Intersections ---
+typedef struct s_intersection
+{
+	double				t;
+	t_object			*object;
+}						t_intersection;
+
+typedef struct s_intersec_list
+{
+	int				count;
+	t_intersection		intersections[10]; //mudar depois
+}					t_intersect_list;
+
 // --- Main Scene Struct ---
 typedef struct s_scene
 {
@@ -142,14 +155,14 @@ typedef enum e_alloc_type
 	ALLOC_TYPE_GENERIC,
 	ALLOC_TYPE_MTX,
 	ALLOC_TYPE_STRING,
-}	t_alloc_type;
+}			t_alloc_type;
 
 typedef struct s_allocation
 {
-	t_alloc_type	type;
-	void			*ptr;
-	s_allocation	*next;
-}	t_allocation;
+	t_alloc_type		type;
+	void				*ptr;
+	struct s_allocation	*next;
+}						t_allocation;
 
 
 # include "parser.h"
