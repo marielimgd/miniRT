@@ -37,9 +37,9 @@ typedef struct s_vector
 
 typedef struct s_color
 {
-	int				r;
-	int				g;
-	int				b;
+	int				red;
+	int				green;
+	int				blue;
 }					t_color;
 
 // --- Rendering ---

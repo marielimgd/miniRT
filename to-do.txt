@@ -1,14 +1,14 @@
 Categoria								Subcategoria							Função													Descrição
-[ ]Fundamentos Matemáticos				Comparações								equal(a, b)												Compara números de ponto flutuante com tolerância
-[ ]Fundamentos Matemáticos				Operações com Tuplas					add(t1, t2)												Adiciona duas tuplas
-[ ]Fundamentos Matemáticos				Operações com Tuplas					subtract(t1, t2)										Subtrai duas tuplas
-[ ]Fundamentos Matemáticos				Operações com Tuplas					negate(t)												Inverte o sinal de cada componente
-[ ]Fundamentos Matemáticos				Operações com Tuplas					multiply(t, scalar)										Multiplica tupla por escalar
-[ ]Fundamentos Matemáticos				Operações com Tuplas					divide(t, scalar)										Divide tupla por escalar
-[ ]Fundamentos Matemáticos				Operações com Vetores					magnitude(v)											Calcula o comprimento do vetor
-[ ]Fundamentos Matemáticos				Operações com Vetores					normalize(v)											Converte em vetor unitário
-[ ]Fundamentos Matemáticos				Operações com Vetores					dot(v1, v2)												Produto escalar entre vetores
-[ ]Fundamentos Matemáticos				Operações com Vetores					cross(v1, v2)											Produto vetorial entre vetores
+[X]Fundamentos Matemáticos				Comparações								equal(a, b)												Compara números de ponto flutuante com tolerância
+[X]Fundamentos Matemáticos				Operações com Tuplas					add(t1, t2)												Adiciona duas tuplas
+[X]Fundamentos Matemáticos				Operações com Tuplas					subtract(t1, t2)										Subtrai duas tuplas
+[X]Fundamentos Matemáticos				Operações com Tuplas					negate(t)												Inverte o sinal de cada componente
+[X]Fundamentos Matemáticos				Operações com Tuplas					multiply(t, scalar)										Multiplica tupla por escalar
+[X]Fundamentos Matemáticos				Operações com Tuplas					divide(t, scalar)										Divide tupla por escalar
+[X]Fundamentos Matemáticos				Operações com Vetores					magnitude(v)											Calcula o comprimento do vetor
+[X]Fundamentos Matemáticos				Operações com Vetores					normalize(v)											Converte em vetor unitário
+[X]Fundamentos Matemáticos				Operações com Vetores					dot(v1, v2)												Produto escalar entre vetores
+[X]Fundamentos Matemáticos				Operações com Vetores					cross(v1, v2)											Produto vetorial entre vetores
 [ ]Fundamentos Matemáticos				Auxiliares								radians(deg)											Converte graus para radianos
 [ ]Fundamentos Matemáticos				Auxiliares								swap(tmin, tmax)										Troca valores de variáveis
 [ ]Álgebra Linear						Matrizes								matrix(...)												Cria matrizes de diferentes dimensões

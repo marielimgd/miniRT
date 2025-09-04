@@ -19,6 +19,6 @@ void		free_tokens(char **tokens);
 t_vector	string_to_vector(char *str, double w_value);
 t_color		parse_colors(char *str);
 
-// --- Safe Malloc ---
+
 
 #endif

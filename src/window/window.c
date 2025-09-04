@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/02 18:17:36 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/03 21:42:35 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 int	close_window(t_scene *scene)
 {
@@ -18,7 +18,7 @@ int	close_window(t_scene *scene)
 	mlx_destroy_window(scene->mlx.mlx_ptr, scene->mlx.win_ptr);
 	mlx_destroy_display(scene->mlx.mlx_ptr);
 	free(scene->mlx.mlx_ptr);
-	// TODO: Free all allocated scene data (lights, objects)
+	// TODO: Free all allocated scene data (lights, objects) // foi feito uma funcao para dar free_all
 	exit(0);
 	return (0);
 }

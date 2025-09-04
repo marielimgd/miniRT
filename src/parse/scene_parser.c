@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/02 16:42:39 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/03 21:41:37 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 t_vector string_to_vector(char *str, double w)
 {
