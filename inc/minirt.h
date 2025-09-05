@@ -44,9 +44,9 @@ typedef struct s_color
 
 typedef struct s_matrix
 {
-	int				**matrix;
-	int				collum;
-	int				row;
+	double				**matrix;
+	double				collum;
+	double				row;
 }					t_matrix;
 
 

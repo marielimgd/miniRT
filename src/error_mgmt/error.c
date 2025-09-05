@@ -6,7 +6,7 @@
 /*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:29:48 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/03 20:53:26 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:06:23 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@ void	print_error(char *s)
 {
 	printf("\033[1;31m%s\033[0m\n",s);
 	free_all();
+	EXIT_FAILURE;
 }
