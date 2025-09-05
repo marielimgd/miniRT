@@ -42,6 +42,14 @@ typedef struct s_color
 	int				b;
 }					t_color;
 
+typedef struct s_matrix
+{
+	double				**matrix;
+	double				collum;
+	double				row;
+}					t_matrix;
+
+
 // --- Rendering ---
 typedef struct s_ray
 {
@@ -159,10 +167,10 @@ typedef enum e_alloc_type
 
 typedef struct s_allocation
 {
-	t_alloc_type		type;
-	void				*ptr;
+	t_alloc_type	type;
+	void			*ptr;
 	struct s_allocation	*next;
-}						t_allocation;
+}	t_allocation;
 
 
 # include "parser.h"

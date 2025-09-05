@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:29:48 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/04 17:14:26 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/05 19:39:26 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@ void	print_error(char *s)
 {
 	printf("\033[1;31m%s\033[0m\n",s);
 	free_all();
+	EXIT_FAILURE;
 }
