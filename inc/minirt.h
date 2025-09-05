@@ -42,6 +42,14 @@ typedef struct s_color
 	int				blue;
 }					t_color;
 
+typedef struct s_matrix
+{
+	int				**matrix;
+	int				collum;
+	int				row;
+}					t_matrix;
+
+
 // --- Rendering ---
 typedef struct s_ray
 {
@@ -148,7 +156,7 @@ typedef struct s_allocation
 {
 	t_alloc_type	type;
 	void			*ptr;
-	s_allocation	*next;
+	struct s_allocation	*next;
 }	t_allocation;
 
 

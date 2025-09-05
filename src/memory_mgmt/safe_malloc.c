@@ -6,7 +6,7 @@
 /*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/03 20:58:33 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:21:53 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_all(void) // colocar todas as structs que a gente malloca
 		next = alloc->next;
 		if (type == ALLOC_TYPE_MTX)
 			free_matrix(alloc->ptr);
-		else if (type == ALLOC_TYPE_STRING || type == ALLOC_TYPE_GENERIC)
+		else if (alloc->type == ALLOC_TYPE_STRING || alloc->type == ALLOC_TYPE_GENERIC)
 			free(alloc->ptr);
 		alloc->ptr = NULL;
 		free(alloc);
@@ -46,14 +46,14 @@ void	*safe_malloc(size_t size, t_alloc_type u_type)
 
 	alloc = get_alloc();
 	while (alloc)
-		alooc = alloc->next;
+		alloc = alloc->next;
 	alloc = malloc(sizeof(t_allocation));
 	if (!alloc)
 		return (print_error("malloc error"));
 	alloc->ptr = malloc(size);
 	if (!alloc->ptr)
 		return (print_error("malloc error"));
-	alloc->type = type;
+	alloc->type = u_type;
 	alloc->next = NULL;
 	return (alloc->ptr);
 }
