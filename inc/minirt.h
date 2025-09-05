@@ -32,7 +32,7 @@ typedef struct s_vector
 	double			x;
 	double			y;
 	double			z;
-	double			w;
+	double			w; //w=0: vector, w=1: point
 }					t_vector;
 
 typedef struct s_color
@@ -133,7 +133,7 @@ typedef struct s_intersec_list
 {
 	int				count;
 	t_intersection		intersections[10]; //mudar depois
-}					t_intersect_list;
+}					t_intersection_list;
 
 // --- Main Scene Struct ---
 typedef struct s_scene

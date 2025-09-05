@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/04 18:53:54 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/05 19:27:31 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ t_vector	ray_position(t_ray ray, double t);
 // --- Intersections ---
 t_intersection		intersect_object(t_object *object, t_ray ray);
 t_intersection		create_intersection(double t, t_object *obj);
-t_intersect_list	create_intersections_list(int count, ...);
-t_intersect_list	intersect_sphere(t_object *sphere, t_ray ray);
-
+t_intersection_list	create_intersections_list(int count, ...);
+t_intersection		*find_hit(t_intersection_list list);
 
 // --- Objects ----
 t_object	*create_sphere(void);
+t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray);
 
 // --- Safe_Malloc ---
 void			*safe_malloc(size_t size, t_alloc_type u_type);
