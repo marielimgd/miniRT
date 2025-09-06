@@ -127,6 +127,7 @@ typedef struct s_object
 	t_object_type		type;
 	t_vector			origin;
 	t_color				color;
+	t_matrix			*transform;
 	t_object_properties	prop;
 }						t_object;
 
