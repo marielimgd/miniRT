@@ -6,13 +6,13 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/08 16:14:59 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:56:19 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* static void	init_scene(t_scene *scene)
+static void	init_scene(t_scene *scene)
 {
 	scene->ambient_light = -1.0;
 	scene->has_ambient = false;
@@ -20,7 +20,7 @@
 	scene->objects = NULL;
 }
 
-int	main(int argc, char **argv)
+/* int	main(int argc, char **argv)
 {
 	t_scene	scene;
 
@@ -35,129 +35,88 @@ int	main(int argc, char **argv)
 } */
 
 //----------------------------------------------TEST AREA----------------------------------------
-void	print_tuple(t_vector t, char *name)
+
+static void	setup_scene(t_scene *scene)
 {
-	printf("%s: (x:%.1f, y:%.1f, z:%.1f, w:%.1f)\n",
-		name, t.x, t.y, t.z, t.w);
+	t_object	*sphere;
+	t_matrix	*transform;
+
+	// Create a sphere and add it to the scene's object list.
+	sphere = create_sphere();
+
+	// Example transform: shrink the sphere and move it a little.
+	// You can comment this out to render the default unit sphere.
+	transform = scaling(0.5, 1, 1);
+	set_transform(sphere, transform);
+
+	scene->objects = ft_lstnew(sphere);
 }
 
-void	print_intersections(t_intersection_list xs, char *name)
+/**
+ * @brief Renders a sphere's shadow onto the canvas (your window).
+ * This function translates the chapter's final pseudocode into C.
+ */
+void	render_sphere_shadow(t_scene *scene)
 {
-	printf("%s: count = %d", name, xs.count);
-	if (xs.count > 0)
-		printf(", t[0] = %.1f, t[1] = %.1f\n", xs.intersections[0].t, xs.intersections[1].t);
-	else
-		printf("\n");
-}
+	int			x;
+	int			y;
+	t_vector	world_coords;
+	t_ray		r;
+	t_intersection_list	xs;
+	t_vector	wall_position;
+	t_vector	*dir_unnormalized;
+	t_vector	*dir_normalized;
+	// FIX 1: Declare and initialize the ray's origin.
+	t_vector	ray_origin;
 
-// Helper to print a 4x4 matrix
-void	print_matrix(t_matrix *m, char *name)
-{
-	int	i;
-	int	j;
+	ray_origin = create_point(0, 0, -5);
+	// Define the "wall" and pixel size in world space units.
+	double wall_z = 10.0;
+	double wall_size = 7.0;
+	double pixel_size = wall_size / WIDTH;
+	double half_wall = wall_size / 2.0;
 
-	printf("--- Matrix: %s ---\n", name);
-	if (!m)
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		printf(" (NULL)\n");
-		return ;
-	}
-	i = 0;
-	while (i < m->row)
-	{
-		j = 0;
-		printf("|");
-		while (j < m->collum)
+		world_coords.y = half_wall - pixel_size * y;
+		x = -1;
+		while (++x < WIDTH)
 		{
-			printf(" %.2f ", m->matrix[i][j]);
-			j++;
+			world_coords.x = -half_wall + pixel_size * x;
+			// FIX 2: Use the already declared wall_position, don't redeclare it.
+			wall_position = create_point(world_coords.x, world_coords.y, wall_z);
+			dir_unnormalized = subtract_tuples(&wall_position, &ray_origin);
+			dir_normalized = normalization(dir_unnormalized);
+			r = create_ray(ray_origin, *dir_normalized);
+			free(dir_unnormalized);
+			free(dir_normalized);
+			xs = intersect_sphere(scene->objects->data, r);
+			// FIX 3: Use the correct function name 'hit'.
+			if (find_hit(xs))
+				my_mlx_pixel_put(&scene->mlx, x, y, (t_color){255, 0, 0});
+			else
+				my_mlx_pixel_put(&scene->mlx, x, y, (t_color){25, 25, 25});
 		}
-		printf("|\n");
-		i++;
 	}
-	printf("---------------------\n");
 }
 
-// Helper to compare two matrices
-void	compare_matrices(t_matrix *a, t_matrix *b, char *name)
-{
-	int	i;
-	int	j;
-	int	equal;
-
-	equal = 1;
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			if (!is_equal(a->matrix[i][j], b->matrix[i][j]))
-				equal = 0;
-			j++;
-		}
-		i++;
-	}
-	printf("%s: %s\n", name, (equal ? "PASS" : "FAIL"));
-}
 
 int	main(void)
 {
-	t_ray				r;
-	t_ray				r2;
-	t_matrix			*m;
-	t_object			*s;
-	t_intersection_list	xs;
-	t_matrix			*t;
-	t_matrix			*ident;
+	t_scene	scene;
 
-	// --- Ray Transformation Tests ---
-	printf("--- SCENARIO: Translating a ray ---\n");
-	r = create_ray(create_point(1, 2, 3), create_vector(0, 1, 0));
-	m = translation(3, 4, 5);
-	r2 = transform(r, m);
-	print_tuple(r2.origin, "r2.origin");    // Expected: (4, 6, 8)
-	print_tuple(r2.direction, "r2.direction"); // Expected: (0, 1, 0)
-	printf("\n");
-
-	printf("--- SCENARIO: Scaling a ray ---\n");
-	r = create_ray(create_point(1, 2, 3), create_vector(0, 1, 0));
-	m = scaling(2, 3, 4);
-	r2 = transform(r, m);
-	print_tuple(r2.origin, "r2.origin");    // Expected: (2, 6, 12)
-	print_tuple(r2.direction, "r2.direction"); // Expected: (0, 3, 0)
-	printf("\n");
-
-	// --- Sphere Transformation Tests ---
-	printf("--- SCENARIO: A sphere's default transformation ---\n");
-	s = create_sphere();
-	ident = identity_matrix();
-	compare_matrices(s->transform, ident, "Default transform is identity");
-	printf("\n");
-
-	printf("--- SCENARIO: Changing a sphere's transformation ---\n");
-	t = translation(2, 3, 4);
-	set_transform(s, t);
-	compare_matrices(s->transform, t, "Transform has been set");
-	printf("\n");
-
-	// --- Intersection with Transformed Spheres ---
-	printf("--- SCENARIO: Intersecting a scaled sphere ---\n");
-	r = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
-	set_transform(s, scaling(2, 2, 2));
-	xs = intersect_sphere(s, r);
-	print_intersections(xs, "xs"); // Expected: count=2, t=3.0, t=7.0
-	printf("\n");
-
-	printf("--- SCENARIO: Intersecting a translated sphere ---\n");
-	r = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
-	set_transform(s, translation(5, 0, 0));
-	xs = intersect_sphere(s, r);
-	print_intersections(xs, "xs"); // Expected: count=0
-	printf("\n");
+	// Basic scene and window initialization.
+	init_scene(&scene);
+	init_window(&scene);
+	setup_scene(&scene);
 	
-	free_all();
+	// Render the final image.
+	render_sphere_shadow(&scene);
+	
+	// Push the final image to the window and start the event loop.
+	mlx_put_image_to_window(scene.mlx.mlx_ptr, scene.mlx.win_ptr,
+		scene.mlx.img_ptr, 0, 0);
+	mlx_loop(scene.mlx.mlx_ptr);
 	return (0);
 }
-
-

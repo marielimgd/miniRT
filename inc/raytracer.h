@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 16:14:39 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:26:30 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ t_matrix	*translation(double x, double y, double z);
 t_matrix	*scaling(double x, double y, double z);
 t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t);
 void		free_matrix(t_matrix *m);
+t_matrix	*rotation_x(double radians);
+t_matrix	*rotation_y(double radians);
+t_matrix	*rotation_z(double radians);
+
+double			cofactor(t_matrix *m, int row, int col);
+double			determinant(t_matrix *m);
 
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
