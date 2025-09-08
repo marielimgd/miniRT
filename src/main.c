@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/05 20:46:08 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:14:59 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ int	main(int argc, char **argv)
 } */
 
 //----------------------------------------------TEST AREA----------------------------------------
+void	print_tuple(t_vector t, char *name)
+{
+	printf("%s: (x:%.1f, y:%.1f, z:%.1f, w:%.1f)\n",
+		name, t.x, t.y, t.z, t.w);
+}
+
+void	print_intersections(t_intersection_list xs, char *name)
+{
+	printf("%s: count = %d", name, xs.count);
+	if (xs.count > 0)
+		printf(", t[0] = %.1f, t[1] = %.1f\n", xs.intersections[0].t, xs.intersections[1].t);
+	else
+		printf("\n");
+}
 
 // Helper to print a 4x4 matrix
 void	print_matrix(t_matrix *m, char *name)
@@ -104,7 +118,6 @@ int	main(void)
 	r2 = transform(r, m);
 	print_tuple(r2.origin, "r2.origin");    // Expected: (4, 6, 8)
 	print_tuple(r2.direction, "r2.direction"); // Expected: (0, 1, 0)
-	free_matrix(m);
 	printf("\n");
 
 	printf("--- SCENARIO: Scaling a ray ---\n");
@@ -113,7 +126,6 @@ int	main(void)
 	r2 = transform(r, m);
 	print_tuple(r2.origin, "r2.origin");    // Expected: (2, 6, 12)
 	print_tuple(r2.direction, "r2.direction"); // Expected: (0, 3, 0)
-	free_matrix(m);
 	printf("\n");
 
 	// --- Sphere Transformation Tests ---
@@ -121,7 +133,6 @@ int	main(void)
 	s = create_sphere();
 	ident = identity_matrix();
 	compare_matrices(s->transform, ident, "Default transform is identity");
-	free_matrix(ident);
 	printf("\n");
 
 	printf("--- SCENARIO: Changing a sphere's transformation ---\n");
@@ -145,6 +156,8 @@ int	main(void)
 	print_intersections(xs, "xs"); // Expected: count=0
 	printf("\n");
 	
-	free_all_allocations();
+	free_all();
 	return (0);
 }
+
+

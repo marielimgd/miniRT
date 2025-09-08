@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/05 21:14:07 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:18:29 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 	inv_matrix = inverse_matrix(sphere->transform);
 	transformed_ray = transform(ray, inv_matrix);
 	free_matrix(inv_matrix);
-	coeficient_calculation(sphere, transformed_ray, &coeff[0], &coeff[1], &coeff[2]);
+	discriminant = (sphere, transformed_ray, &coeff[0], &coeff[1], &coeff[2]);
 	if (discriminant < 0)
 		return ((t_intersection_list){.count = 0});
 

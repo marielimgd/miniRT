@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:13 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/05 20:09:28 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:21:06 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,18 @@ t_matrix	*tuple_to_matrix(t_vector *tuple)
 	return (final);
 }
 
-t_matrix	*indenty_matrix(double	size)
+t_matrix	*indentity_matrix(void)
 {
 	t_matrix	*final;
 	int			i;
 	int			j;
 
-	final = create_matrix(size, size);
+	final = create_matrix(4, 4);
 	i = 0;
-	while (i < size)
+	while (i < 4)
 	{
 		j = 0;
-		while (j < size)
+		while (j < 4)
 		{
 			if (i == j)
 				final->matrix[i][j] = 1;
@@ -122,8 +122,46 @@ t_matrix	*inverse_matrix(t_matrix *a)
 {
 	t_matrix	*final;
 
+	final = NULL;
+
 	if (a->row != a->collum)
 		print_error("Trying to inverse non quadratic matrix");
 	
-	
+	return(final);
+}
+
+
+t_matrix	*translation(double x, double y, double z)
+{
+	t_matrix	*final;
+
+	final = identity_matrix();
+	final->matrix[0][3] = x;
+	final->matrix[1][3] = y;
+	final->matrix[2][3] = z;
+	return (final);
+}
+
+
+t_matrix	*scaling(double x, double y, double z)
+{
+	t_matrix	*final;
+
+	final = identity_matrix(); 
+	final->matrix[0][0] = x;
+	final->matrix[1][1] = y;
+	final->matrix[2][2] = z;
+	return (final);
+}
+
+
+t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t)
+{
+	t_vector	result;
+
+	result.x = m->matrix[0][0] * t.x + m->matrix[0][1] * t.y + m->matrix[0][2] * t.z + m->matrix[0][3] * t.w;
+	result.y = m->matrix[1][0] * t.x + m->matrix[1][1] * t.y + m->matrix[1][2] * t.z + m->matrix[1][3] * t.w;
+	result.z = m->matrix[2][0] * t.x + m->matrix[2][1] * t.y + m->matrix[2][2] * t.z + m->matrix[2][3] * t.w;
+	result.w = m->matrix[3][0] * t.x + m->matrix[3][1] * t.y + m->matrix[3][2] * t.z + m->matrix[3][3] * t.w;
+	return (result);
 }

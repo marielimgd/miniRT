@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/05 20:47:10 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:14:39 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,13 @@ t_vector	*scale_tuples_divison(t_vector *vector, double scale);
 t_matrix	*create_matrix(double collum, double row);
 t_matrix	*matrix_product(t_matrix *a, t_matrix *b);
 t_matrix	*tuple_to_matrix(t_vector *tuple);
-t_matrix	*indenty_matrix(double	size);
+t_matrix	*identity_matrix(void);
 t_matrix	*transpose_matrix(t_matrix *a);
 t_matrix	*inverse_matrix(t_matrix *a);
+t_matrix	*translation(double x, double y, double z);
+t_matrix	*scaling(double x, double y, double z);
+t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t);
+void		free_matrix(t_matrix *m);
 
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
