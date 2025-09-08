@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/08 17:56:19 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:20:28 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ static void	setup_scene(t_scene *scene)
 	scene->objects = ft_lstnew(sphere);
 }
 
-/**
- * @brief Renders a sphere's shadow onto the canvas (your window).
- * This function translates the chapter's final pseudocode into C.
- */
+#include "minirt.h"
+
+// Your init_scene and setup_scene functions...
+
 void	render_sphere_shadow(t_scene *scene)
 {
 	int			x;
@@ -66,11 +66,9 @@ void	render_sphere_shadow(t_scene *scene)
 	t_vector	wall_position;
 	t_vector	*dir_unnormalized;
 	t_vector	*dir_normalized;
-	// FIX 1: Declare and initialize the ray's origin.
 	t_vector	ray_origin;
 
-	ray_origin = create_point(0, 0, -5);
-	// Define the "wall" and pixel size in world space units.
+	ray_origin = (t_vector){0, 0, -5, 1}; // Direct initialization
 	double wall_z = 10.0;
 	double wall_size = 7.0;
 	double pixel_size = wall_size / WIDTH;
@@ -79,20 +77,20 @@ void	render_sphere_shadow(t_scene *scene)
 	y = -1;
 	while (++y < HEIGHT)
 	{
-		world_coords.y = half_wall - pixel_size * y;
 		x = -1;
 		while (++x < WIDTH)
 		{
 			world_coords.x = -half_wall + pixel_size * x;
-			// FIX 2: Use the already declared wall_position, don't redeclare it.
-			wall_position = create_point(world_coords.x, world_coords.y, wall_z);
+			world_coords.y = half_wall - pixel_size * y;
+			wall_position = (t_vector){world_coords.x, world_coords.y, wall_z, 1};
 			dir_unnormalized = subtract_tuples(&wall_position, &ray_origin);
 			dir_normalized = normalization(dir_unnormalized);
 			r = create_ray(ray_origin, *dir_normalized);
+			
 			free(dir_unnormalized);
 			free(dir_normalized);
+			
 			xs = intersect_sphere(scene->objects->data, r);
-			// FIX 3: Use the correct function name 'hit'.
 			if (find_hit(xs))
 				my_mlx_pixel_put(&scene->mlx, x, y, (t_color){255, 0, 0});
 			else
@@ -101,22 +99,17 @@ void	render_sphere_shadow(t_scene *scene)
 	}
 }
 
-
 int	main(void)
 {
 	t_scene	scene;
 
-	// Basic scene and window initialization.
 	init_scene(&scene);
 	init_window(&scene);
 	setup_scene(&scene);
-	
-	// Render the final image.
 	render_sphere_shadow(&scene);
-	
-	// Push the final image to the window and start the event loop.
 	mlx_put_image_to_window(scene.mlx.mlx_ptr, scene.mlx.win_ptr,
 		scene.mlx.img_ptr, 0, 0);
 	mlx_loop(scene.mlx.mlx_ptr);
+	free_all();
 	return (0);
 }

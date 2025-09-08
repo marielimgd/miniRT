@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 22:10:55 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 17:52:50 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:06:10 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ double	dot_product(t_vector *a, t_vector *b)
 {
 	double	result;
 	
-	if ((a->w * b->w) != 0)
-		print_error("Wrong Vector Passed");
+	// if ((a->w * b->w) != 0)
+	// 	print_error("Wrong Vector Passed");
 	result = (a->x * b->x) + (a->y * b->y) + (a->z * b->z);
 	return (result);
 }

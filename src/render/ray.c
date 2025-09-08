@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/04 17:18:22 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:03:09 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,10 @@ t_vector ray_position(t_ray ray, double t)
 	t_vector	result;
 	t_vector	*scaled_direction;
 	t_vector	*new_position;
-	
+
 	scaled_direction = scale_tuples_product(&ray.direction, t);
 	new_position = add_tuples(&ray.origin, scaled_direction);
 	result = *new_position;
-	
 	free(scaled_direction);
 	free(new_position);
 	return (result);
