@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuples.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 16:22:46 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/02 21:24:29 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:39:59 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_equal(double a, double b)
 {
-	if (a - b < EPSILON)
+	if (fabs(a - b) < EPSILON)
 		return (1);
 	else
 		return (0);

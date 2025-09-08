@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:13 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 17:28:39 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:38:24 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,4 +223,5 @@ void	free_matrix(t_matrix *m)
 		i++;
 	}
 	free(m->matrix);
+	free(m);
 }

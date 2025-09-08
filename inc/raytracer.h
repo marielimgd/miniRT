@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 18:20:23 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:47:53 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		set_transform(t_object *s, t_matrix *t);
 t_intersection		intersect_object(t_object *object, t_ray ray);
 t_intersection		create_intersection(double t, t_object *obj);
 t_intersection_list	create_intersections_list(int count, ...);
-t_intersection		*find_hit(t_intersection_list list);
+t_intersection		*find_hit(t_intersection_list *list);
 
 
 

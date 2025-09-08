@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/08 18:20:28 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:48:21 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ static void	setup_scene(t_scene *scene)
 	scene->objects = ft_lstnew(sphere);
 }
 
-#include "minirt.h"
-
-// Your init_scene and setup_scene functions...
 
 void	render_sphere_shadow(t_scene *scene)
 {
@@ -91,7 +88,7 @@ void	render_sphere_shadow(t_scene *scene)
 			free(dir_normalized);
 			
 			xs = intersect_sphere(scene->objects->data, r);
-			if (find_hit(xs))
+			if (find_hit(&xs))
 				my_mlx_pixel_put(&scene->mlx, x, y, (t_color){255, 0, 0});
 			else
 				my_mlx_pixel_put(&scene->mlx, x, y, (t_color){25, 25, 25});

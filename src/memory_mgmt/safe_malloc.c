@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 19:34:44 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:39:01 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,27 +78,25 @@ t_allocation	**get_alloc_list(void)
  */
 void	free_all(void)
 {
-	t_allocation	**list_head;
-	t_allocation	*current;
-	t_allocation	*next;
+    t_allocation	**list_head;
+    t_allocation	*current;
+    t_allocation	*next;
 
-	list_head = get_alloc_list();
-	current = *list_head;
-	while (current)
-	{
-		next = current->next;
-		if (current->type == ALLOC_TYPE_MTX)
-			free_matrix(current->ptr);
-		free(current->ptr);
-		free(current);
-		current = next;
-	}
-	*list_head = NULL;
+    list_head = get_alloc_list();
+    current = *list_head;
+    while (current)
+    {
+        next = current->next;
+        if (current->type == ALLOC_TYPE_MTX)
+            free_matrix(current->ptr);
+        else 
+            free(current->ptr);
+        free(current);
+        current = next;
+    }
+    *list_head = NULL;
 }
 
-/**
- * @brief A safe malloc that correctly tracks all allocations in a linked list.
- */
 void	*safe_malloc(size_t size, t_alloc_type u_type)
 {
 	t_allocation	*new_node;
