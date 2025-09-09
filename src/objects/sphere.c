@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/09 14:58:47 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:34:54 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 
 	inv_matrix = inverse_matrix(sphere->transform);
 	transformed_ray = transform(ray, inv_matrix);
-	free_matrix(inv_matrix);
 
 	calculate_sphere_coeffs(&transformed_ray, sphere, coeffs);
 	discriminant = (coeffs[1] * coeffs[1]) - 4 * coeffs[0] * coeffs[2];
@@ -87,3 +86,47 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 			sphere));
 }
 
+
+static t_vector	*get_object_space_normal(t_vector world_point,
+		t_matrix *inv_transform)
+{
+	t_vector	object_point;
+	t_vector	origin_point;
+	t_vector	*object_normal;
+
+	object_point = multiply_matrix_by_tuple(inv_transform, world_point);
+	origin_point = create_point(0, 0, 0);
+	object_normal = subtract_tuples(&object_point, &origin_point);
+	return (object_normal);
+}
+
+
+static t_vector	get_world_space_normal(t_vector *object_normal, t_matrix *inv_transform)
+{
+	t_matrix	*transposed_inv;
+	t_vector	world_normal;
+
+	transposed_inv = transpose_matrix(inv_transform);
+	world_normal = multiply_matrix_by_tuple(transposed_inv, *object_normal);
+	world_normal.w = 0;
+	return (world_normal);
+}
+
+
+//change to normal_at_sphere
+t_vector	normal_at(t_object *sphere, t_vector world_point)
+{
+	t_matrix	*inv_transform;
+	t_vector	*object_normal;
+	t_vector	world_normal;
+	t_vector	*normalized_normal;
+	t_vector	final_normal;
+
+	inv_transform = inverse_matrix(sphere->transform);
+	object_normal = get_object_space_normal(world_point, inv_transform);
+	world_normal = get_world_space_normal(object_normal, inv_transform);
+	normalized_normal = normalization(&world_normal);
+	final_normal = *normalized_normal;
+	free_all();
+	return (final_normal);
+}

@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 19:47:53 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:35:10 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ t_intersection		*find_hit(t_intersection_list *list);
 // --- Objects ----
 t_object	*create_sphere(void);
 t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray);
+t_vector	normal_at(t_object *sphere, t_vector world_point);
+
 
 // --- Safe_Malloc ---
 void			*safe_malloc(size_t size, t_alloc_type u_type);

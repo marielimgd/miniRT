@@ -6,21 +6,21 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/09 15:50:25 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:35:32 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	init_scene(t_scene *scene)
+/* static void	init_scene(t_scene *scene)
 {
 	scene->ambient_light = -1.0;
 	scene->has_ambient = false;
 	scene->lights = NULL;
 	scene->objects = NULL;
-}
+} */
 
-int	main(int argc, char **argv)
+/* int	main(int argc, char **argv)
 {
 	t_scene	scene;
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	render_scene(&scene);
 	mlx_loop(scene.mlx.mlx_ptr);
 	return (0);
-}
+} */
 
 //----------------------------------------------TEST AREA----------------------------------------
 
@@ -47,10 +47,10 @@ int	main(int argc, char **argv)
 	set_transform(sphere, transform);
 
 	scene->objects = ft_lstnew(sphere);
-}
+} */
 
 
-void	render_sphere_shadow(t_scene *scene)
+/*void	render_sphere_shadow(t_scene *scene)
 {
 	int			x;
 	int			y;
@@ -107,3 +107,127 @@ int	main(void)
 	free_all();
 	return (0);
 } */
+
+
+// Helper function to compare two vectors for equality
+static bool	are_vectors_equal(t_vector v1, t_vector v2)
+{
+	if (!is_equal(v1.x, v2.x))
+		return (false);
+	if (!is_equal(v1.y, v2.y))
+		return (false);
+	if (!is_equal(v1.z, v2.z))
+		return (false);
+	if (!is_equal(v1.w, v2.w))
+		return (false);
+	return (true);
+}
+
+// Test: The normal on a sphere at a point on the x axis
+static void	test_normal_on_x_axis(void)
+{
+	t_object	*s;
+	t_vector	p;
+	t_vector	n;
+	t_vector	expected;
+
+	s = create_sphere();
+	p = create_point(1, 0, 0);
+	n = normal_at(s, p);
+	expected = create_vector(1, 0, 0);
+	if (are_vectors_equal(n, expected))
+		printf("PASS: Normal on x-axis is correct.\n");
+	else
+		printf("FAIL: Normal on x-axis is incorrect.\n");
+	free_all(); // Clears memory for the next test
+}
+
+// Test: The normal on a sphere at a point on the y axis
+static void	test_normal_on_y_axis(void)
+{
+	t_object	*s;
+	t_vector	p;
+	t_vector	n;
+	t_vector	expected;
+
+	s = create_sphere();
+	p = create_point(0, 1, 0);
+	n = normal_at(s, p);
+	expected = create_vector(0, 1, 0);
+	if (are_vectors_equal(n, expected))
+		printf("PASS: Normal on y-axis is correct.\n");
+	else
+		printf("FAIL: Normal on y-axis is incorrect.\n");
+	free_all();
+}
+
+// Test: The normal on a sphere at a point on the z axis
+static void	test_normal_on_z_axis(void)
+{
+	t_object	*s;
+	t_vector	p;
+	t_vector	n;
+	t_vector	expected;
+
+	s = create_sphere();
+	p = create_point(0, 0, 1);
+	n = normal_at(s, p);
+	expected = create_vector(0, 0, 1);
+	if (are_vectors_equal(n, expected))
+		printf("PASS: Normal on z-axis is correct.\n");
+	else
+		printf("FAIL: Normal on z-axis is incorrect.\n");
+	free_all();
+}
+
+// Test: The normal on a sphere at a nonaxial point
+static void	test_normal_nonaxial(void)
+{
+	t_object	*s;
+	t_vector	p;
+	t_vector	n;
+	t_vector	expected;
+	double		val;
+
+	s = create_sphere();
+	val = sqrt(3.0) / 3.0;
+	p = create_point(val, val, val);
+	n = normal_at(s, p);
+	expected = create_vector(val, val, val);
+	if (are_vectors_equal(n, expected))
+		printf("PASS: Normal on a non-axial point is correct.\n");
+	else
+		printf("FAIL: Normal on a non-axial point is incorrect.\n");
+	free_all();
+}
+
+// Test: The normal vector is normalized
+static void	test_normal_is_normalized(void)
+{
+	t_object	*s;
+	t_vector	p;
+	t_vector	n;
+	double		val;
+
+	s = create_sphere();
+	val = sqrt(3.0) / 3.0;
+	p = create_point(val, val, val);
+	n = normal_at(s, p);
+	if (is_equal(get_magnitude(&n), 1.0))
+		printf("PASS: The normal vector is normalized.\n");
+	else
+		printf("FAIL: The normal vector is not normalized.\n");
+	free_all();
+}
+
+int	main(void)
+{
+	printf("--- Running Sphere Normal Tests ---\n");
+	test_normal_on_x_axis();
+	test_normal_on_y_axis();
+	test_normal_on_z_axis();
+	test_normal_nonaxial();
+	test_normal_is_normalized();
+	printf("--- All tests finished. ---\n");
+	return (0);
+}
