@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:13 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/09 17:52:58 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:47:00 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,10 +193,10 @@ t_vector	matrix_to_tuple(t_matrix *final)
 {
 	t_vector	tuple;
 
-	tuple.x = final->matrix[0][1];
-	tuple.y = final->matrix[0][2];
-	tuple.z = final->matrix[0][3];
-	tuple.w = final->matrix[0][4];
+	tuple.x = final->matrix[0][0];
+	tuple.y = final->matrix[1][0];
+	tuple.z = final->matrix[2][0];
+	tuple.w = final->matrix[3][0];
 	return (tuple);
 }
 

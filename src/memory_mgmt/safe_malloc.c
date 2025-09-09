@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/09 17:55:09 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:55:26 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,6 @@ t_allocation	*get_alloc()
 
 	alloc = NULL;	
 	return (&alloc);
-}
-
-void	free_all(void) // colocar todas as structs que a gente malloca
-{
-	t_allocation	*alloc;
-	t_allocation	*next;
-
-	alloc = get_alloc();
-	while (alloc)
-	{
-		next = alloc->next;
-		if (alloc->type == ALLOC_TYPE_MTX)
-			//free_matrix(alloc->ptr);
-			free(alloc->ptr);
-		else if (alloc->type == ALLOC_TYPE_STRING || alloc->type == ALLOC_TYPE_GENERIC)
-			free(alloc->ptr);
-		alloc->ptr = NULL;
-		free(alloc);
-		alloc = NULL;
-		alloc = next;
-	}
 }
 
 void	*safe_malloc(size_t size, t_alloc_type u_type)
@@ -53,59 +32,40 @@ void	*safe_malloc(size_t size, t_alloc_type u_type)
 		return (print_error("malloc error"), NULL);
 	alloc->ptr = malloc(size);
 	if (!alloc->ptr)
+	{
+		free(alloc);
 		return (print_error("malloc error"), NULL);
+	}
+		
 	alloc->type = u_type;
 	alloc->next = NULL;
 	return (alloc->ptr);
 }
 
-
-void	free_all(void)
+void	free_all(void) // colocar todas as structs que a gente malloca
 {
-	t_allocation	**list_head;
-	t_allocation	*current;
+	t_allocation	*alloc;
 	t_allocation	*next;
 
-	list_head = get_alloc_list();
-	current = *list_head;
-	while (current)
+	alloc = get_alloc();
+	while (alloc)
 	{
-		next = current->next;
-		if (current->ptr)
-			free(current->ptr);
-		free(current);
-		current = next;
+		next = alloc->next;
+		if (alloc->type == ALLOC_TYPE_MTX)
+			free_matrix(alloc->ptr);
+		else if (alloc->type == ALLOC_TYPE_STRING || alloc->type == ALLOC_TYPE_GENERIC)
+			free(alloc->ptr);
+		alloc->ptr = NULL;
+		free(alloc);
+		alloc = NULL;
+		alloc = next;
 	}
-	*list_head = NULL;
 }
-
-void	free_all(void)
-{
-	t_allocation	**list_head;
-	t_allocation	*current;
-	t_allocation	*next;
-
-	list_head = get_alloc_list();
-	current = *list_head;
-	while (current)
-	{
-		next = current->next;
-		if (current->type == ALLOC_TYPE_MTX)
-			free_matrix(current->ptr);
-		else
-			free(current->ptr);
-		free(current);
-		current = next;
-	}
-	*list_head = NULL;
-}
-
 
 void	free_matrix(t_matrix *m)
 {
 	int	i;
 
-	printf("    -> Attempting to free matrix at address: %p\n", (void *)m);
 	if (!m)
 		return ;
 	i = 0;
@@ -113,7 +73,6 @@ void	free_matrix(t_matrix *m)
 	{
 		while (i < m->row)
 		{
-			printf("        -> Freeing matrix row %d at address: %p\n", i, (void *)m->matrix[i]);
 			if (m->matrix[i])
 				free(m->matrix[i]);
 			i++;
@@ -121,5 +80,4 @@ void	free_matrix(t_matrix *m)
 		free(m->matrix);
 	}
 	free(m);
-	printf("    -> Successfully freed matrix at %p\n", (void *)m);
-} 
+}

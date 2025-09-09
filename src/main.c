@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/09 16:35:32 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:56:31 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 	init_window(&scene);
 	render_scene(&scene);
 	mlx_loop(scene.mlx.mlx_ptr);
+	// free_all();
 	return (0);
 } */
 
@@ -229,5 +230,7 @@ int	main(void)
 	test_normal_nonaxial();
 	test_normal_is_normalized();
 	printf("--- All tests finished. ---\n");
+
+	free_all(); // Free everything at the very end
 	return (0);
 }
