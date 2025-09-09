@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/08 19:48:21 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 15:03:18 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	init_scene(t_scene *scene)
 	scene->objects = NULL;
 }
 
-/* int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_scene	scene;
 
@@ -32,20 +32,17 @@ static void	init_scene(t_scene *scene)
 	render_scene(&scene);
 	mlx_loop(scene.mlx.mlx_ptr);
 	return (0);
-} */
+}
 
 //----------------------------------------------TEST AREA----------------------------------------
 
-static void	setup_scene(t_scene *scene)
+/* static void	setup_scene(t_scene *scene)
 {
 	t_object	*sphere;
 	t_matrix	*transform;
 
-	// Create a sphere and add it to the scene's object list.
 	sphere = create_sphere();
 
-	// Example transform: shrink the sphere and move it a little.
-	// You can comment this out to render the default unit sphere.
 	transform = scaling(0.5, 1, 1);
 	set_transform(sphere, transform);
 
@@ -65,7 +62,7 @@ void	render_sphere_shadow(t_scene *scene)
 	t_vector	*dir_normalized;
 	t_vector	ray_origin;
 
-	ray_origin = (t_vector){0, 0, -5, 1}; // Direct initialization
+	ray_origin = (t_vector){0, 0, -5, 1};
 	double wall_z = 10.0;
 	double wall_size = 7.0;
 	double pixel_size = wall_size / WIDTH;
@@ -109,4 +106,4 @@ int	main(void)
 	mlx_loop(scene.mlx.mlx_ptr);
 	free_all();
 	return (0);
-}
+} */

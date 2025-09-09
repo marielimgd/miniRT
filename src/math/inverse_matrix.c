@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:26:48 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/08 17:28:15 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:56:22 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,62 @@ double	determinant(t_matrix *m)
 	return (det);
 }
 
-t_matrix	*inverse_matrix(t_matrix *a)
-{
-	t_matrix	*inverse;
-	double		det;
-	int			row;
-	int			col;
 
-	if (a->row != 4 || a->collum != 4)
-		print_error("Trying to inverse a non-4x4 matrix");
-	det = determinant(a);
+t_matrix	*inverse_matrix(t_matrix *m)
+{
+	t_matrix	*inv;
+	double		det;
+	double		a[16];
+	double		b[16];
+
+	inv = create_matrix(4, 4);
+	a[0] = m->matrix[0][0]; a[1] = m->matrix[0][1]; a[2] = m->matrix[0][2]; a[3] = m->matrix[0][3];
+	a[4] = m->matrix[1][0]; a[5] = m->matrix[1][1]; a[6] = m->matrix[1][2]; a[7] = m->matrix[1][3];
+	a[8] = m->matrix[2][0]; a[9] = m->matrix[2][1]; a[10] = m->matrix[2][2]; a[11] = m->matrix[2][3];
+	a[12] = m->matrix[3][0]; a[13] = m->matrix[3][1]; a[14] = m->matrix[3][2]; a[15] = m->matrix[3][3];
+
+	b[0] = a[5] * a[10] * a[15] - a[5] * a[11] * a[14] - a[9] * a[6] * a[15] + a[9] * a[7] * a[14] + a[13] * a[6] * a[11] - a[13] * a[7] * a[10];
+	b[1] = -a[1] * a[10] * a[15] + a[1] * a[11] * a[14] + a[9] * a[2] * a[15] - a[9] * a[3] * a[14] - a[13] * a[2] * a[11] + a[13] * a[3] * a[10];
+	b[2] = a[1] * a[6] * a[15] - a[1] * a[7] * a[14] - a[5] * a[2] * a[15] + a[5] * a[3] * a[14] + a[13] * a[2] * a[7] - a[13] * a[3] * a[6];
+	b[3] = -a[1] * a[6] * a[11] + a[1] * a[7] * a[10] + a[5] * a[2] * a[11] - a[5] * a[3] * a[10] - a[9] * a[2] * a[7] + a[9] * a[3] * a[6];
+	b[4] = -a[4] * a[10] * a[15] + a[4] * a[11] * a[14] + a[8] * a[6] * a[15] - a[8] * a[7] * a[14] - a[12] * a[6] * a[11] + a[12] * a[7] * a[10];
+	b[5] = a[0] * a[10] * a[15] - a[0] * a[11] * a[14] - a[8] * a[2] * a[15] + a[8] * a[3] * a[14] + a[12] * a[2] * a[11] - a[12] * a[3] * a[10];
+	b[6] = -a[0] * a[6] * a[15] + a[0] * a[7] * a[14] + a[4] * a[2] * a[15] - a[4] * a[3] * a[14] - a[12] * a[2] * a[7] + a[12] * a[3] * a[6];
+	b[7] = a[0] * a[6] * a[11] - a[0] * a[7] * a[10] - a[4] * a[2] * a[11] + a[4] * a[3] * a[10] + a[8] * a[2] * a[7] - a[8] * a[3] * a[6];
+	b[8] = a[4] * a[9] * a[15] - a[4] * a[11] * a[13] - a[8] * a[5] * a[15] + a[8] * a[7] * a[13] + a[12] * a[5] * a[11] - a[12] * a[7] * a[9];
+	b[9] = -a[0] * a[9] * a[15] + a[0] * a[11] * a[13] + a[8] * a[1] * a[15] - a[8] * a[3] * a[13] - a[12] * a[1] * a[11] + a[12] * a[3] * a[9];
+	b[10] = a[0] * a[5] * a[15] - a[0] * a[7] * a[13] - a[4] * a[1] * a[15] + a[4] * a[3] * a[13] + a[12] * a[1] * a[7] - a[12] * a[3] * a[5];
+	b[11] = -a[0] * a[5] * a[11] + a[0] * a[7] * a[9] + a[4] * a[1] * a[11] - a[4] * a[3] * a[9] - a[8] * a[1] * a[7] + a[8] * a[3] * a[5];
+	b[12] = -a[4] * a[9] * a[14] + a[4] * a[10] * a[13] + a[8] * a[5] * a[14] - a[8] * a[6] * a[13] - a[12] * a[5] * a[10] + a[12] * a[6] * a[9];
+	b[13] = a[0] * a[9] * a[14] - a[0] * a[10] * a[13] - a[8] * a[1] * a[14] + a[8] * a[2] * a[13] + a[12] * a[1] * a[10] - a[12] * a[2] * a[9];
+	b[14] = -a[0] * a[5] * a[14] + a[0] * a[6] * a[13] + a[4] * a[1] * a[14] - a[4] * a[2] * a[13] - a[12] * a[1] * a[6] + a[12] * a[2] * a[5];
+	b[15] = a[0] * a[5] * a[10] - a[0] * a[6] * a[9] - a[4] * a[1] * a[10] + a[4] * a[2] * a[9] + a[8] * a[1] * a[6] - a[8] * a[2] * a[5];
+
+det = a[0] * b[0] + a[1] * b[4] + a[2] * b[8] + a[3] * b[12];
 	if (is_equal(det, 0))
-		print_error("Matrix is not invertible");
-	inverse = create_matrix(4, 4);
-	row = 0;
-	while (row < a->row)
 	{
-		col = 0;
-		while (col < a->collum)
-		{
-			inverse->matrix[col][row] = cofactor(a, row, col) / det;
-			col++;
-		}
-		row++;
+		free_matrix(inv);
+		print_error("Matrix is not invertible");
+		return (NULL);
 	}
-	return (inverse);
+	det = 1.0 / det;
+
+	inv->matrix[0][0] = b[0] * det;
+	inv->matrix[0][1] = b[4] * det;
+	inv->matrix[0][2] = b[8] * det;
+	inv->matrix[0][3] = b[12] * det;
+	inv->matrix[1][0] = b[1] * det;
+	inv->matrix[1][1] = b[5] * det;
+	inv->matrix[1][2] = b[9] * det;
+	inv->matrix[1][3] = b[13] * det;
+	inv->matrix[2][0] = b[2] * det;
+	inv->matrix[2][1] = b[6] * det;
+	inv->matrix[2][2] = b[10] * det;
+	inv->matrix[2][3] = b[11] * det;
+	inv->matrix[3][0] = b[3] * det;
+	inv->matrix[3][1] = b[7] * det;
+	inv->matrix[3][2] = b[14] * det;
+	inv->matrix[3][3] = b[15] * det;
+
+	return (inv);
 }
