@@ -18,7 +18,7 @@
 # endif
 
 # define WIDTH 800
-# define HEIGHT 600
+# define HEIGHT 800
 # define ESC_KEY 65307
 # define EPSILON 0.00001
 

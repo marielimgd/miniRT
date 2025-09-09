@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 16:14:39 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:47:53 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ t_matrix	*translation(double x, double y, double z);
 t_matrix	*scaling(double x, double y, double z);
 t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t);
 void		free_matrix(t_matrix *m);
+t_matrix	*rotation_x(double radians);
+t_matrix	*rotation_y(double radians);
+t_matrix	*rotation_z(double radians);
+
+
+//DELETAR DEPOIS
+double			cofactor(t_matrix *m, int row, int col);
+double			determinant(t_matrix *m);
 
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
@@ -59,7 +67,7 @@ void		set_transform(t_object *s, t_matrix *t);
 t_intersection		intersect_object(t_object *object, t_ray ray);
 t_intersection		create_intersection(double t, t_object *obj);
 t_intersection_list	create_intersections_list(int count, ...);
-t_intersection		*find_hit(t_intersection_list list);
+t_intersection		*find_hit(t_intersection_list *list);
 
 
 

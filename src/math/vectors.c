@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 22:10:55 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/04 19:26:36 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:06:10 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,14 @@ t_vector	*normalization(t_vector *u_vector)
 		vector->x = 0.0f;
 		vector->y = 0.0f;
 		vector->z = 0.0f;
-		vector->w = 0.0f;
 	}
 	else
 	{
-		vector->x = vector->x/magnitute;
-		vector->y = vector->y/magnitute;
-		vector->z = vector->z/magnitute;
-		vector->w = vector->w/magnitute;
+		vector->x = u_vector->x/magnitute;
+		vector->y = u_vector->y/magnitute;
+		vector->z = u_vector->z/magnitute;	
 	}
+	vector->w = u_vector->w;
 	return (vector);
 }
 
@@ -73,8 +72,8 @@ double	dot_product(t_vector *a, t_vector *b)
 {
 	double	result;
 	
-	if ((a->w * b->w) != 0)
-		print_error("Wrong Vector Passed");
+	// if ((a->w * b->w) != 0)
+	// 	print_error("Wrong Vector Passed");
 	result = (a->x * b->x) + (a->y * b->y) + (a->z * b->z);
 	return (result);
 }
