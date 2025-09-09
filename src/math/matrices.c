@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:13 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 19:38:24 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/09 15:37:10 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,15 +200,30 @@ t_matrix	*scaling(double x, double y, double z)
 	return (final);
 }
 
+t_vector	matrix_to_tuple(t_matrix *final)
+{
+	t_vector	tuple;
 
-t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t)
+	tuple->x = final->matrix[0][1];
+	tuple->y = final->matrix[0][2];
+	tuple->z = final->matrix[0][3];
+	tuple->w = final->matrix[0][4];
+	return (tuple);
+}
+
+t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t) // vou refazer com verificações (transformar para tuple de novo)
 {
 	t_vector	result;
-
-	result.x = m->matrix[0][0] * t.x + m->matrix[0][1] * t.y + m->matrix[0][2] * t.z + m->matrix[0][3] * t.w;
-	result.y = m->matrix[1][0] * t.x + m->matrix[1][1] * t.y + m->matrix[1][2] * t.z + m->matrix[1][3] * t.w;
-	result.z = m->matrix[2][0] * t.x + m->matrix[2][1] * t.y + m->matrix[2][2] * t.z + m->matrix[2][3] * t.w;
-	result.w = m->matrix[3][0] * t.x + m->matrix[3][1] * t.y + m->matrix[3][2] * t.z + m->matrix[3][3] * t.w;
+	t_matrix	*tuple;
+	t_matrix	*product;
+	
+	tuple = tuple_to_matrix(&t);
+	product = matrix_product(m, tuple);
+	result = matrix_to_tuple(product);
+	// result.x = m->matrix[0][0] * t.x + m->matrix[0][1] * t.y + m->matrix[0][2] * t.z + m->matrix[0][3] * t.w;
+	// result.y = m->matrix[1][0] * t.x + m->matrix[1][1] * t.y + m->matrix[1][2] * t.z + m->matrix[1][3] * t.w;
+	// result.z = m->matrix[2][0] * t.x + m->matrix[2][1] * t.y + m->matrix[2][2] * t.z + m->matrix[2][3] * t.w;
+	// result.w = m->matrix[3][0] * t.x + m->matrix[3][1] * t.y + m->matrix[3][2] * t.z + m->matrix[3][3] * t.w;
 	return (result);
 }
 
@@ -224,4 +239,14 @@ void	free_matrix(t_matrix *m)
 	}
 	free(m->matrix);
 	free(m);
+}
+
+double	determinante(t_matrix *a)
+{
+	double	det;
+	
+	if (a->row != 2 || a->collum != 2)
+		print_error("Not possible find submatrix");
+	det = (a->matrix[0][0]*a->matrix[1][1]) - (a->matrix[0][1] * a->matrix[1][0]);
+	return (det);
 }
