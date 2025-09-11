@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:46:11 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/04 15:31:28 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/11 19:47:36 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-/*
-	Calibrar para deixar menor que 255 a maior que 0;
-*/
+
 t_color	max_color(t_color c)
 {
 	t_color	final;

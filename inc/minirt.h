@@ -91,6 +91,13 @@ typedef struct s_light
 	t_color			color;
 }					t_light;
 
+typedef struct s_lighting_data
+{
+	t_vector	point;
+	t_vector	eyev;
+	t_vector	normalv;
+}				t_lighting_data;
+
 typedef enum e_object_type
 {
 	SPHERE,

@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 19:28:21 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 19:48:12 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,22 @@ void		free_matrix(t_matrix *m);
 t_matrix	*rotation_x(double radians);
 t_matrix	*rotation_y(double radians);
 t_matrix	*rotation_z(double radians);
+double		cofactor(t_matrix *m, int row, int col);
+double		determinant(t_matrix *m);
 
 
-//DELETAR DEPOIS
-double			cofactor(t_matrix *m, int row, int col);
-double			determinant(t_matrix *m);
+//--- Color ---
+t_color	max_color(t_color c);
+t_color	scale_color(t_color c, float ratio);
+t_color	add_color(t_color a, t_color b);
+t_color	subtract_color(t_color a, t_color b);
+t_color	multiply_color(t_color a, t_color b);
 
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
 void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y,
 				struct s_color color);
+t_color	lighting(t_material m, t_light *light, t_lighting_data d);
 
 // --- Ray ---
 t_vector	calculate_ray_direction(t_camera *camera, int x, int y);
