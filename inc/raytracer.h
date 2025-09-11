@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 20:12:41 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 20:46:41 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ t_vector	*reflect(t_vector in, t_vector normal);
 void		render_scene(struct s_scene *scene);
 void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y,
 				struct s_color color);
+int			simple_rand(void);
+void		randomize_object_colors(t_scene *scene);
 
 
 // --- Ray ---

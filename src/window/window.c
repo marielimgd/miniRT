@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/03 21:42:35 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/11 20:46:29 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 int	close_window(t_scene *scene)
 {
@@ -18,16 +18,77 @@ int	close_window(t_scene *scene)
 	mlx_destroy_window(scene->mlx.mlx_ptr, scene->mlx.win_ptr);
 	mlx_destroy_display(scene->mlx.mlx_ptr);
 	free(scene->mlx.mlx_ptr);
-	// TODO: Free all allocated scene data (lights, objects) // foi feito uma funcao para dar free_all
+	free_all();
 	exit(0);
 	return (0);
 }
 
 int	handle_keypress(int keycode, t_scene *scene)
 {
+	bool	needs_rerender;
+
+	needs_rerender = false;
 	if (keycode == ESC_KEY)
 		close_window(scene);
+	else if (keycode == SPACE_KEY)
+	{
+		randomize_object_colors(scene);
+		needs_rerender = true;
+	}
+	else if (keycode == PLUS_KEY)
+	{
+		scene->camera.fov -= 5;
+		if (scene->camera.fov < 1)
+			scene->camera.fov = 1;
+		needs_rerender = true;
+	}
+	else if (keycode == MINUS_KEY)
+	{
+		scene->camera.fov += 5;
+		if (scene->camera.fov > 179)
+			scene->camera.fov = 179;
+		needs_rerender = true;
+	}
+	if (needs_rerender)
+		render_scene(scene);
 	return (0);
+}
+
+int	handle_mouse_scroll(int button, int x, int y, t_scene *scene)
+{
+	(void)x;
+	(void)y;
+	if (button == MOUSE_SCROLL_UP)
+	{
+		scene->camera.fov -= 5;
+		if (scene->camera.fov < 1)
+			scene->camera.fov = 1;
+		render_scene(scene);
+	}
+	else if (button == MOUSE_SCROLL_DOWN)
+	{
+		scene->camera.fov += 5;
+		if (scene->camera.fov > 179)
+			scene->camera.fov = 179;
+		render_scene(scene);
+	}
+	return (0);
+}
+
+void	randomize_object_colors(t_scene *scene)
+{
+	t_list	*current_obj;
+
+	current_obj = scene->objects;
+	while (current_obj)
+	{
+		t_object *obj = (t_object *)current_obj->data;
+		obj->material.color.r = simple_rand() % 256;
+		obj->material.color.g = simple_rand() % 256;
+		obj->material.color.b = simple_rand() % 256;
+		obj->color = obj->material.color;
+		current_obj = current_obj->next;
+	}
 }
 
 void	my_mlx_pixel_put(t_mlx_data *data, int x, int y, t_color color)
@@ -56,5 +117,6 @@ void	init_window(t_scene *scene)
 	scene->mlx.addr = mlx_get_data_addr(scene->mlx.img_ptr, &scene->mlx.bpp,
 			&scene->mlx.line_len, &scene->mlx.endian);
 	mlx_key_hook(scene->mlx.win_ptr, handle_keypress, scene);
+	mlx_mouse_hook(scene->mlx.win_ptr, handle_mouse_scroll, scene);
 	mlx_hook(scene->mlx.win_ptr, 17, 0, close_window, scene);
 }

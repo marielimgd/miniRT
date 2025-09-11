@@ -8,6 +8,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <time.h>
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 
@@ -21,6 +22,12 @@
 # define HEIGHT 800
 # define ESC_KEY 65307
 # define EPSILON 0.00001
+
+# define SPACE_KEY 65
+# define PLUS_KEY 61
+# define MINUS_KEY 45
+# define MOUSE_SCROLL_UP 4
+# define MOUSE_SCROLL_DOWN 5
 
 /* -----------------Structs--------------------------*/
 
