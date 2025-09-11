@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:10:26 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/11 20:21:36 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 20:48:07 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_intersection	intersect_world(t_scene *scene, t_ray ray)
         return (*hit);
     return ((t_intersection){-1, NULL});
 }
-
-// src/render/world.c
 
 t_color	shade_hit(t_scene *scene, t_intersection hit, t_ray ray)
 {

@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/11 20:46:29 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 20:48:22 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,6 @@ int	handle_mouse_scroll(int button, int x, int y, t_scene *scene)
 		render_scene(scene);
 	}
 	return (0);
-}
-
-void	randomize_object_colors(t_scene *scene)
-{
-	t_list	*current_obj;
-
-	current_obj = scene->objects;
-	while (current_obj)
-	{
-		t_object *obj = (t_object *)current_obj->data;
-		obj->material.color.r = simple_rand() % 256;
-		obj->material.color.g = simple_rand() % 256;
-		obj->material.color.b = simple_rand() % 256;
-		obj->color = obj->material.color;
-		current_obj = current_obj->next;
-	}
 }
 
 void	my_mlx_pixel_put(t_mlx_data *data, int x, int y, t_color color)
