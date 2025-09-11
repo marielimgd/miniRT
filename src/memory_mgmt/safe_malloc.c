@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/10 14:20:14 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 19:32:14 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,6 @@ t_allocation	*get_alloc()
 	static t_allocation	*alloc;
 
 	return (alloc);
-}
-
-void	free_all(void) // colocar todas as structs que a gente malloca
-{
-	t_allocation	*alloc;
-	t_allocation	*next;
-
-	alloc = get_alloc();
-	while (alloc)
-	{
-		next = alloc->next;
-		if (alloc->type == ALLOC_TYPE_MTX)
-			//free_matrix(alloc->ptr);
-			free(alloc->ptr);
-		else if (alloc->type == ALLOC_TYPE_STRING || alloc->type == ALLOC_TYPE_GENERIC)
-			free(alloc->ptr);
-		alloc->ptr = NULL;
-		free(alloc);
-		alloc = NULL;
-		alloc = next;
-	}
 }
 
 void	*safe_malloc(size_t size, t_alloc_type u_type)
@@ -57,6 +36,25 @@ void	*safe_malloc(size_t size, t_alloc_type u_type)
 	alloc->next = NULL;
 	return (alloc->ptr);
 } 
+void	free_all(void) // colocar todas as structs que a gente malloca
+{
+	t_allocation	*alloc;
+	t_allocation	*next;
+
+	alloc = get_alloc();
+	while (alloc)
+	{
+		next = alloc->next;
+		if (alloc->type == ALLOC_TYPE_MTX)
+			free_matrix(alloc->ptr);
+		else if (alloc->type == ALLOC_TYPE_STRING || alloc->type == ALLOC_TYPE_GENERIC)
+			free(alloc->ptr);
+		alloc->ptr = NULL;
+		free(alloc);
+		alloc = NULL;
+		alloc = next;
+	}
+}
 
 void	free_matrix(t_matrix *m)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/09 17:34:54 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/11 19:30:47 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,6 @@ static t_intersection_list	make_intersections(double t1, double t2, t_object *sp
 	return (create_intersections_list(2, i1, i2));
 }
 
-/* static double	calculate_discriminant(t_ray *ray, t_object *sphere, double *a, double *b, double *c)
-{
-	t_vector	*sphere_to_ray;
-
-	sphere_to_ray = subtract_tuples(&ray->origin, &sphere->origin);
-	*a = dot_product(&ray->direction, &ray->direction);
-	*b = 2 * dot_product(&ray->direction, sphere_to_ray);
-	*c = dot_product(sphere_to_ray, sphere_to_ray) - (sphere->prop.sphere.radius * sphere->prop.sphere.radius);
-	free(sphere_to_ray);
-	return ((*b * *b) - 4 * *a * *c);
-} */
-
 static void	calculate_sphere_coeffs(t_ray *ray, t_object *sphere, double *coeffs)
 {
 	t_vector	*sphere_to_ray;
@@ -58,9 +46,6 @@ static void	calculate_sphere_coeffs(t_ray *ray, t_object *sphere, double *coeffs
 	coeffs[0] = dot_product(&ray->direction, &ray->direction);
 	coeffs[1] = 2 * dot_product(&ray->direction, sphere_to_ray);
 	coeffs[2] = dot_product(sphere_to_ray, sphere_to_ray) - (sphere->prop.sphere.radius * sphere->prop.sphere.radius);
-	//coeffs[2] = dot_product(sphere_to_ray, sphere_to_ray) - 1;
-
-
 	free(sphere_to_ray);
 }
 
@@ -68,7 +53,7 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 {
 	t_ray		transformed_ray;
 	t_matrix	*inv_matrix;
-	double		coeffs[3]; // a, b, c
+	double		coeffs[3];
 	double		discriminant;
 
 	inv_matrix = inverse_matrix(sphere->transform);
@@ -87,17 +72,20 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 }
 
 
-static t_vector	*get_object_space_normal(t_vector world_point,
-		t_matrix *inv_transform)
+static t_vector	*get_object_space_normal(t_vector world_point, t_matrix *inv_transform)
 {
 	t_vector	object_point;
 	t_vector	origin_point;
 	t_vector	*object_normal;
+	t_vector	*result;
 
 	object_point = multiply_matrix_by_tuple(inv_transform, world_point);
 	origin_point = create_point(0, 0, 0);
 	object_normal = subtract_tuples(&object_point, &origin_point);
-	return (object_normal);
+	result = safe_malloc(sizeof(t_vector), ALLOC_TYPE_GENERIC);
+	*result = *object_normal;
+	free(object_normal);
+	return (result);
 }
 
 
@@ -109,24 +97,29 @@ static t_vector	get_world_space_normal(t_vector *object_normal, t_matrix *inv_tr
 	transposed_inv = transpose_matrix(inv_transform);
 	world_normal = multiply_matrix_by_tuple(transposed_inv, *object_normal);
 	world_normal.w = 0;
+	free_matrix(transposed_inv);
 	return (world_normal);
 }
 
-
-//change to normal_at_sphere
-t_vector	normal_at(t_object *sphere, t_vector world_point)
+t_vector	normal_at_sphere(t_object *sphere, t_vector world_point)
 {
 	t_matrix	*inv_transform;
-	t_vector	*object_normal;
+	t_vector	object_normal;
 	t_vector	world_normal;
 	t_vector	*normalized_normal;
 	t_vector	final_normal;
 
 	inv_transform = inverse_matrix(sphere->transform);
-	object_normal = get_object_space_normal(world_point, inv_transform);
-	world_normal = get_world_space_normal(object_normal, inv_transform);
+	t_vector *object_normal_ptr;
+
+	object_normal_ptr = get_object_space_normal(world_point, inv_transform);
+	object_normal = *object_normal_ptr;
+	world_normal = get_world_space_normal(&object_normal, inv_transform);
 	normalized_normal = normalization(&world_normal);
 	final_normal = *normalized_normal;
-	free_all();
+
+	free_matrix(inv_transform);
+	free(object_normal_ptr);
+	free(normalized_normal);
 	return (final_normal);
 }

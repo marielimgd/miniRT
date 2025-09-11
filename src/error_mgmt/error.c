@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:29:48 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/05 19:39:26 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/11 18:41:58 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 void	print_error(char *s)
 {

@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/10 14:19:06 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 19:28:21 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_vector	*add_tuples(t_vector *vector, t_vector *point);
 t_vector	*subtract_tuples(t_vector *vector, t_vector *point);
 t_vector	*scale_tuples_product(t_vector *vector, double scale);
 t_vector	*scale_tuples_divison(t_vector *vector, double scale);
+bool		are_vectors_equal(t_vector a, t_vector b);
 
 // --- Matrix ----
 t_matrix	*create_matrix(double collum, double row);
@@ -75,6 +76,7 @@ t_intersection		*find_hit(t_intersection_list *list);
 t_object	*create_sphere(void);
 t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray);
 t_vector	normal_at(t_object *sphere, t_vector world_point);
+t_vector	normal_at_sphere(t_object *sphere, t_vector world_point);
 
 
 // --- Safe_Malloc ---

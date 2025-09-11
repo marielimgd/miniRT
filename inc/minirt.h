@@ -9,7 +9,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
-# include "../minilibx-linux/minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 
 /*--------------Constants----------------------------*/
 
@@ -122,11 +122,21 @@ typedef union u_object_properties
 	t_plane_prop	plane;
 }					t_object_properties;
 
+typedef struct s_material
+{
+	t_color			color;
+	double			ambient;
+	double			diffuse;
+	double			specular;
+	double			shininess;
+}					t_material;
+
 typedef struct s_object
 {
 	t_object_type		type;
 	t_vector			origin;
 	t_color				color;
+	t_material			material;
 	t_matrix			*transform;
 	t_object_properties	prop;
 }						t_object;
@@ -140,9 +150,9 @@ typedef struct s_intersection
 
 typedef struct s_intersec_list
 {
-	int				count;
+	int					count;
 	t_intersection		intersections[10]; //mudar depois
-}					t_intersection_list;
+}						t_intersection_list;
 
 // --- Main Scene Struct ---
 typedef struct s_scene

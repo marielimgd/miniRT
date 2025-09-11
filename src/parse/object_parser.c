@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/03 21:41:19 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/11 19:14:40 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void parse_plane(char **tokens, t_scene *scene)
 
     if (count_tokens(tokens) != 4)
         parse_error("Invalid plane parameters");
-    plane = malloc(sizeof(t_object));
+    plane = safe_malloc(sizeof(t_object), ALLOC_TYPE_GENERIC);
     if (!plane)
         parse_error("Memory allocation failed for a new plane");
     plane->type = PLANE;
@@ -45,7 +45,7 @@ void	parse_sphere(char **tokens, t_scene *scene)
 
 	if (count_tokens(tokens) != 4)
 		parse_error("Invalid sphere parameters");
-	sphere = malloc(sizeof(t_object));
+	sphere = safe_malloc(sizeof(t_object), ALLOC_TYPE_GENERIC);
 	if (!sphere)
 		parse_error("Memory allocation failed for a new sphere");
 	sphere->type = SPHERE;
@@ -70,7 +70,7 @@ void 	parse_cylinder(char**tokens, t_scene *scene)
     if (count_tokens(tokens) != 6)
         parse_error("Invalid cylinder parameters");
 
-    cylinder = malloc(sizeof(t_object));
+    cylinder = safe_malloc(sizeof(t_object), ALLOC_TYPE_GENERIC);
     if (!cylinder)
         parse_error("Memory allocation failed for a new cylinder");
     cylinder->type = CYLINDER;

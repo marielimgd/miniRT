@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:13 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/09 18:47:00 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/11 19:16:13 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_matrix	*create_matrix(double collum, double row)
 	double		**mtx;
 	int			i;
 
-	i = row;
+	i = 0;
 	matrix = safe_malloc(sizeof(t_matrix), ALLOC_TYPE_MTX);
 	mtx = safe_malloc(sizeof(double *) * row, ALLOC_TYPE_MTX);
-	while (i > 0)
+	while (i < row)
 	{
 		mtx[i] = safe_malloc(sizeof(double) * collum, ALLOC_TYPE_MTX);
-		i--;
+		i++;
 	}
 	matrix->collum = collum;
 	matrix->row = row;
@@ -32,26 +32,8 @@ t_matrix	*create_matrix(double collum, double row)
 	return (matrix);
 }
 
-/* t_matrix	*create_matrix(double collum, double row)
-{
-	t_matrix	*matrix;
-	int			i;
 
-	matrix = safe_malloc(sizeof(t_matrix), ALLOC_TYPE_MTX);
-	matrix->row = row;
-	matrix->collum = collum;
-	matrix->matrix = safe_malloc(sizeof(double *) * row, ALLOC_TYPE_MTX);
-	i = 0;
-	while (i < row)
-	{
-		matrix->matrix[i] = safe_malloc(sizeof(double) * collum,
-				ALLOC_TYPE_MTX);
-		i++;
-	}
-	return (matrix);
-} */
-
-/* t_matrix	*matrix_product(t_matrix *a, t_matrix *b)
+t_matrix	*matrix_product(t_matrix *a, t_matrix *b)
 {
 	t_matrix	*product;
 	int			i;
@@ -77,30 +59,6 @@ t_matrix	*create_matrix(double collum, double row)
 			j++;
 		}
 		i++;
-	}
-	return (product);
-} */
-
-t_matrix	*matrix_product(t_matrix *a, t_matrix *b)
-{
-	t_matrix	*product;
-	int			i;
-	int			j;
-	int			k;
-
-	if (a->collum != b->row)
-		print_error("Wrong values for matrix product");
-	product = create_matrix(b->collum, a->row);
-	i = -1;
-	while (++i < a->row)
-	{
-		j = -1;
-		while (++j < b->collum)
-		{
-			k = -1;
-			while (++k < a->collum)
-				product->matrix[i][j] += a->matrix[i][k] * b->matrix[k][j];
-		}
 	}
 	return (product);
 }
