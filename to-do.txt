@@ -62,3 +62,8 @@ Categoria								Subcategoria							Função													Descrição
 [ ]Estrutura de Cena					Grupos									group()													Cria objeto grupo para organizar formas
 [ ]Estrutura de Cena					Grupos									add_child(group, shape)									Adiciona forma como filho de grupo
 [ ]Estrutura de Cena					CSG										csg(operation, left_shape, right_shape)					Cria objeto de geometria construtiva
+
+
+[]add different light sources
+[]scape key to change colors
+[]

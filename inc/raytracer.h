@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 19:56:09 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 20:12:41 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ t_intersection		intersect_object(t_object *object, t_ray ray);
 t_intersection		create_intersection(double t, t_object *obj);
 t_intersection_list	create_intersections_list(int count, ...);
 t_intersection		*find_hit(t_intersection_list *list);
+t_intersection	intersect_world(t_scene *scene, t_ray ray);
+t_color	shade_hit(t_scene *scene, t_intersection hit, t_ray ray);
 
 
 

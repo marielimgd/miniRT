@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/11 19:14:40 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 20:20:24 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ void	parse_sphere(char **tokens, t_scene *scene)
 		parse_error("Sphere diameter must be greater than 0");
 	}
 	sphere->prop.sphere.radius = diameter / 2.0;
+    sphere->transform = identity_matrix();
+    sphere->material.color = sphere->color;
+	sphere->material.ambient = 0.1;
+	sphere->material.diffuse = 0.9;
+	sphere->material.specular = 0.9;
+	sphere->material.shininess = 200.0;
     ft_lstadd_back(&scene->objects, ft_lstnew(sphere));
 }
 
