@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   inverse_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:26:48 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/09 17:46:26 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:50:49 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 static t_matrix	*submatrix(t_matrix *a, int row_to_remove, int col_to_remove)
 {
