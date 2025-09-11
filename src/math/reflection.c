@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   reflection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/03 16:29:48 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 18:41:58 by marieli          ###   ########.fr       */
+/*   Created: 2025/09/11 19:53:45 by marieli           #+#    #+#             */
+/*   Updated: 2025/09/11 19:54:29 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	print_error(char *s)
+t_vector	*reflect(t_vector in, t_vector normal)
 {
-	printf("\033[1;31m%s\033[0m\n",s);
-	free_all();
-	EXIT_FAILURE;
+	t_vector	*scaled_normal;
+	t_vector	*result;
+	double		dot_in_normal;
+
+	dot_in_normal = dot_product(&in, &normal);
+	scaled_normal = scale_tuples_product(&normal, 2 * dot_in_normal);
+	result = subtract_tuples(&in, scaled_normal);
+
+	free(scaled_normal);
+	return (result);
 }

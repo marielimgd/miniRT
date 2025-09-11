@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   struct_creation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 18:52:13 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/04 18:53:44 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:50:29 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 t_vector	create_point(double x, double y, double z)
 {

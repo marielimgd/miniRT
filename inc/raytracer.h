@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/08 19:47:53 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/11 20:12:41 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_vector	*add_tuples(t_vector *vector, t_vector *point);
 t_vector	*subtract_tuples(t_vector *vector, t_vector *point);
 t_vector	*scale_tuples_product(t_vector *vector, double scale);
 t_vector	*scale_tuples_divison(t_vector *vector, double scale);
+bool		are_vectors_equal(t_vector a, t_vector b);
 
 // --- Matrix ----
 t_matrix	*create_matrix(double collum, double row);
@@ -44,16 +45,27 @@ void		free_matrix(t_matrix *m);
 t_matrix	*rotation_x(double radians);
 t_matrix	*rotation_y(double radians);
 t_matrix	*rotation_z(double radians);
+double		cofactor(t_matrix *m, int row, int col);
+double		determinant(t_matrix *m);
 
 
-//DELETAR DEPOIS
-double			cofactor(t_matrix *m, int row, int col);
-double			determinant(t_matrix *m);
+//--- Color ---
+t_color	max_color(t_color c);
+t_color	scale_color(t_color c, float ratio);
+t_color	add_color(t_color a, t_color b);
+t_color	subtract_color(t_color a, t_color b);
+t_color	multiply_color(t_color a, t_color b);
+
+// --- Scene ---
+t_color	lighting(t_material m, t_light *light, t_lighting_data d);
+t_vector	*reflect(t_vector in, t_vector normal);
+
 
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
 void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y,
 				struct s_color color);
+
 
 // --- Ray ---
 t_vector	calculate_ray_direction(t_camera *camera, int x, int y);
@@ -68,12 +80,17 @@ t_intersection		intersect_object(t_object *object, t_ray ray);
 t_intersection		create_intersection(double t, t_object *obj);
 t_intersection_list	create_intersections_list(int count, ...);
 t_intersection		*find_hit(t_intersection_list *list);
+t_intersection	intersect_world(t_scene *scene, t_ray ray);
+t_color	shade_hit(t_scene *scene, t_intersection hit, t_ray ray);
 
 
 
 // --- Objects ----
 t_object	*create_sphere(void);
 t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray);
+t_vector	normal_at(t_object *sphere, t_vector world_point);
+t_vector	normal_at_sphere(t_object *sphere, t_vector world_point);
+
 
 // --- Safe_Malloc ---
 void			*safe_malloc(size_t size, t_alloc_type u_type);

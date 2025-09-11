@@ -3,55 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:13 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 16:35:54 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/11 20:32:27 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-/* t_matrix	*create_matrix(double collum, double row)
+t_matrix	*create_matrix(double collum, double row)
 {
 	t_matrix	*matrix;
 	double		**mtx;
 	int			i;
 
-	i = row;
+	i = 0;
 	matrix = safe_malloc(sizeof(t_matrix), ALLOC_TYPE_MTX);
 	mtx = safe_malloc(sizeof(double *) * row, ALLOC_TYPE_MTX);
-	while (i > 0)
+	while (i < row)
 	{
 		mtx[i] = safe_malloc(sizeof(double) * collum, ALLOC_TYPE_MTX);
-		i--;
+		i++;
 	}
 	matrix->collum = collum;
 	matrix->row = row;
 	matrix->matrix = mtx;
 	return (matrix);
-} */
-t_matrix	*create_matrix(double collum, double row)
-{
-	t_matrix	*matrix;
-	int			i;
-
-	matrix = safe_malloc(sizeof(t_matrix), ALLOC_TYPE_MTX);
-	matrix->row = row;
-	matrix->collum = collum;
-	matrix->matrix = safe_malloc(sizeof(double *) * row, ALLOC_TYPE_MTX);
-	
-	i = 0;
-	while (i < row)
-	{
-		matrix->matrix[i] = safe_malloc(sizeof(double) * collum,
-				ALLOC_TYPE_MTX);
-		i++;
-	}
-	return (matrix);
 }
 
-/* t_matrix	*matrix_product(t_matrix *a, t_matrix *b)
+
+t_matrix	*matrix_product(t_matrix *a, t_matrix *b)
 {
 	t_matrix	*product;
 	int			i;
@@ -79,31 +61,6 @@ t_matrix	*create_matrix(double collum, double row)
 		i++;
 	}
 	return (product);
-} */
-
-t_matrix	*matrix_product(t_matrix *a, t_matrix *b)
-{
-	t_matrix	*product;
-	int			i;
-	int			j;
-	int			k;
-
-	if (a->collum != b->row)
-		print_error("Wrong values for matrix product");
-	product = create_matrix(a->row, b->collum);
-	i = -1;
-	while (++i < a->row)
-	{
-		j = -1;
-		while (++j < b->collum)
-		{
-			product->matrix[i][j] = 0;
-			k = -1;
-			while (++k < a->collum)
-				product->matrix[i][j] += a->matrix[i][k] * b->matrix[k][j];
-		}
-	}
-	return (product);
 }
 
 
@@ -112,10 +69,10 @@ t_matrix	*tuple_to_matrix(t_vector *tuple)
 	t_matrix	*final;
 
 	final = create_matrix(1, 4);
-	final->matrix[0][1] = tuple->x;
-	final->matrix[0][2] = tuple->y;
-	final->matrix[0][3] = tuple->z;
-	final->matrix[0][4] = tuple->w;
+	final->matrix[0][0] = tuple->x;
+	final->matrix[1][0] = tuple->y;
+	final->matrix[2][0] = tuple->z;
+	final->matrix[3][0] = tuple->w;
 	return (final);
 }
 
@@ -141,7 +98,8 @@ t_matrix	*identity_matrix(void)
 		i++;
 	}
 	return (final);
-}
+} 
+	
 
 t_matrix	*transpose_matrix(t_matrix *a)
 {
@@ -164,17 +122,6 @@ t_matrix	*transpose_matrix(t_matrix *a)
 	return (final);
 }
 
-/* t_matrix	*inverse_matrix(t_matrix *a)
-{
-	t_matrix	*final;
-
-	final = NULL;
-
-	if (a->row != a->collum)
-		print_error("Trying to inverse non quadratic matrix");
-	
-	return(final);
-} */
 
 
 t_matrix	*translation(double x, double y, double z)
@@ -204,10 +151,10 @@ t_vector	matrix_to_tuple(t_matrix *final)
 {
 	t_vector	tuple;
 
-	tuple->x = final->matrix[0][1];
-	tuple->y = final->matrix[0][2];
-	tuple->z = final->matrix[0][3];
-	tuple->w = final->matrix[0][4];
+	tuple.x = final->matrix[0][0];
+	tuple.y = final->matrix[1][0];
+	tuple.z = final->matrix[2][0];
+	tuple.w = final->matrix[3][0];
 	return (tuple);
 }
 
@@ -227,7 +174,7 @@ t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t) // vou refazer com ve
 	return (result);
 }
 
-void	free_matrix(t_matrix *m)
+/* void	free_matrix(t_matrix *m)
 {
 	int	i;
 
@@ -239,7 +186,7 @@ void	free_matrix(t_matrix *m)
 	}
 	free(m->matrix);
 	free(m);
-}
+} */
 
 double	determinante(t_matrix *a)
 {
