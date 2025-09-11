@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 19:48:12 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/11 19:56:09 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,16 @@ t_color	add_color(t_color a, t_color b);
 t_color	subtract_color(t_color a, t_color b);
 t_color	multiply_color(t_color a, t_color b);
 
+// --- Scene ---
+t_color	lighting(t_material m, t_light *light, t_lighting_data d);
+t_vector	*reflect(t_vector in, t_vector normal);
+
+
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
 void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y,
 				struct s_color color);
-t_color	lighting(t_material m, t_light *light, t_lighting_data d);
+
 
 // --- Ray ---
 t_vector	calculate_ray_direction(t_camera *camera, int x, int y);
