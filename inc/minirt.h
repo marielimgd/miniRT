@@ -9,7 +9,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/minilibx_mms_20200219/mlx.h"
+# include "../minilibx-linux/minilibx_opengl_20191021/mlx.h"
+# include "../minilibx-linux/minilibx_opengl_20191021/mlx_int.h"
+# include "../minilibx-linux/minilibx_opengl_20191021/mlx_new_window.h"
+# include "../minilibx-linux/minilibx_opengl_20191021/mlx_opengl.h"
+# include "../minilibx-linux/minilibx_opengl_20191021/mlx_png.h"
+# include "../minilibx-linux/minilibx-linux/mlx.h"
+# include "../minilibx-linux/minilibx-linux/mlx_int.h"
 
 /*--------------Constants----------------------------*/
 
