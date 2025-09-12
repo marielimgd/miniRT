@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 17:24:25 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 17:58:22 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,17 @@ t_color	multiply_color(t_color a, t_color b);
 t_color	lighting(t_material m, t_light *light, t_lighting_data d);
 void	reflect(t_vector *result,t_vector *in, t_vector *normal);
 
+// --- Window ---
+void	init_window(t_scene *scene);
+int	close_window(t_scene *scene);
+int	handle_mouse_scroll(int button, int x, int y, t_scene *scene);
+int	handle_keypress(int keycode, t_scene *scene);
+
+
+
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
-void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y,
-				struct s_color color);
+void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y, struct s_color color);
 int			simple_rand(void);
 void		randomize_object_colors(t_scene *scene);
 
@@ -81,8 +88,8 @@ t_intersection		intersect_object(t_object *object, t_ray ray);
 t_intersection		create_intersection(double t, t_object *obj);
 t_intersection_list	create_intersections_list(int count, ...);
 t_intersection		*find_hit(t_intersection_list *list);
-t_intersection	intersect_world(t_scene *scene, t_ray ray);
-t_color	shade_hit(t_scene *scene, t_intersection hit, t_ray ray);
+t_intersection		intersect_world(t_scene *scene, t_ray ray);
+t_color				shade_hit(t_scene *scene, t_intersection hit, t_ray ray);
 
 
 

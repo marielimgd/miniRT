@@ -6,7 +6,7 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -g -O3 -Ofast
 INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR)
 LDFLAGS     = -L$(LIBFT_DIR) -lft \
-              -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+              -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -pthread
 
 # Directories
 SRC_DIR     = src

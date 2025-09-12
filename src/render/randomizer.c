@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   randomizer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:41:51 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/11 20:48:28 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/12 18:18:08 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	simple_rand(void)
+//trocar a cor com keyhook, vou tirar por agora
+
+
+/* int	simple_rand(void)
 {
 	static unsigned int	seed;
     
@@ -36,4 +39,4 @@ void	randomize_object_colors(t_scene *scene)
 		obj->color = obj->material.color;
 		current_obj = current_obj->next;
 	}
-}
+} */

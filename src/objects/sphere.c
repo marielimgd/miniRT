@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 17:26:17 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 18:53:05 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_object	*create_sphere(void)
 {
 	t_object *sphere;
 	
-	sphere = malloc(sizeof(t_object));
+	sphere = safe_malloc(sizeof(t_object), ALLOC_TYPE_OBJECT);
 	sphere->type = SPHERE;
 	sphere->transform = identity_matrix();
 	sphere->inverse_transform = inverse_matrix(sphere->transform);

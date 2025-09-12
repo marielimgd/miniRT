@@ -20,9 +20,10 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define ESC_KEY 65307
+
 # define EPSILON 0.00001
 
+# define ESC_KEY 65307
 # define C_KEY 99
 # define PLUS_KEY 61
 # define MINUS_KEY 45
@@ -197,6 +198,7 @@ typedef enum e_alloc_type
 	ALLOC_TYPE_GENERIC,
 	ALLOC_TYPE_MTX,
 	ALLOC_TYPE_STRING,
+	ALLOC_TYPE_OBJECT
 }			t_alloc_type;
 
 typedef struct s_allocation
@@ -210,5 +212,6 @@ typedef struct s_allocation
 # include "parser.h"
 # include "window.h"
 # include "raytracer.h"
+# include "multithreading.h"
 
 #endif
