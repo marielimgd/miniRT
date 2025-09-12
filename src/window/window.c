@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/11 20:48:22 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:06:00 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	handle_keypress(int keycode, t_scene *scene)
 	needs_rerender = false;
 	if (keycode == ESC_KEY)
 		close_window(scene);
-	else if (keycode == SPACE_KEY)
+	else if (keycode == C_KEY)
 	{
 		randomize_object_colors(scene);
 		needs_rerender = true;

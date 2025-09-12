@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 20:46:41 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:24:25 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ t_vector	create_vector(double x, double y, double z);
 
 // --- Vector Math ---
 double		get_magnitude(t_vector *vector);
-t_vector	*normalization(t_vector *u_vector);
-t_vector	*negative_vector(t_vector *vector);
+void		normalization(t_vector *result, t_vector *u_vector);
+void		negative_vector(t_vector *result, t_vector *vector);
 double		dot_product(t_vector *a, t_vector *b);
-t_vector	*dot_cross(t_vector *a, t_vector *b);
+void		dot_cross(t_vector *result, t_vector *a, t_vector *b);
 int			is_equal(double a, double b);
-t_vector	*add_tuples(t_vector *vector, t_vector *point);
-t_vector	*subtract_tuples(t_vector *vector, t_vector *point);
-t_vector	*scale_tuples_product(t_vector *vector, double scale);
-t_vector	*scale_tuples_divison(t_vector *vector, double scale);
+void		add_tuples(t_vector *result, t_vector *vector, t_vector *point);
+void		subtract_tuples(t_vector *result, t_vector *vector, t_vector *point);
+void		scale_tuples_product(t_vector *result, t_vector *vector, double scale);
+void		scale_tuples_divison(t_vector *result, t_vector *vector, double scale);
 bool		are_vectors_equal(t_vector a, t_vector b);
 
 // --- Matrix ----
@@ -58,8 +58,7 @@ t_color	multiply_color(t_color a, t_color b);
 
 // --- Scene ---
 t_color	lighting(t_material m, t_light *light, t_lighting_data d);
-t_vector	*reflect(t_vector in, t_vector normal);
-
+void	reflect(t_vector *result,t_vector *in, t_vector *normal);
 
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);

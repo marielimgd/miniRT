@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/11 20:14:18 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:02:40 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-/* static t_color	get_ray_color(t_vector ray_direction)
-{
-	t_color	color;
-
-	color.r = (int)((ray_direction.x + 1.0) * 0.5 * 255);
-	color.g = (int)((ray_direction.y + 1.0) * 0.5 * 255);
-	color.b = (int)((ray_direction.z + 1.0) * 0.5 * 255);
-	return (color);
-} */
 
 void	render_scene(t_scene *scene)
 {

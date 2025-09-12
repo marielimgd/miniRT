@@ -3,7 +3,7 @@ NAME        = miniRT
 
 # Compiler and Flags
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS      = -Wall -Wextra -Werror -g -O3 -Ofast
 INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR)
 LDFLAGS     = -L$(LIBFT_DIR) -lft \
               -L$(MLX_DIR) -lmlx -lXext -lX11 -lm

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:10:26 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/11 20:48:07 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:15:24 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,14 @@ t_intersection	intersect_world(t_scene *scene, t_ray ray)
 t_color	shade_hit(t_scene *scene, t_intersection hit, t_ray ray)
 {
 	t_lighting_data	    d;
-	t_vector		    *temp_v;
+    t_vector		    eyev;
 	t_color			    surface_color;
 	t_color			    ambient_contribution;
 
 	d.point = ray_position(ray, hit.t);
 	d.normalv = normal_at(hit.object, d.point);
-	temp_v = negative_vector(&ray.direction);
-	d.eyev = *temp_v;
-	free(temp_v);
+	negative_vector(&eyev, &ray.direction);
+	d.eyev = eyev;
 
 	if (scene->lights)
 		surface_color = lighting(hit.object->material, scene->lights->data, d);

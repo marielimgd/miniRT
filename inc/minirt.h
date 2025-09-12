@@ -23,7 +23,7 @@
 # define ESC_KEY 65307
 # define EPSILON 0.00001
 
-# define SPACE_KEY 65
+# define C_KEY 99
 # define PLUS_KEY 61
 # define MINUS_KEY 45
 # define MOUSE_SCROLL_UP 4
@@ -72,6 +72,13 @@ typedef struct s_hit
 	t_vector		normal;
 }					t_hit;
 
+typedef struct s_camera_basis
+{
+	t_vector	right;
+	t_vector	up;
+	t_vector	forward;
+}				t_camera_basis;
+
 typedef struct s_mlx_data
 {
 	void			*mlx_ptr;
@@ -117,17 +124,17 @@ typedef struct s_sphere_prop
 	double			radius;
 }					t_sphere_prop;
 
+typedef struct s_plane_prop
+{
+	t_vector		normal;
+}					t_plane_prop;
+
 typedef struct s_cylinder_prop
 {
 	t_vector		orientation;
 	double			diameter;
 	double			height;
 }					t_cylinder_prop;
-
-typedef struct s_plane_prop
-{
-	t_vector		normal;
-}					t_plane_prop;
 
 typedef union u_object_properties
 {
@@ -152,6 +159,8 @@ typedef struct s_object
 	t_color				color;
 	t_material			material;
 	t_matrix			*transform;
+	t_matrix			*inverse_transform;
+	t_matrix			*transpose_inverse_transform;
 	t_object_properties	prop;
 }						t_object;
 
