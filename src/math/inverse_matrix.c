@@ -6,11 +6,11 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:26:48 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:36:17 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 19:48:49 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 
 static t_matrix	*submatrix(t_matrix *a, int row_to_remove, int col_to_remove)

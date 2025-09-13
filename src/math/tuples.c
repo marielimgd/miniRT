@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tuples.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 16:22:46 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 16:34:19 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:49:35 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 int	is_equal(double a, double b)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   reflection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:53:45 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/12 17:11:47 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:56:38 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	reflect(t_vector *result,t_vector *in, t_vector *normal)
+void	reflect(t_vector *result, t_vector *in, t_vector *normal)
 {
 	t_vector	scaled_normal;
 	double		dot_in_normal;

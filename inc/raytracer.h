@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/13 19:00:32 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 20:16:27 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_matrix	*inverse_matrix(t_matrix *a);
 t_matrix	*translation(double x, double y, double z);
 t_matrix	*scaling(double x, double y, double z);
 t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t);
-void		free_matrix(t_matrix *m);
 t_matrix	*rotation_x(double radians);
 t_matrix	*rotation_y(double radians);
 t_matrix	*rotation_z(double radians);
@@ -50,31 +49,30 @@ double		determinant(t_matrix *m);
 
 
 //--- Color ---
-t_color	max_color(t_color c);
-t_color	scale_color(t_color c, float ratio);
-t_color	add_color(t_color a, t_color b);
-t_color	subtract_color(t_color a, t_color b);
-t_color	multiply_color(t_color a, t_color b);
+t_color	    max_color(t_color c);
+t_color	    scale_color(t_color c, float ratio);
+t_color	    add_color(t_color a, t_color b);
+t_color	    subtract_color(t_color a, t_color b);
+t_color	    multiply_color(t_color a, t_color b);
+t_color	    color_at(t_scene *world, t_ray ray);
 
 // --- Scene ---
 t_scene	    *create_world(void);
-void	create_default_world(t_scene *world); // ONLY FOR TESTING
-t_color	    lighting(t_material m, t_light *light, t_lighting_data d);
+void	    create_default_world(t_scene *world); // ONLY FOR TESTING
+t_color	    lighting(t_material m, t_light *light, t_comps *comps);
 void	    reflect(t_vector *result,t_vector *in, t_vector *normal);
 
 // --- Window ---
 void	init_window(t_scene *scene);
-int	close_window(t_scene *scene);
-int	handle_mouse_scroll(int button, int x, int y, t_scene *scene);
-int	handle_keypress(int keycode, t_scene *scene);
-
+int	    close_window(t_scene *scene);
+int	    handle_mouse_scroll(int button, int x, int y, t_scene *scene);
+int	    handle_keypress(int keycode, t_scene *scene);
 
 
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
 void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y, struct s_color color);
-int			simple_rand(void);
-void		randomize_object_colors(t_scene *scene);
+void	    prepare_computations(t_comps *comps, t_intersection *i, t_ray *ray);
 
 
 // --- Ray ---
@@ -98,10 +96,8 @@ t_intersection		intersect_object(t_object *object, t_ray ray);
 t_intersection		create_intersection(double t, t_object *obj);
 t_intersection_list	create_intersections_list(int count, ...);
 t_intersection		*find_hit(t_intersection_list *list);
-t_intersection		intersect_world(t_scene *scene, t_ray ray);
-t_color				shade_hit(t_scene *scene, t_intersection hit, t_ray ray);
-
-
+t_color				shade_hit(t_scene *scene, t_comps *comps);
+t_intersection_list	intersect_world(t_scene *scene, t_ray ray);
 
 // --- Objects ----
 t_object	*create_sphere(void);
@@ -114,6 +110,9 @@ t_vector	normal_at_sphere(t_object *sphere, t_vector world_point);
 void			*safe_malloc(size_t size, t_alloc_type u_type);
 void			free_all(void);
 t_allocation	*get_alloc();
+void		    free_matrix(t_matrix *m);
+void	        free_object(void *obj_ptr);
+void	        free_scene(t_scene *scene);
 
 
 // --- Error ---

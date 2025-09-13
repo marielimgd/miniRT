@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 19:32:14 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 19:50:41 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,38 @@ void	free_matrix(t_matrix *m)
 	}
 	free(m->matrix);
 	free(m);
+}
+
+void	free_object(void *obj_ptr)
+{
+	t_object *obj;
+
+	obj = (t_object *)obj_ptr;
+	if (obj)
+	{
+		if (obj->transform)
+			free_matrix(obj->transform);
+		if (obj->inverse_transform)
+			free_matrix(obj->inverse_transform);
+		if (obj->transpose_inverse_transform)
+			free_matrix(obj->transpose_inverse_transform);
+		free(obj);
+	}
+}
+
+void	free_scene(t_scene *scene)
+{
+	if (scene->lights)
+		ft_lstclear(&scene->lights, free);
+	if (scene->objects)
+		ft_lstclear(&scene->objects, free_object);
+	if (scene->mlx.img_ptr)
+		mlx_destroy_image(scene->mlx.mlx_ptr, scene->mlx.img_ptr);
+	if (scene->mlx.win_ptr)
+		mlx_destroy_window(scene->mlx.mlx_ptr, scene->mlx.win_ptr);
+	if (scene->mlx.mlx_ptr)
+	{
+		mlx_destroy_display(scene->mlx.mlx_ptr);
+		free(scene->mlx.mlx_ptr);
+	}
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:09:57 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/03 21:41:27 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:52:20 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 static void parse_elements(char **tokens, t_scene *scene)
 {

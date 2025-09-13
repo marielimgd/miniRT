@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:08:15 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/03 21:41:15 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:52:05 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 static void	validate_rgb_values(char **rgb_values)
 {

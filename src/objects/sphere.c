@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:15:53 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 20:21:20 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,32 +66,3 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 			sphere));
 }
 
-static void	get_object_space_normal(t_vector *result, t_vector *world_point,
-		t_matrix *inv_transform)
-{
-	t_vector	object_point;
-	t_vector	origin_point;
-
-	object_point = multiply_matrix_by_tuple(inv_transform, *world_point);
-	origin_point = create_point(0, 0, 0);
-	subtract_tuples(result, &object_point, &origin_point);
-}
-
-static void	get_world_space_normal(t_vector *result, t_vector *object_normal,
-		t_matrix *transpose_inv_transform)
-{
-	*result = multiply_matrix_by_tuple(transpose_inv_transform, *object_normal);
-	result->w = 0;
-}
-
-t_vector	normal_at_sphere(t_object *sphere, t_vector world_point)
-{
-	t_vector	object_normal;
-	t_vector	world_normal;
-	t_vector	final_normal;
-
-	get_object_space_normal(&object_normal, &world_point, sphere->inverse_transform);
-	get_world_space_normal(&world_normal, &object_normal, sphere->transpose_inverse_transform);
-	normalization(&final_normal, &world_normal);
-	return (final_normal);
-}

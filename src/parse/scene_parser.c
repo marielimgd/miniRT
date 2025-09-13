@@ -6,11 +6,11 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:08:52 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 19:52:39 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 t_vector string_to_vector(char *str, double w)
 {
@@ -32,8 +32,6 @@ t_vector string_to_vector(char *str, double w)
 	free_tokens(values);
 	return (vector);
 }
-
-/* In src/parse/scene_parser.c */
 
 void	parse_camera(char **tokens, t_scene *scene)
 {

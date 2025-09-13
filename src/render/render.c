@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:20:40 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 20:17:21 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 static void	process_pixel(t_scene *scene, int x, int y)
 {
-    t_ray			ray;
-    t_intersection	hit;
-    t_color			pixel_color;
+	t_ray				ray;
+	t_intersection_list	intersections;
+	t_intersection		*hit;
+	t_comps				comps;
+	t_color				pixel_color;
 
-    ray = ray_for_pixel(&scene->camera, x, y);
-
-    hit = intersect_world(scene, ray);
-    if (hit.object != NULL)
-        pixel_color = shade_hit(scene, hit, ray);
-    else
-        pixel_color = (t_color){0, 0, 0};
-    my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
+	ray = ray_for_pixel(&scene->camera, x, y);
+		intersections = intersect_world(scene, ray);
+		hit = find_hit(&intersections);
+	if (hit == NULL)
+	{
+		pixel_color = (t_color){0, 0, 0};
+	}
+	else
+	{
+		prepare_computations(&comps, hit, &ray);
+		pixel_color = shade_hit(scene, &comps);
+	}
+		my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
 }
 
 

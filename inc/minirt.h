@@ -52,9 +52,9 @@ typedef struct s_color
 
 typedef struct s_matrix
 {
-	double				**matrix;
-	double				collum;
-	double				row;
+	double			**matrix;
+	double			collum;
+	double			row;
 }					t_matrix;
 
 
@@ -118,24 +118,18 @@ typedef struct s_light
 	t_color			color;
 }					t_light;
 
-typedef struct s_lighting_data
-{
-	t_vector	point;
-	t_vector	eyev;
-	t_vector	normalv;
-}				t_lighting_data;
 
 typedef enum e_object_type
 {
 	SPHERE,
 	PLANE,
 	CYLINDER
-}					t_object_type;
+}			t_object_type;
 
 typedef struct s_sphere_prop
 {
-	double			radius;
-}					t_sphere_prop;
+	double		radius;
+}				t_sphere_prop;
 
 typedef struct s_plane_prop
 {
@@ -169,13 +163,22 @@ typedef struct s_object
 {
 	t_object_type		type;
 	t_vector			origin;
-	t_color				color;
 	t_material			material;
 	t_matrix			*transform;
 	t_matrix			*inverse_transform;
 	t_matrix			*transpose_inverse_transform;
 	t_object_properties	prop;
 }						t_object;
+
+typedef struct s_comps
+{
+	double		t;
+	t_object	*object;
+	t_vector	point;
+	t_vector	eyev;
+	t_vector	normalv;
+	bool		inside;
+}				t_comps;
 
 // --- Intersections ---
 typedef struct s_intersection
