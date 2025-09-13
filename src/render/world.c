@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:10:26 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/13 18:54:24 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 19:42:57 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,24 @@ t_intersection	intersect_world(t_scene *scene, t_ray ray)
     return ((t_intersection){-1, NULL});
 }
 
+/* In src/render/world.c */
+
 t_color	shade_hit(t_scene *scene, t_intersection hit, t_ray ray)
 {
-    t_lighting_data	d;
-    t_vector		eyev;
-    t_color			final_color;
-    t_list			*current_light_node;
+	t_lighting_data	d;
+	t_color			final_color;
+	t_list			*current_light_node;
 
-    d.point = ray_position(ray, hit.t);
-    d.normalv = normal_at(hit.object, d.point);
-    negative_vector(&eyev, &ray.direction);
-    d.eyev = eyev;
-    
-    final_color = scale_color(hit.object->material.color, scene->ambient_light);
-    current_light_node = scene->lights;
-    while (current_light_node)
-    {
-        t_light *light = (t_light *)current_light_node->data;
-        final_color = add_color(final_color, 
-            lighting(hit.object->material, light, d));
-        current_light_node = current_light_node->next;
-    }
-
-    return (final_color);
+	d.point = ray_position(ray, hit.t);
+	d.normalv = normal_at(hit.object, d.point);
+	negative_vector(&d.eyev, &ray.direction);
+	final_color = scale_color(hit.object->material.color, scene->ambient_light);
+	current_light_node = scene->lights;
+	while (current_light_node)
+	{
+		final_color = add_color(final_color,
+			lighting(hit.object->material, current_light_node->data, d));
+		current_light_node = current_light_node->next;
+	}
+	return (final_color);
 }

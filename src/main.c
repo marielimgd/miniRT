@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:03:29 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 19:42:07 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,42 +37,28 @@
 
 //----------------------------------------------TEST AREA----------------------------------------
 
-/* In src/main.c */
-
-#include "minirt.h"
-
-int	main(void)
+int	main(int argc, char **argv)
 {
-	t_scene		*world;
-	t_vector	from;
-	t_vector	to;
-	t_vector	up;
+	t_scene	*world;
 
-	// 1. Create the world struct
+	if (argc != 2)
+		parse_error("Usage: ./miniRT <scene.rt>");
+
+	// Create and initialize the world
 	world = create_world();
 	
-	// 2. POPULATE THE WORLD with test objects and lights
-	create_default_world(world);
+	// Parse the scene file to populate the world with objects,
+	// lights, and the camera setup.
+	parse_scene(argv[1], world);
 
-	// 3. Initialize the camera's settings
-	camera_init(&world->camera, WIDTH, HEIGHT, M_PI / 3.0);
-
-	// 4. Define the camera's position and orientation
-	from = create_point(0, 1.5, -5);
-	to = create_point(0, 1, 0);
-	up = create_vector(0, 1, 0);
-
-	// 5. Create the view matrix and assign it to the camera
-	world->camera.transform = view_transform(from, to, up);
-	
-	// 6. INITIALIZE THE WINDOW before rendering
+	// Initialize the window
 	init_window(world);
 	
-	// 7. Render the scene
+	// Render the fully parsed scene
 	render_scene(world);
 	mlx_loop(world->mlx.mlx_ptr);
 
-	// 8. Use your master cleanup function
+	// Use your master cleanup function
 	free_all();
 
 	return (0);
