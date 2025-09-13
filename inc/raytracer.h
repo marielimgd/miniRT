@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 21:54:54 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 22:35:58 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_color		multiply_color(t_color a, t_color b);
 // --- Scene ---
 t_color		lighting(t_material m, t_light *light, t_comps *comps);
 void		reflect(t_vector *result,t_vector *in, t_vector *normal);
+void		create_final_scene_world(t_scene *world);
+
 
 // --- Window ---
 void		init_window(t_scene *scene);
@@ -76,9 +78,8 @@ void		create_default_world(t_scene *world);
 t_color		color_at(t_scene *scene, t_ray ray);
 
 // --- Camera ----
-void	camera_init(t_camera *cam, int hsize, int vsize, double fov);
+void		camera_init(t_camera *cam, int hsize, int vsize, double fov);
 t_matrix	*view_transform(t_vector from, t_vector to, t_vector up);
-
 
 // --- Ray ---
 t_ray		create_ray(t_vector origin, t_vector direction);

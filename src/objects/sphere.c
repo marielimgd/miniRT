@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 18:53:05 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 22:30:45 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,22 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 	t_ray		transformed_ray;
 	double		coeffs[3];
 	double		discriminant;
+	bool		is_center_pixel;
+
+	//DEBUG
+	is_center_pixel = is_equal(ray.origin.x, 0) && is_equal(ray.origin.y, 1.5);
 
 	transformed_ray = transform(ray, sphere->inverse_transform);
 	calculate_sphere_coeffs(&transformed_ray, coeffs);
 	discriminant = (coeffs[1] * coeffs[1]) - 4 * coeffs[0] * coeffs[2];
 	if (discriminant < 0)
 		return ((t_intersection_list){.count = 0});
+	if (is_center_pixel)
+    {
+        printf("  Testing Sphere Intersection:\n");
+        printf("    Coeffs: a=%.2f, b=%.2f, c=%.2f\n", coeffs[0], coeffs[1], coeffs[2]);
+        printf("    Discriminant: %.2f\n", discriminant);
+    }
 	return (make_intersections(
 			(-coeffs[1] - sqrt(discriminant)) / (2 * coeffs[0]),
 			(-coeffs[1] + sqrt(discriminant)) / (2 * coeffs[0]),

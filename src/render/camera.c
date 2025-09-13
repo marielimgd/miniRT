@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 21:42:08 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 21:48:07 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 22:44:20 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	camera_init(t_camera *cam, int hsize, int vsize, double fov)
 	cam->vsize = vsize;
 	cam->fov = fov;
 	cam->transform = identity_matrix();
-	half_view = tan(fov / 2);
+	half_view = tan(fov / 2.0);
 	aspect = (double)hsize / (double)vsize;
-	if (aspect >= 1)
+	if (aspect >= 1.0)
 	{
 		cam->half_width = half_view;
 		cam->half_height = half_view / aspect;
@@ -33,9 +33,29 @@ void	camera_init(t_camera *cam, int hsize, int vsize, double fov)
 		cam->half_width = half_view * aspect;
 		cam->half_height = half_view;
 	}
-	cam->pixel_size = (cam->half_width * 2) / hsize;
+	cam->pixel_size = (cam->half_width * 2.0) / (double)hsize;
 }
 
+t_ray	ray_for_pixel(t_camera *camera, int px, int py)
+{
+	t_vector	pixel;
+	t_vector	origin;
+	t_vector	direction;
+	t_matrix	*inv_transform;
+	double		world_x;
+	double		world_y;
+
+	world_x = camera->half_width - (px + 0.5) * camera->pixel_size;
+	world_y = camera->half_height - (py + 0.5) * camera->pixel_size;
+	inv_transform = inverse_matrix(camera->transform);
+	pixel = multiply_matrix_by_tuple(inv_transform,
+			create_point(world_x, world_y, -1));
+	origin = multiply_matrix_by_tuple(inv_transform, create_point(0, 0, 0));
+	subtract_tuples(&direction, &pixel, &origin);
+	normalization(&direction, &direction);
+	free_matrix(inv_transform);
+	return (create_ray(origin, direction));
+}
 
 static void	calculate_orientation_vectors(t_orientation_vectors *vecs,
 	t_vector from, t_vector to, t_vector up)

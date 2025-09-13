@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 21:45:26 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 22:32:14 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static void	process_pixel(t_scene *scene, int x, int y)
 	t_color	pixel_color;
 
 	ray = ray_for_pixel(&scene->camera, x, y);
+	if (x == scene->camera.hsize / 2 && y == scene->camera.vsize / 2)
+	{
+		printf("\n--- DEBUGGING CENTER PIXEL ---\n");
+		printf("Ray Origin:    (%.2f, %.2f, %.2f)\n", ray.origin.x,
+			ray.origin.y, ray.origin.z);
+		printf("Ray Direction: (%.2f, %.2f, %.2f)\n", ray.direction.x,
+			ray.direction.y, ray.direction.z);
+	}
 	pixel_color = color_at(scene, ray);
 	my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
 }
