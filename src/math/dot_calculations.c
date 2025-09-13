@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dot_calculations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 16:35:40 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 16:47:29 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:13:27 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ double	dot_product(t_vector *a, t_vector *b)
 {
 	double	result;
 	
-	if ((a->w * b->w) != 0)
-		print_error("Wrong Vector Passed");
+	// if (a->w != 0 || b->w != 0)
+	// 	print_error("Wrong Vector Passed");
 	result = (a->x * b->x) + (a->y * b->y) + (a->z * b->z);
 	return (result);
 }

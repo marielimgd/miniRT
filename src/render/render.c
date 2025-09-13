@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 18:07:08 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:20:40 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 static void	process_pixel(t_scene *scene, int x, int y)
 {
-	t_ray			ray;
-	t_intersection	hit;
-	t_color			pixel_color;
+    t_ray			ray;
+    t_intersection	hit;
+    t_color			pixel_color;
 
-	ray.origin = scene->camera.origin;
-	ray.direction = calculate_ray_direction(&scene->camera, x, y);
-	hit = intersect_world(scene, ray);
-	if (hit.object != NULL)
-		pixel_color = shade_hit(scene, hit, ray);
-	else
-		pixel_color = (t_color){0, 0, 0};
-	my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
+    ray = ray_for_pixel(&scene->camera, x, y);
+
+    hit = intersect_world(scene, ray);
+    if (hit.object != NULL)
+        pixel_color = shade_hit(scene, hit, ray);
+    else
+        pixel_color = (t_color){0, 0, 0};
+    my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
 }
 
 
-static void	*render_thread(void *thread_arg)
+/* static void	*render_thread(void *thread_arg)
 {
 	t_thread_data	*data;
 	t_scene			*scene;
@@ -94,4 +94,26 @@ void	render_scene(t_scene *scene)
 	join_threads(threads);
 	mlx_put_image_to_window(scene->mlx.mlx_ptr, scene->mlx.win_ptr,
 		scene->mlx.img_ptr, 0, 0);
+} */
+
+//DEBUGGING:
+
+void render_scene(t_scene *scene)
+{
+    int x;
+    int y;
+
+    y = 0;
+    while (y < HEIGHT)
+    {
+        x = 0;
+        while (x < WIDTH)
+        {
+            process_pixel(scene, x, y);
+            x++;
+        }
+        y++;
+    }
+    mlx_put_image_to_window(scene->mlx.mlx_ptr, scene->mlx.win_ptr,
+        scene->mlx.img_ptr, 0, 0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:35:55 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/12 17:13:08 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 18:53:51 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,19 @@ t_color	lighting(t_material m, t_light *light, t_lighting_data d)
     t_vector	temp_v;
     double		light_dot_normal;
 
-effective_color = scale_color(m.color, light->brightness);
-	final_color = scale_color(effective_color, m.ambient);
-	subtract_tuples(&temp_v, &light->origin, &d.point);
-	normalization(&lightv, &temp_v);
-	light_dot_normal = dot_product(&lightv, &d.normalv);
-	if (light_dot_normal >= 0)
-	{
-		final_color = add_color(final_color,
-				scale_color(effective_color, m.diffuse * light_dot_normal));
-		final_color = add_color(final_color,
-				compute_specular(m, light, d, lightv));
-	}
-	return (final_color);
-}
+    effective_color = multiply_color(m.color, light->color);
 
+    subtract_tuples(&temp_v, &light->origin, &d.point);
+    normalization(&lightv, &temp_v);
+    light_dot_normal = dot_product(&lightv, &d.normalv);
+
+    final_color = (t_color){0, 0, 0};
+    if (light_dot_normal >= 0)
+    {
+        final_color = add_color(final_color,
+                scale_color(effective_color, m.diffuse * light_dot_normal));
+        final_color = add_color(final_color,
+                compute_specular(m, light, d, lightv));
+    }
+    return (final_color);
+}

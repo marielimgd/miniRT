@@ -3,38 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:10:26 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/12 17:15:24 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 18:54:24 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
 t_intersection	intersect_world(t_scene *scene, t_ray ray)
 {
-    t_list				*objects;
-    t_intersection_list	intersections;
-    t_intersection_list	obj_intersections;
+    t_list				*current_obj_node;
+    t_intersection_list	all_intersections;
+    t_intersection_list	obj_hits;
     t_intersection		*hit;
     int					i;
 
-    intersections.count = 0;
-    objects = scene->objects;
-    while (objects)
+    all_intersections.count = 0;
+    current_obj_node = scene->objects;
+    while (current_obj_node)
     {
-        if (((t_object *)objects->data)->type == SPHERE) //add other object types later
+        t_object *obj = (t_object *)current_obj_node->data;
+        if (obj->type == SPHERE)
         {
-            obj_intersections = intersect_sphere(objects->data, ray);
+            obj_hits = intersect_sphere(obj, ray);
             i = 0;
-            while (i < obj_intersections.count)
-                intersections.intersections[intersections.count++] = obj_intersections.intersections[i++];
+            while (i < obj_hits.count && all_intersections.count < 10)
+            {
+                all_intersections.intersections[all_intersections.count++] = obj_hits.intersections[i++];
+            }
         }
-        objects = objects->next;
+        current_obj_node = current_obj_node->next;
     }
-    hit = find_hit(&intersections);
+    hit = find_hit(&all_intersections);
     if (hit)
         return (*hit);
     return ((t_intersection){-1, NULL});
@@ -42,20 +44,25 @@ t_intersection	intersect_world(t_scene *scene, t_ray ray)
 
 t_color	shade_hit(t_scene *scene, t_intersection hit, t_ray ray)
 {
-	t_lighting_data	    d;
-    t_vector		    eyev;
-	t_color			    surface_color;
-	t_color			    ambient_contribution;
+    t_lighting_data	d;
+    t_vector		eyev;
+    t_color			final_color;
+    t_list			*current_light_node;
 
-	d.point = ray_position(ray, hit.t);
-	d.normalv = normal_at(hit.object, d.point);
-	negative_vector(&eyev, &ray.direction);
-	d.eyev = eyev;
+    d.point = ray_position(ray, hit.t);
+    d.normalv = normal_at(hit.object, d.point);
+    negative_vector(&eyev, &ray.direction);
+    d.eyev = eyev;
+    
+    final_color = scale_color(hit.object->material.color, scene->ambient_light);
+    current_light_node = scene->lights;
+    while (current_light_node)
+    {
+        t_light *light = (t_light *)current_light_node->data;
+        final_color = add_color(final_color, 
+            lighting(hit.object->material, light, d));
+        current_light_node = current_light_node->next;
+    }
 
-	if (scene->lights)
-		surface_color = lighting(hit.object->material, scene->lights->data, d);
-	else
-		surface_color = (t_color){0, 0, 0};
-	ambient_contribution = scale_color(hit.object->color, scene->ambient_light);
-	return (add_color(surface_color, ambient_contribution));
+    return (final_color);
 }

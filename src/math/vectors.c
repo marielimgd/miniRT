@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 22:10:55 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 16:36:23 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:14:04 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ double	get_magnitude(t_vector *vector)
 	double	x;
 	double	y;
 	double	z;
-	double	w;
 
 	x = vector->x;
 	y = vector->y;
 	z = vector->z;
-	w = vector->w;
-	result = sqrt((x * x) + (y * y) + (z * z) + (w * w));
+	result = sqrt((x * x) + (y * y) + (z * z));
 	return (result);
 }
 

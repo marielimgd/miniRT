@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 18:53:05 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:15:53 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 	double		discriminant;
 
 	transformed_ray = transform(ray, sphere->inverse_transform);
+	
 	calculate_sphere_coeffs(&transformed_ray, coeffs);
 	discriminant = (coeffs[1] * coeffs[1]) - 4 * coeffs[0] * coeffs[2];
 	if (discriminant < 0)

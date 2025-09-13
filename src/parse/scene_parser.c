@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/03 21:41:37 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:08:52 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,30 @@ t_vector string_to_vector(char *str, double w)
 	return (vector);
 }
 
-void 	parse_camera(char**tokens, t_scene *scene)
+/* In src/parse/scene_parser.c */
+
+void	parse_camera(char **tokens, t_scene *scene)
 {
+	t_vector	from;
+	t_vector	to;
 	t_vector	orientation;
-	int 		fov;
+	t_vector	up;
+	int			fov;
 
-	if(count_tokens(tokens) != 4)
+	if (count_tokens(tokens) != 4)
 		parse_error("Invalid camera parameters");
-
-	scene->camera.origin = string_to_vector(tokens[1], 1.0);
-	
+	from = string_to_vector(tokens[1], 1.0);
 	orientation = string_to_vector(tokens[2], 0.0);
-	if (orientation.x < -1.0 || orientation.x > 1.0 ||
-		orientation.y < -1.0 || orientation.y > 1.0 ||
-		orientation.z < -1.0 || orientation.z > 1.0)
-		parse_error("Camera orientation vector values is out of range (-1.0 to 1.0)\n");
-
 	fov = ft_atoi(tokens[3]);
+	if (orientation.x < -1.0 || orientation.x > 1.0 || orientation.y < -1.0
+		|| orientation.y > 1.0 || orientation.z < -1.0 || orientation.z > 1.0)
+		parse_error("Camera orientation vector values out of range [-1.0, 1.0]");
 	if (fov < 0 || fov > 180)
-		parse_error("Camera FOV must be between 0 and 180 degrees\n");
-	
-	scene->camera.orientation = orientation;
-	scene->camera.fov = fov;	
+		parse_error("Camera FOV must be between 0 and 180 degrees");
+	camera_init(&scene->camera, WIDTH, HEIGHT, fov * (M_PI / 180.0));
+	add_tuples(&to, &from, &orientation);
+	up = create_vector(0, 1, 0);
+	scene->camera.transform = view_transform(from, to, up);
 }
 
 void 	parse_ambient_light(char**tokens, t_scene *scene)

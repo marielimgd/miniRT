@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 17:01:53 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:05:40 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	setup_camera(t_camera_basis *basis, t_vector *orientation)
+/* static void	setup_camera(t_camera_basis *basis, t_vector *orientation)
 {
 	t_vector	world_ref;
 	t_vector	temp_a;
@@ -48,14 +48,14 @@ t_vector	calculate_ray_direction(t_camera *camera, int x, int y)
 	t_vector		cam_coords;
 	double			aspect_ratio;
 
-	setup_camera(&basis, &camera->orientation);
+	setup_camera(&basis, &camera->direction);
 	aspect_ratio = (double)WIDTH / (double)HEIGHT;
 	cam_coords.x = (2.0 * (x + 0.5) / (double)WIDTH - 1.0)
 		* tan(camera->fov * 0.5 * (M_PI / 180.0)) * aspect_ratio;
 	cam_coords.y = (1.0 - 2.0 * (y + 0.5) / (double)HEIGHT)
 		* tan(camera->fov * 0.5 * (M_PI / 180.0));
 	return (combine_ray_vectors(&basis, &cam_coords));
-}
+} */
 
 t_ray	create_ray(t_vector origin, t_vector direction)
 {

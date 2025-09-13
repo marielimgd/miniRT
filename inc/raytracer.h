@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 17:58:22 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:00:32 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ t_color	subtract_color(t_color a, t_color b);
 t_color	multiply_color(t_color a, t_color b);
 
 // --- Scene ---
-t_color	lighting(t_material m, t_light *light, t_lighting_data d);
-void	reflect(t_vector *result,t_vector *in, t_vector *normal);
+t_scene	    *create_world(void);
+void	create_default_world(t_scene *world); // ONLY FOR TESTING
+t_color	    lighting(t_material m, t_light *light, t_lighting_data d);
+void	    reflect(t_vector *result,t_vector *in, t_vector *normal);
 
 // --- Window ---
 void	init_window(t_scene *scene);
@@ -81,6 +83,14 @@ t_ray		create_ray(t_vector origin, t_vector direction);
 t_vector	ray_position(t_ray ray, double t);
 t_ray		transform(t_ray ray, t_matrix *m);
 void		set_transform(t_object *s, t_matrix *t);
+
+
+// --- Camera ---
+void		camera_init(t_camera *cam, int hsize, int vsize, double fov);
+t_matrix	*view_transform(t_vector from, t_vector to, t_vector up);
+t_matrix	*create_orientation_matrix(t_orientation_vectors *vecs);
+void		calculate_orientation_vectors(t_orientation_vectors *vecs, t_vector from, t_vector to, t_vector up);
+t_ray	    ray_for_pixel(t_camera *camera, int px, int py);
 
 
 // --- Intersections ---

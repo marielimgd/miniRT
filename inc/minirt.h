@@ -18,8 +18,8 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 300
+# define HEIGHT 300
 
 # define EPSILON 0.00001
 
@@ -92,12 +92,24 @@ typedef struct s_mlx_data
 }					t_mlx_data;
 
 // --- Scene Elements ---
+
 typedef struct s_camera
 {
-	t_vector		origin;
-	t_vector		orientation;
-	int				fov;
-}					t_camera;
+	int			hsize;
+	int			vsize;
+	double		fov;
+	t_matrix	*transform; 
+	double		pixel_size;
+	double		half_width;
+	double		half_height;
+}				t_camera;
+
+typedef struct s_orientation_vectors
+{
+	t_vector	forward;
+	t_vector	left;
+	t_vector	true_up;
+}				t_orientation_vectors;
 
 typedef struct s_light
 {
