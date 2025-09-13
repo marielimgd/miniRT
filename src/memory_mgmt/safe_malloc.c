@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   safe_malloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 20:45:51 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 17:20:29 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-t_allocation	*get_alloc()
+/* t_allocation	*get_alloc()
 {
 	static t_allocation	*alloc;
 
 	return (alloc);
-}
+} */
 
-void	*safe_malloc(size_t size, t_alloc_type u_type)
+/* void	*safe_malloc(size_t size, t_alloc_type u_type)
 {
 	t_allocation	*alloc;
 
@@ -35,7 +35,47 @@ void	*safe_malloc(size_t size, t_alloc_type u_type)
 	alloc->type = u_type;
 	alloc->next = NULL;
 	return (alloc->ptr);
-} 
+}  */
+
+static t_allocation	**get_alloc_head(void)
+{
+	static t_allocation	*alloc;
+
+	return (&alloc);
+}
+
+t_allocation	*get_alloc(void)
+{
+	return (*get_alloc_head());
+}
+
+void	*safe_malloc(size_t size, t_alloc_type u_type)
+{
+	t_allocation	*new_alloc;
+	t_allocation	*current;
+
+	new_alloc = malloc(sizeof(t_allocation));
+	if (!new_alloc)
+		return (print_error("malloc error"), NULL);
+	new_alloc->ptr = malloc(size);
+	if (!new_alloc->ptr)
+	{
+		free(new_alloc);
+		return (print_error("malloc error"), NULL);
+	}
+	new_alloc->type = u_type;
+	new_alloc->next = NULL;
+	if (get_alloc() == NULL)
+		*get_alloc_head() = new_alloc;
+	else
+	{
+		current = get_alloc();
+		while (current->next)
+			current = current->next;
+		current->next = new_alloc;
+	}
+	return (new_alloc->ptr);
+}
 void	free_all(void)
 {
 	t_allocation	*alloc;

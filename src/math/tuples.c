@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tuples.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 16:22:46 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 21:57:35 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:53:45 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 int	is_equal(double a, double b)
 {
@@ -20,12 +20,12 @@ int	is_equal(double a, double b)
 		return (0);
 }
 
-void	add_tuples(t_vector *result, t_vector *vector, t_vector *point)
+void	add_tuples(t_vector *result, t_vector *a, t_vector *b)
 {
-	result->x = vector->x + point->x;
-	result->y = vector->y + point->y;
-	result->z = vector->z + point->z;
-	result->w = vector->w + point->w;
+	result->x = a->x + b->x;
+	result->y = a->y + b->y;
+	result->z = a->z + b->z;
+	result->w = a->w + b->w;
 }
 
 void	subtract_tuples(t_vector *result, t_vector *a, t_vector *b)
@@ -36,20 +36,10 @@ void	subtract_tuples(t_vector *result, t_vector *a, t_vector *b)
 	result->w = a->w - b->w;
 }
 
-void	scale_tuples_product(t_vector *result, t_vector *vector, double scale)
+void	scale_tuples_product(t_vector *result, t_vector *v, double scale)
 {
-	result->x = vector->x * scale;
-	result->y = vector->y * scale;
-	result->z = vector->z * scale;
-	result->w = vector->w * scale;
+	result->x = v->x * scale;
+	result->y = v->y * scale;
+	result->z = v->z * scale;
+	result->w = v->w * scale;
 }
-
-void	scale_tuples_divison(t_vector *result, t_vector *vector, double scale)
-{
-	result->x = vector->x / scale;
-	result->y = vector->y / scale;
-	result->z = vector->z / scale;
-	result->w = vector->w / scale;
-
-}
-

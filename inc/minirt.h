@@ -18,8 +18,8 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 100
+# define HEIGHT 100
 
 # define EPSILON 0.00001
 
@@ -109,6 +109,7 @@ typedef struct s_orientation_vectors
 	t_vector	left;
 	t_vector	true_up;
 }				t_orientation_vectors;
+
 
 typedef struct s_light
 {
@@ -225,7 +226,6 @@ typedef struct s_allocation
 
 
 # include "parser.h"
-# include "window.h"
 # include "raytracer.h"
 # include "multithreading.h"
 

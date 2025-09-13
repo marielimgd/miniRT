@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 22:32:14 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 17:12:40 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,49 @@ static void	process_pixel(t_scene *scene, int x, int y)
 	t_ray	ray;
 	t_color	pixel_color;
 
+
+
 	ray = ray_for_pixel(&scene->camera, x, y);
-	if (x == scene->camera.hsize / 2 && y == scene->camera.vsize / 2)
-	{
-		printf("\n--- DEBUGGING CENTER PIXEL ---\n");
-		printf("Ray Origin:    (%.2f, %.2f, %.2f)\n", ray.origin.x,
-			ray.origin.y, ray.origin.z);
-		printf("Ray Direction: (%.2f, %.2f, %.2f)\n", ray.direction.x,
-			ray.direction.y, ray.direction.z);
-	}
+
+
+	t_intersection_list	intersections;
+	t_intersection		*hit;
+	printf("\n--- DEBUGGING CENTER PIXEL ---\n");
+	printf("1. Ray Generated:\n");
+	printf("   Origin:    (%.2f, %.2f, %.2f)\n", ray.origin.x,
+		ray.origin.y, ray.origin.z);
+	printf("   Direction: (%.2f, %.2f, %.2f)\n", ray.direction.x,
+		ray.direction.y, ray.direction.z);
+	
+	intersections = intersect_world(scene, ray);
+	printf("2. Intersections Found: %d\n", intersections.count);
+
+	hit = find_hit(&intersections);
+	if (hit != NULL)
+		printf("3. Closest Hit Found at t = %.2f\n", hit->t);
+	else
+		printf("3. No valid hit was found.\n");
+	printf("----------------------------\n");
+		
 	pixel_color = color_at(scene, ray);
 	my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
 }
 
+
 static void	*render_thread(void *thread_arg)
 {
 	t_thread_data	*data;
-	t_scene			*scene;
 	int				x;
 	int				y;
 
 	data = (t_thread_data *)thread_arg;
-	scene = data->scene;
 	y = data->start_row;
 	while (y < data->end_row)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			process_pixel(scene, x, y);
+			process_pixel(data->scene, x, y);
 			x++;
 		}
 		y++;

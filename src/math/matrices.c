@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:13 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 20:32:27 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:21:19 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,18 @@ t_matrix	*matrix_product(t_matrix *a, t_matrix *b)
 
 	if (a->collum != b->row)
 		print_error("Wrong values for matrix product");
-	i = 0;
-	product = create_matrix(a->collum, b->row);
-	while (i < a->row)
+	product = create_matrix(b->collum, a->row);
+	i = -1;
+	while (++i < a->row)
 	{
-		j= 0;
-		while (j < b->collum)
+		j = -1;
+		while (++j < b->collum)
 		{
-			k = 0;
 			product->matrix[i][j] = 0;
-			while (k < a->collum)
-			{
+			k = -1;
+			while (++k < a->collum)
 				product->matrix[i][j] += a->matrix[i][k] * b->matrix[k][j];
-				k++;
-			}
-			j++;
 		}
-		i++;
 	}
 	return (product);
 }
@@ -174,19 +169,6 @@ t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t) // vou refazer com ve
 	return (result);
 }
 
-/* void	free_matrix(t_matrix *m)
-{
-	int	i;
-
-	i = 0;
-	while (i < m->row)
-	{
-		free(m->matrix[i]);
-		i++;
-	}
-	free(m->matrix);
-	free(m);
-} */
 
 double	determinante(t_matrix *a)
 {

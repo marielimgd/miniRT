@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 22:35:58 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:53:06 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void		init_window(t_scene *scene);
 int			close_window(t_scene *scene);
 int			handle_mouse_scroll(int button, int x, int y, t_scene *scene);
 int			handle_keypress(int keycode, t_scene *scene);
-
 
 
 // --- Rendering ---
