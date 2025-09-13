@@ -57,7 +57,6 @@ typedef struct s_matrix
 	double				row;
 }					t_matrix;
 
-
 // --- Rendering ---
 typedef struct s_ray
 {
@@ -92,12 +91,24 @@ typedef struct s_mlx_data
 }					t_mlx_data;
 
 // --- Scene Elements ---
+
 typedef struct s_camera
 {
-	t_vector		origin;
-	t_vector		orientation;
-	int				fov;
-}					t_camera;
+	int			hsize; //orizontal size in pixels
+	int			vsize; //vertical
+	double		fov;
+	t_matrix	*transform;
+	double		pixel_size;
+	double		half_width;
+	double		half_height;
+}				t_camera;
+
+typedef struct s_orientation_vectors
+{
+	t_vector	forward;
+	t_vector	left;
+	t_vector	true_up;
+}				t_orientation_vectors;
 
 typedef struct s_light
 {
@@ -105,13 +116,6 @@ typedef struct s_light
 	double			brightness;
 	t_color			color;
 }					t_light;
-
-typedef struct s_lighting_data
-{
-	t_vector	point;
-	t_vector	eyev;
-	t_vector	normalv;
-}				t_lighting_data;
 
 typedef enum e_object_type
 {
@@ -165,6 +169,16 @@ typedef struct s_object
 	t_object_properties	prop;
 }						t_object;
 
+typedef struct s_comps
+{
+	double		t;
+	t_object	*object;
+	t_vector	point;
+	t_vector	eyev;
+	t_vector	normalv;
+	bool		inside;
+}				t_comps;
+
 // --- Intersections ---
 typedef struct s_intersection
 {
@@ -175,7 +189,7 @@ typedef struct s_intersection
 typedef struct s_intersec_list
 {
 	int					count;
-	t_intersection		intersections[10]; //mudar depois
+	t_intersection		intersections[10]; //mudar depois se precisar
 }						t_intersection_list;
 
 // --- Main Scene Struct ---
@@ -198,7 +212,8 @@ typedef enum e_alloc_type
 	ALLOC_TYPE_GENERIC,
 	ALLOC_TYPE_MTX,
 	ALLOC_TYPE_STRING,
-	ALLOC_TYPE_OBJECT
+	ALLOC_TYPE_OBJECT,
+	ALLOC_TYPE_SCENE 
 }			t_alloc_type;
 
 typedef struct s_allocation

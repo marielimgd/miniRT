@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 16:22:46 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/12 16:34:19 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 21:57:35 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	add_tuples(t_vector *result, t_vector *vector, t_vector *point)
 	result->w = vector->w + point->w;
 }
 
-void	subtract_tuples(t_vector *result, t_vector *vector, t_vector *point)
+void	subtract_tuples(t_vector *result, t_vector *a, t_vector *b)
 {
-	result->x = vector->x - point->x;
-	result->y = vector->y - point->y;
-	result->z = vector->z - point->z;
-	result->w = vector->w - point->w;
+	result->x = a->x - b->x;
+	result->y = a->y - b->y;
+	result->z = a->z - b->z;
+	result->w = a->w - b->w;
 }
 
 void	scale_tuples_product(t_vector *result, t_vector *vector, double scale)

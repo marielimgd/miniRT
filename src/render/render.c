@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 18:07:08 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 21:45:26 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,13 @@
 
 static void	process_pixel(t_scene *scene, int x, int y)
 {
-	t_ray			ray;
-	t_intersection	hit;
-	t_color			pixel_color;
+	t_ray	ray;
+	t_color	pixel_color;
 
-	ray.origin = scene->camera.origin;
-	ray.direction = calculate_ray_direction(&scene->camera, x, y);
-	hit = intersect_world(scene, ray);
-	if (hit.object != NULL)
-		pixel_color = shade_hit(scene, hit, ray);
-	else
-		pixel_color = (t_color){0, 0, 0};
+	ray = ray_for_pixel(&scene->camera, x, y);
+	pixel_color = color_at(scene, ray);
 	my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
 }
-
 
 static void	*render_thread(void *thread_arg)
 {

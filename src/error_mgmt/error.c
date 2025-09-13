@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:29:48 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 18:41:58 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/12 21:25:04 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ void	print_error(char *s)
 {
 	printf("\033[1;31m%s\033[0m\n",s);
 	free_all();
-	EXIT_FAILURE;
+	exit(EXIT_FAILURE);
 }

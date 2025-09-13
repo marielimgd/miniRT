@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:55:10 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/08 17:25:46 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 20:53:02 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ void	set_transform(t_object *s, t_matrix *t)
 {
 	if (s->transform)
 		free_matrix(s->transform);
+	if (s->inverse_transform)
+		free_matrix(s->inverse_transform);
+	if (s->transpose_inverse_transform)
+		free_matrix(s->transpose_inverse_transform);
 	s->transform = t;
+	s->inverse_transform = inverse_matrix(s->transform);
+	s->transpose_inverse_transform = transpose_matrix(s->inverse_transform);
 }
 
 t_matrix	*rotation_x(double radians)

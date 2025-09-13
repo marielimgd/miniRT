@@ -6,11 +6,25 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 16:06:00 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/12 21:29:13 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static void init_sphere(t_object *sphere, double diameter)
+{
+    sphere->prop.sphere.radius = diameter / 2.0;
+	sphere->material.color = sphere->color;
+	sphere->material.ambient = 0.1;
+	sphere->material.diffuse = 0.9;
+	sphere->material.specular = 0.9;
+	sphere->material.shininess = 200.0;
+	sphere->transform = identity_matrix();
+	sphere->inverse_transform = inverse_matrix(sphere->transform);
+	sphere->transpose_inverse_transform = transpose_matrix(sphere->inverse_transform);
+
+}
 
 void	parse_sphere(char **tokens, t_scene *scene)
 {
@@ -19,7 +33,7 @@ void	parse_sphere(char **tokens, t_scene *scene)
 
 	if (count_tokens(tokens) != 4)
 		parse_error("Invalid sphere parameters");
-	sphere = safe_malloc(sizeof(t_object), ALLOC_TYPE_GENERIC);
+	sphere = safe_malloc(sizeof(t_object), ALLOC_TYPE_OBJECT);
 	if (!sphere)
 		parse_error("Memory allocation failed for a new sphere");
 	sphere->type = SPHERE;
@@ -31,15 +45,7 @@ void	parse_sphere(char **tokens, t_scene *scene)
 		free(sphere);
 		parse_error("Sphere diameter must be greater than 0");
 	}
-	sphere->prop.sphere.radius = diameter / 2.0;
-    sphere->transform = identity_matrix();
-    sphere->inverse_transform = inverse_matrix(sphere->transform);
-sphere->transpose_inverse_transform = transpose_matrix(sphere->inverse_transform);
-    sphere->material.color = sphere->color;
-	sphere->material.ambient = 0.1;
-	sphere->material.diffuse = 0.9;
-	sphere->material.specular = 0.9;
-	sphere->material.shininess = 200.0;
+    init_sphere(sphere, diameter);
     ft_lstadd_back(&scene->objects, ft_lstnew(sphere));
 }
 
