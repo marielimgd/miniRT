@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/13 20:16:27 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 20:53:54 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,13 @@ t_color				shade_hit(t_scene *scene, t_comps *comps);
 t_intersection_list	intersect_world(t_scene *scene, t_ray ray);
 
 // --- Objects ----
-t_object	*create_sphere(void);
+t_object	        *create_sphere(void);
 t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray);
-t_vector	normal_at(t_object *sphere, t_vector world_point);
-t_vector	normal_at_sphere(t_object *sphere, t_vector world_point);
-
+t_vector	        normal_at(t_object *sphere, t_vector world_point);
+t_vector	        normal_at_sphere(t_object *sphere, t_vector world_point);
+t_object	        *create_plane(void);
+t_intersection_list	intersect_plane(t_object *plane, t_ray ray);
+t_vector	        normal_at_plane(t_object *plane, t_vector world_point);
 
 // --- Safe_Malloc ---
 void			*safe_malloc(size_t size, t_alloc_type u_type);

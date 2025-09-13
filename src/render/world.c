@@ -6,7 +6,7 @@
 /*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:10:26 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/13 20:13:11 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/13 20:50:54 by marieli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,16 @@ t_intersection_list	intersect_world(t_scene *scene, t_ray ray)
 	while (current_obj)
 	{
 		if (((t_object *)current_obj->data)->type == SPHERE)
-		{
-			obj_hits = intersect_sphere(current_obj->data, ray);			
-			i = 0;
-			while (i < obj_hits.count && all_intersections.count < 10)
-				all_intersections.intersections[all_intersections.count++] = obj_hits.intersections[i++];
-		}
-		// add depois: else if (((t_object *)current_obj->data)->type == PLANE) { ... }
+			obj_hits = intersect_sphere(current_obj->data, ray);
+		else if (((t_object *)current_obj->data)->type == PLANE)
+			obj_hits = intersect_plane(current_obj->data, ray);
+		else
+			obj_hits.count = 0; //for cylinder later
+
+		i = 0;
+		while (i < obj_hits.count && all_intersections.count < 10)
+			all_intersections.intersections[all_intersections.count++] = obj_hits.intersections[i++];
+		
 		current_obj = current_obj->next;
 	}
 	sort_intersections(&all_intersections);
