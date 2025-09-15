@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/12 18:01:31 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:23:20 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ static void	init_mlx_connection(t_mlx_data *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
-		parse_error("Failed to initialize MLX");
+		parse_error(0, "Failed to initialize MLX");
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, "miniRT");
 	if (!mlx->win_ptr)
-		parse_error("Failed to create window");
+		parse_error(0, "Failed to create window");
 }
 
 static void	init_mlx_image(t_mlx_data *mlx)
 {
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIDTH, HEIGHT);
 	if (!mlx->img_ptr)
-		parse_error("Failed to create image");
+		parse_error(0, "Failed to create image");
 	mlx->addr = mlx_get_data_addr(mlx->img_ptr, &mlx->bpp,
 			&mlx->line_len, &mlx->endian);
 }

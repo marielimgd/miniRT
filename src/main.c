@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 17:33:10 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:19:58 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 	t_scene	scene;
 
 	if (argc != 2)
-		parse_error("Usage: ./minirt <scene.rt>");
+		parse_error(0, "Usage: ./minirt <scene.rt>", 1);
 	init_scene(&scene);
 	parse_scene(argv[1], &scene);
 	init_window(&scene);
@@ -42,9 +42,8 @@ int	main(int argc, char **argv)
 	t_scene	*world;
 
 	if (argc != 2)
-		parse_error("Usage: ./minirt <scene.rt>");
-
-	// Create and initialize the world
+		parse_error(0, "Usage: ./minirt <scene.rt>");
+		
 	world = create_world();
 	
 	// Parse the scene file to populate the world with objects,

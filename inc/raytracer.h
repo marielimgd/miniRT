@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/15 17:26:28 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:26:07 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t);
 t_matrix	*rotation_x(double radians);
 t_matrix	*rotation_y(double radians);
 t_matrix	*rotation_z(double radians);
+t_matrix	*rotation_from_orientation(t_vector orientation); // Add this line
 double		cofactor(t_matrix *m, int row, int col);
 double		determinant(t_matrix *m);
 

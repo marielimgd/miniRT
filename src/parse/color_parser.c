@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:08:15 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:52:05 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 19:20:14 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void	validate_rgb_values(char **rgb_values)
 		{
 			if (!ft_isdigit(rgb_values[index][j]) && rgb_values[index][j] != '-'
 				&& rgb_values[index][j] != '+')
-				parse_error("Color values must be numeric\n");
+				parse_error(0, "Color values must be numeric\n");
 			j++;
 		}
 		value = ft_atoi(rgb_values[index]);
 		if (value < 0 || value > 255)
-			parse_error("Invalid color value\n");
+			parse_error(0, "Invalid color value\n");
 		index++;
 	}
 }
@@ -43,7 +43,7 @@ t_color	parse_colors(char *str)
 
 	rgb_values = ft_split(str, ',');
 	if (!rgb_values || !rgb_values[0] || !rgb_values[1] || !rgb_values[2])
-		parse_error("Memory allocation failed during color parsing\n");
+		parse_error(0, "Memory allocation failed during color parsing\n");
 	validate_rgb_values(rgb_values);
 	color.r = ft_atoi(rgb_values[0]);
 	color.g = ft_atoi(rgb_values[1]);
