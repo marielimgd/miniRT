@@ -18,8 +18,8 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define WIDTH 300
-# define HEIGHT 300
+# define WIDTH 500
+# define HEIGHT 500
 
 # define EPSILON 0.00001
 

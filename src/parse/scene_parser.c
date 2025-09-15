@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 19:22:57 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:28:53 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@ t_vector string_to_vector(char *str, double w)
 {
 	t_vector 	vector;
 	char 		**values;
-	int			line_number;
 
 	values = ft_split(str, ',');
 	if (!values)
-		parse_error(line_number, "Invalid vector format. Expected: x, y, z\n");
+		parse_error(0, "Invalid vector format. Expected: x, y, z\n");
 	if (count_tokens(values) != 3)
 	{
 		free_tokens(values);
-		parse_error(line_number, "Invalid vector format. Expected: x, y, z\n");
+		parse_error(0, "Invalid vector format. Expected: x, y, z\n");
 	}
 	vector.x = ft_atof(values[0]);
 	vector.y = ft_atof(values[1]);

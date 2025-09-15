@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 20:21:20 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 19:32:37 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_object	*create_sphere(void)
 	return(sphere);
 }
 
-static t_intersection_list	make_intersections(double t1, double t2, t_object *sphere)
+static t_intersection_list	make_intersections(double t1, double t2,
+		t_object *sphere)
 {
 	t_intersection	i1;
 	t_intersection	i2;
@@ -53,16 +54,18 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 	t_ray		transformed_ray;
 	double		coeffs[3];
 	double		discriminant;
+	t_intersection_list empty_list;
 
 	transformed_ray = transform(ray, sphere->inverse_transform);
-	
 	calculate_sphere_coeffs(&transformed_ray, coeffs);
 	discriminant = (coeffs[1] * coeffs[1]) - 4 * coeffs[0] * coeffs[2];
 	if (discriminant < 0)
-		return ((t_intersection_list){.count = 0});
+	{
+		empty_list.count = 0;
+		empty_list.intersections = NULL;
+	}
 	return (make_intersections(
 			(-coeffs[1] - sqrt(discriminant)) / (2 * coeffs[0]),
 			(-coeffs[1] + sqrt(discriminant)) / (2 * coeffs[0]),
 			sphere));
 }
-

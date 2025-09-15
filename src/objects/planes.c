@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 20:49:29 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/15 17:49:05 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:31:19 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,26 @@ t_object	*create_plane(void)
 	return (plane);
 }
 
+#include "minirt.h"
+
 t_intersection_list	intersect_plane(t_object *plane, t_ray ray)
 {
 	t_intersection_list	intersections;
 	double				t;
 	t_ray				transformed_ray;
 
-	intersections.count = 0;
 	transformed_ray = transform(ray, plane->inverse_transform);
 	if (fabs(transformed_ray.direction.y) < EPSILON)
+	{
+		intersections.count = 0;
+		intersections.intersections = NULL; 
 		return (intersections);
+	}
 	t = -transformed_ray.origin.y / transformed_ray.direction.y;
-	intersections.intersections[0] = create_intersection(t, plane);
 	intersections.count = 1;
+	intersections.capacity = 1;
+	intersections.intersections = safe_malloc(sizeof(t_intersection),
+			ALLOC_TYPE_GENERIC);
+	intersections.intersections[0] = create_intersection(t, plane);
 	return (intersections);
 }
