@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 20:00:55 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/13 20:01:03 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:15:47 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	prepare_computations(t_comps *comps, t_intersection *i, t_ray *ray)
 {
+	t_vector		scaled_normal;
+
 	comps->t = i->t;
 	comps->object = i->object;
 	comps->point = ray_position(*ray, comps->t);
@@ -25,4 +27,6 @@ void	prepare_computations(t_comps *comps, t_intersection *i, t_ray *ray)
 		comps->inside = true;
 		negative_vector(&comps->normalv, &comps->normalv);
 	}
+	scale_tuples_product(&scaled_normal, &comps->normalv, EPSILON);
+	add_tuples(&comps->over_point, &comps->point, &scaled_normal);
 }

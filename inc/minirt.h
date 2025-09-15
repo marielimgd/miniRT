@@ -175,6 +175,7 @@ typedef struct s_comps
 	double		t;
 	t_object	*object;
 	t_vector	point;
+	t_vector	over_point;
 	t_vector	eyev;
 	t_vector	normalv;
 	bool		inside;

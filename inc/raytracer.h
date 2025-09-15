@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/13 20:53:54 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:26:28 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_color	    color_at(t_scene *world, t_ray ray);
 // --- Scene ---
 t_scene	    *create_world(void);
 void	    create_default_world(t_scene *world); // ONLY FOR TESTING
-t_color	    lighting(t_material m, t_light *light, t_comps *comps);
+t_color	    lighting(t_material m, t_light *light, t_comps *comps, bool in_shadow);
 void	    reflect(t_vector *result,t_vector *in, t_vector *normal);
 
 // --- Window ---
