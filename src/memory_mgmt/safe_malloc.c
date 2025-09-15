@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_malloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/13 19:50:41 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 18:57:06 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	free_all(void) // colocar todas as structs que a gente malloca
 		next = alloc->next;
 		if (alloc->type == ALLOC_TYPE_MTX)
 			free_matrix(alloc->ptr);
+		else if (alloc->type == ALLOC_TYPE_OBJECT)
+			free_object(alloc->ptr);
+		else if (alloc->type == ALLOC_TYPE_SCENE)
+			free_scene((t_scene *)alloc->ptr);
 		else if (alloc->type == ALLOC_TYPE_STRING || alloc->type == ALLOC_TYPE_GENERIC)
 			free(alloc->ptr);
 		alloc->ptr = NULL;

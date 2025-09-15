@@ -204,6 +204,7 @@ typedef struct s_scene
 	struct s_list	*lights;
 	struct s_list	*objects;
 	bool			has_ambient;
+	bool			has_camera;
 	t_mlx_data		mlx;
 }					t_scene;
 
@@ -215,7 +216,9 @@ typedef enum e_alloc_type
 	ALLOC_TYPE_GENERIC,
 	ALLOC_TYPE_MTX,
 	ALLOC_TYPE_STRING,
-	ALLOC_TYPE_OBJECT
+	ALLOC_TYPE_OBJECT,
+	ALLOC_TYPE_SCENE,
+	ALLOC_TYPE_LIGHT
 }			t_alloc_type;
 
 typedef struct s_allocation

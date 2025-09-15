@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 18:13:35 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:58:11 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	parse_camera(char **tokens, t_scene *scene, int line_number)
 	t_vector	up;
 	int			fov;
 
+	if (scene->has_camera)
+		parse_error(line_number, "Camera already defined in the scene");
 	if (count_tokens(tokens) != 4)
 		parse_error("Invalid camera parameters", line_number);
 	from = string_to_vector(tokens[1], 1.0);
