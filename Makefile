@@ -1,5 +1,5 @@
 # Project Name
-NAME        = miniRT
+NAME        = minirt
 
 # Compiler and Flags
 CC          = cc

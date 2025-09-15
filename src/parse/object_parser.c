@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 20:20:06 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:46:14 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_sphere(char **tokens, t_scene *scene)
 		parse_error("Invalid sphere parameters");
 		
 	sphere = create_sphere();
-		sphere->origin = string_to_vector(tokens[1], 1.0);
+	sphere->origin = string_to_vector(tokens[1], 1.0);
 	diameter = ft_atof(tokens[2]);
 	if (diameter <= 0.0)
 		parse_error("Sphere diameter must be greater than 0");
@@ -45,11 +45,7 @@ void	parse_plane(char **tokens, t_scene *scene)
 	if (count_tokens(tokens) != 4)
 		parse_error("Invalid plane parameters");
 		
-	//make create_plane, similar to create_sphere().
-	plane = safe_malloc(sizeof(t_object), ALLOC_TYPE_OBJECT);
-	if (!plane)
-		parse_error("Memory allocation failed for a new plane");
-	plane->type = PLANE;
+	plane = create_plane();
 	plane->origin = string_to_vector(tokens[1], 1.0);
 	normal = string_to_vector(tokens[2], 0.0);
 	if (normal.x < -1.0 || normal.x > 1.0 || normal.y < -1.0
@@ -74,11 +70,13 @@ void	parse_cylinder(char **tokens, t_scene *scene)
 	if (count_tokens(tokens) != 6)
 		parse_error("Invalid cylinder parameters");
 
-	// create a create_cylinder() constructor later
+	// create a create_cylinder() constructor later and remove the following block
 	cylinder = safe_malloc(sizeof(t_object), ALLOC_TYPE_OBJECT);
 	if (!cylinder)
 		parse_error("Memory allocation failed for a new cylinder");
 	cylinder->type = CYLINDER;
+
+	//cylinder = create_cylinder(); //add here
 	cylinder->origin = string_to_vector(tokens[1], 1.0);
 	cylinder->prop.cylinder.orientation = string_to_vector(tokens[2], 0.0);
 	diameter = ft_atof(tokens[3]);

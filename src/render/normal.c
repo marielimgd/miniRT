@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:16:02 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 20:53:20 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:48:32 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_vector	normal_at_plane(t_object *plane, t_vector world_point)
 	world_normal = multiply_matrix_by_tuple(plane->transpose_inverse_transform,
 			object_normal);
 	world_normal.w = 0;
-	normalization(&world_normal, &world_normal);
 	
+	normalization(&world_normal, &world_normal);
 	return (world_normal);
 }
 

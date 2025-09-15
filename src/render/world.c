@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:10:26 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/15 17:24:39 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:49:30 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static void	sort_intersections(t_intersection_list *list)
 
 t_intersection_list	intersect_world(t_scene *scene, t_ray ray)
 {
-	t_list				*current_obj;
-	t_intersection_list	all_intersections;
-	t_intersection_list	obj_hits;
-	int					i;
+	t_list					*current_obj;
+	t_intersection_list		all_intersections;
+	t_intersection_list		obj_hits;
+	int						i;
 
 	all_intersections.count = 0;
 	current_obj = scene->objects;

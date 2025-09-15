@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:42:07 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:33:10 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 	t_scene	scene;
 
 	if (argc != 2)
-		parse_error("Usage: ./miniRT <scene.rt>");
+		parse_error("Usage: ./minirt <scene.rt>");
 	init_scene(&scene);
 	parse_scene(argv[1], &scene);
 	init_window(&scene);
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	t_scene	*world;
 
 	if (argc != 2)
-		parse_error("Usage: ./miniRT <scene.rt>");
+		parse_error("Usage: ./minirt <scene.rt>");
 
 	// Create and initialize the world
 	world = create_world();
