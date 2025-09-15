@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 22:10:55 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/13 19:14:04 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:59:11 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	normalization(t_vector *result, t_vector *u_vector)
 	double	magnitute;
 
 	magnitute = get_magnitude(u_vector);
-	if(magnitute == 0.0f)
+	if(magnitute < EPSILON)
 	{
 		result->x = 0.0f;
 		result->y = 0.0f;

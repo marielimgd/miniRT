@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:15:50 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/03 21:41:23 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:06:50 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
-void parse_error(char *message)
+void	parse_error(int line_number, char *message)
 {
-	ft_putstr_fd("Parse error: ", 2);
+	ft_putstr_fd("Parse error on line ", 2);
+	ft_putnbr_fd(line_number, 2);
+	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd("\n", 2);
 	exit(1);
 }
+
 
 void free_tokens(char **tokens)
 {

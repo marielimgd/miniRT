@@ -191,7 +191,8 @@ typedef struct s_intersection
 typedef struct s_intersec_list
 {
 	int					count;
-	t_intersection		intersections[10]; //mudar depois
+	int					capacity;
+	t_intersection		*intersections;
 }						t_intersection_list;
 
 // --- Main Scene Struct ---

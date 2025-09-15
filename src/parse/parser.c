@@ -3,58 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:09:57 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:52:20 by marieli          ###   ########.fr       */
+/*   Updated: 2025/09/15 18:08:17 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void parse_elements(char **tokens, t_scene *scene)
+static void	parse_elements(char **tokens, t_scene *scene, int line_number)
 {
-	if (ft_strcmp(tokens[0], "A") == 0) //ambient light
-		parse_ambient_light(tokens, scene);
-	else if (ft_strcmp(tokens[0], "C") == 0) //camera
-		parse_camera(tokens, scene);
-	else if (ft_strcmp(tokens[0], "L") == 0) //light
-		parse_light(tokens, scene);
-	else if (ft_strcmp(tokens[0], "pl") == 0) // Plane
-		parse_plane(tokens, scene);
-	else if (ft_strcmp(tokens[0], "sp") == 0) // Sphere
-		parse_sphere(tokens, scene);
-	else if (ft_strcmp(tokens[0], "cy") == 0) //cylinder
-		parse_cylinder(tokens, scene);
+	if (ft_strcmp(tokens[0], "A") == 0)
+		parse_ambient_light(tokens, scene, line_number);
+	else if (ft_strcmp(tokens[0], "C") == 0)
+		parse_camera(tokens, scene, line_number);
+	else if (ft_strcmp(tokens[0], "L") == 0)
+		parse_light(tokens, scene, line_number);
+	else if (ft_strcmp(tokens[0], "pl") == 0)
+		parse_plane(tokens, scene, line_number);
+	else if (ft_strcmp(tokens[0], "sp") == 0)
+		parse_sphere(tokens, scene, line_number);
+	else if (ft_strcmp(tokens[0], "cy") == 0)
+		parse_cylinder(tokens, scene, line_number);
 	else
-		printf("Unknown element type in scene file: %s\n", tokens[0]);
-
+	{
+		ft_putstr_fd("Unknown element type in scene file: ", 2);
+		ft_putendl_fd(tokens[0], 2);
+	}
 }
 
-void parse_scene(char *file, t_scene *scene)
+void	parse_scene(char *file, t_scene *scene)
 {
-	int fd;
-	char *line;
-	char **tokens;
+	int		fd;
+	char	*line;
+	char	**tokens;
+	int		line_number;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		parse_error("Failed to open the scene file\n");
-
+		parse_error(0, "Failed to open the scene file");
+	line_number = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
+		line_number++;
 		if (line[0] == '\0' || line[0] == '#')
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		tokens = ft_split(line, ' ');
 		if (!tokens)
-			parse_error("Memory allocation failed during parsing\n");
-		parse_elements(tokens, scene);
+			parse_error(line_number, "Memory allocation failed during parsing");
+		parse_elements(tokens, scene, line_number);
 		free_tokens(tokens);
 		free(line);
 	}
 	close(fd);
 }
-	

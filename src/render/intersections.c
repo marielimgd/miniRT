@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:28:07 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/08 19:47:45 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:06:23 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ t_intersection_list	create_intersections_list(int count, ...)
 	t_intersection_list	list;
 	va_list				args;
 	int					i;
-	
+
 	list.count = count;
+	list.capacity = count;
+	list.intersections = safe_malloc(count * sizeof(t_intersection),
+			ALLOC_TYPE_GENERIC);
 	va_start(args, count);
 	i = 0;
 	while (i < count)
@@ -36,7 +39,7 @@ t_intersection_list	create_intersections_list(int count, ...)
 		i++;
 	}
 	va_end(args);
-	return(list);
+	return (list);
 }
 
 t_intersection	intersect_object(t_object *object, t_ray ray)
