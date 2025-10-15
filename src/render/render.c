@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 18:15:51 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:31:22 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	render_scene(t_scene *scene)
 
 	launch_threads(threads, thread_data, scene);
 	join_threads(threads);
-	mlx_put_image_to_window(scene->mlx.mlx_ptr, scene->mlx.win_ptr,
-		scene->mlx.img_ptr, 0, 0);
+	if (scene->mlx.win_ptr)
+		mlx_put_image_to_window(scene->mlx.mlx_ptr, scene->mlx.win_ptr,
+			scene->mlx.img_ptr, 0, 0);
 }

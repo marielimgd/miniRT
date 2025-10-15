@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 19:27:25 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:40:50 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	parse_plane(char **tokens, t_scene *scene, int line_number)
 	translation_m = translation(plane->origin.x, plane->origin.y, plane->origin.z);
 	rotation_m = rotation_from_orientation(normal);
 	set_transform(plane, matrix_product(translation_m, rotation_m));
+	plane->material.color = parse_colors(tokens[3]);
 	plane->material.ambient = 0.1;
 	plane->material.diffuse = 0.9;
 	plane->material.specular = 0.9;

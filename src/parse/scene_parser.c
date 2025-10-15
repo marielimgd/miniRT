@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 19:28:53 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/15 17:32:33 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,28 @@ t_vector string_to_vector(char *str, double w)
 
 void	parse_camera(char **tokens, t_scene *scene, int line_number)
 {
-	t_vector	from;
 	t_vector	to;
-	t_vector	orientation;
-	t_vector	up;
-	int			fov;
+	int 		fov;
+
 
 	if (scene->has_camera)
 		parse_error(line_number, "Camera already defined in the scene");
 	if (count_tokens(tokens) != 4)
 		parse_error(line_number, "Invalid camera parameters");
-	from = string_to_vector(tokens[1], 1.0);
-	orientation = string_to_vector(tokens[2], 0.0);
+	scene->has_camera = true;
+	scene->camera.from = string_to_vector(tokens[1], 1.0);
+	scene->camera.orientation = string_to_vector(tokens[2], 0.0);
+	scene->camera.up = create_vector(0, 1, 0);
 	fov = ft_atoi(tokens[3]);
-	if (orientation.x < -1.0 || orientation.x > 1.0 || orientation.y < -1.0
-		|| orientation.y > 1.0 || orientation.z < -1.0 || orientation.z > 1.0)
+	if (scene->camera.orientation.x < -1.0 || scene->camera.orientation.x > 1.0 || scene->camera.orientation.y < -1.0
+		|| scene->camera.orientation.y > 1.0 || scene->camera.orientation.z < -1.0 || scene->camera.orientation.z > 1.0)
 		parse_error(line_number, "Camera orientation vector values out of range [-1.0, 1.0]");
 	if (fov < 0 || fov > 180)
 		parse_error(line_number, "Camera FOV must be between 0 and 180 degrees");
 	camera_init(&scene->camera, WIDTH, HEIGHT, fov * (M_PI / 180.0));
-	add_tuples(&to, &from, &orientation);
-	up = create_vector(0, 1, 0);
-	scene->camera.transform = view_transform(from, to, up);
+	add_tuples(&to, &scene->camera.from, &scene->camera.orientation);
+	scene->camera.transform = view_transform(scene->camera.from, to,
+			scene->camera.up);
 }
 
 void 	parse_ambient_light(char**tokens, t_scene *scene, int line_number)

@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:20:10 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 18:20:20 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:00:14 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ static bool	is_shadowed(t_scene *scene, t_vector point, t_light *light)
 t_color	shade_hit(t_scene *world, t_comps *comps)
 {
 	t_color		final_color;
+	t_color		ambient;
 	t_list		*current_light;
 	bool		is_in_shadow;
 
-	final_color = (t_color){0, 0, 0};
+	ambient = scale_color(multiply_color(comps->object->material.color,
+				world->ambient_color),
+			comps->object->material.ambient * world->ambient_light);
+	final_color = ambient;
 	current_light = world->lights;
 	while (current_light)
 	{

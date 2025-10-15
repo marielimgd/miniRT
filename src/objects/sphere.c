@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 19:32:37 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:50:49 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 	{
 		empty_list.count = 0;
 		empty_list.intersections = NULL;
+		return (empty_list);
 	}
 	return (make_intersections(
 			(-coeffs[1] - sqrt(discriminant)) / (2 * coeffs[0]),

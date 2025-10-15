@@ -21,14 +21,22 @@
 # define WIDTH 500
 # define HEIGHT 500
 
-# define EPSILON 0.00001
+# define EPSILON 0.01
 
 # define ESC_KEY 65307
-# define C_KEY 99
 # define PLUS_KEY 61
 # define MINUS_KEY 45
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_L 108 //light control
 
 /* -----------------Structs--------------------------*/
 
@@ -99,6 +107,9 @@ typedef struct s_camera
 	int			vsize;
 	double		fov;
 	t_matrix	*transform; 
+	t_vector	from;
+	t_vector	orientation;
+	t_vector	up;
 	double		pixel_size;
 	double		half_width;
 	double		half_height;
@@ -202,6 +213,7 @@ typedef struct s_scene
 	t_color			ambient_color;
 	t_camera		camera;
 	struct s_list	*lights;
+	struct s_list	*selected_light;
 	struct s_list	*objects;
 	bool			has_ambient;
 	bool			has_camera;
@@ -233,5 +245,6 @@ typedef struct s_allocation
 # include "window.h"
 # include "raytracer.h"
 # include "multithreading.h"
+# include "bitmap.h"
 
 #endif

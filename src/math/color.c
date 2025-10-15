@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:46:11 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/11 19:47:36 by marieli          ###   ########.fr       */
+/*   Updated: 2025/10/15 18:37:58 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ t_color	multiply_color(t_color a, t_color b)
 {
 	t_color	color;
 
-	color.r = a.r * b.r;
-	color.g = a.g * b.g;
-	color.b = a.b * b.b;
+	color.r = (a.r * b.r) / 255;
+	color.g = (a.g * b.g) / 255;
+	color.b = (a.b * b.b) / 255;
 	color = max_color(color);
 	return (color);
 }
