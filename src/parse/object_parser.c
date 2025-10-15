@@ -6,9 +6,11 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/15 19:24:32 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:44:19 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minirt.h"
 
 #include "minirt.h"
 
@@ -22,7 +24,7 @@ void	parse_sphere(char **tokens, t_scene *scene, int line_number)
 		parse_error(line_number, "Invalid sphere parameters");
 		
 	sphere = create_sphere();
-	position = string_to_vector(tokens[1], 1.0);
+	position = string_to_vector(tokens[1], 1.0); 
 	diameter = ft_atof(tokens[2]);
 	if (diameter <= 0.0)
 		parse_error(line_number, "Sphere diameter must be greater than 0");
@@ -44,12 +46,12 @@ void	parse_plane(char **tokens, t_scene *scene, int line_number)
 	t_vector	normal;
 	t_matrix	*rotation_m;
 	t_matrix	*translation_m;
-	t_vector	position;
+	t_vector	position; 
 
 	if (count_tokens(tokens) != 4)
 		parse_error(line_number, "Invalid plane parameters");
 	plane = create_plane();
-	position = string_to_vector(tokens[1], 1.0);
+	position = string_to_vector(tokens[1], 1.0); 
 	normal = string_to_vector(tokens[2], 0.0);
 	if (normal.x < -1.0 || normal.x > 1.0 || normal.y < -1.0
 		|| normal.y > 1.0 || normal.z < -1.0 || normal.z > 1.0)
