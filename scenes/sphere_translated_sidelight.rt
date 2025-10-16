@@ -1,0 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    sphere_translated_sidelight.rt                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/10/16 17:45:00 by mmariano          #+#    #+#              #
+#    Updated: 2025/10/16 16:29:52 by mmariano         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# Ambient lighting - low level to see side lighting effect clearly
+A  0.15  255,255,255
+
+# Camera positioned in front, looking at origin
+# This lets us see both spheres - one at origin, one translated
+C  0,0,10   0,0,-1   70
+
+# Light source positioned to the RIGHT of camera for sideways illumination
+L  8,2,10   0.85     255,255,255
+
+# Reference sphere at origin (LEFT side of screen)
+# sp 0,0,0    2.0     100,100,220
+
+# Sphere TRANSLATED to the RIGHT (RIGHT side of screen)
+# This sphere is at (5, 0, 0) - translated 5 units right
+# The lighting (halo) must be computed AFTER the translation
+sp 5,0,0    2.0     220,120,100

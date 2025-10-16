@@ -1,0 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    sphere_far_translated.rt                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/10/16 17:50:00 by mmariano          #+#    #+#              #
+#    Updated: 2025/10/16 16:29:36 by mmariano         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# Ambient lighting - very low to emphasize directional lighting
+A  0.1  255,255,255
+
+# Camera positioned in front, looking at origin
+# This shows both a reference sphere and a highly translated one
+C  0,0,15   0,0,-1   70
+
+# Light source positioned to the RIGHT for dramatic side lighting
+L  10,3,15   0.9     255,255,255
+
+# Reference sphere at origin (center-left of screen)
+# sp -3,0,0    2.5     220,100,100
+
+# Sphere HIGHLY TRANSLATED to the RIGHT (right side of screen)
+# At position (8, 0, 0) - far from origin
+# Lighting must be computed at this translated world position
+sp 8,0,0    2.5     100,220,150
