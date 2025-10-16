@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 14:06:05 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 14:48:29 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,31 @@
 } */
 
 /* ---Keyhooks---
-	-ESC: close he window
-	-W, A, S, D: Move the camera forward, left, backward, and right.
-	-Arrows: Rotate the camera's view.
-	-L: Cycle through the light sources in the scene.
-	+/-: Increase or decrease the brightness of the currently selected light 
+	Camera:
+	  -W, A, S, D: Move the camera forward, left, backward, and right
+	  -Arrows: Rotate the camera's view
+	  -Mouse Scroll: Zoom in/out (FOV)
+	
+	Lights:
+	  -L: Cycle through light sources
+	  -+/-: Increase/decrease brightness of selected light
+	  -T then I/K/J/;/U/M: Translate selected light
+	
+	Objects:
+	  -O: Cycle through objects
+	  -, (comma): Decrease diameter (sphere/cylinder)
+	  -. (dot): Increase diameter (sphere/cylinder)
+	  -H/G: Increase/decrease cylinder height
+	  -T then I/K/J/;/U/M: Translate selected object
+	  -R then I/K/J/;/U/M: Rotate selected object (not spheres)
+	
+	Transform Controls (when T or R mode active):
+	  -I/K: Move/Rotate Y-axis (up/down)
+	  -J/;: Move/Rotate X-axis (left/right)
+	  -U/M: Move/Rotate Z-axis (forward/backward)
+	
+	Other:
+	  -ESC: Close window
 */
 
 //----------------------------------------------TEST AREA----------------------------------------
@@ -54,6 +74,7 @@ int	main(int argc, char **argv)
 	parse_scene(argv[1], world);
 	validate_scene(world);
 	world->selected_light = world->lights;
+	print_initial_object_selection(world);
 	if (save_to_bmp)
 		export_bmp(world);
 	else

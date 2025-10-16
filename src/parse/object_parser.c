@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/15 19:44:19 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 14:43:45 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	parse_sphere(char **tokens, t_scene *scene, int line_number)
 	t_object	*sphere;
 	double		diameter;
 	t_vector	position;
+	t_matrix	*translation_m;
+	t_matrix	*scaling_m;
 
 	if (count_tokens(tokens) != 4)
 		parse_error(line_number, "Invalid sphere parameters");
@@ -28,9 +30,12 @@ void	parse_sphere(char **tokens, t_scene *scene, int line_number)
 	diameter = ft_atof(tokens[2]);
 	if (diameter <= 0.0)
 		parse_error(line_number, "Sphere diameter must be greater than 0");
-	t_matrix *translation_m = translation(position.x, position.y, position.z);
-	t_matrix *scaling_m = scaling(diameter / 2.0, diameter / 2.0, diameter / 2.0);
+	sphere->prop.sphere.radius = diameter / 2.0;
+	translation_m = translation(position.x, position.y, position.z);
+	scaling_m = scaling(diameter / 2.0, diameter / 2.0, diameter / 2.0);
 	set_transform(sphere, matrix_product(translation_m, scaling_m));
+	free_matrix(translation_m);
+	free_matrix(scaling_m);
 	sphere->material.color = parse_colors(tokens[3]);
 	sphere->material.ambient = 0.1;
 	sphere->material.diffuse = 0.9;
@@ -38,6 +43,8 @@ void	parse_sphere(char **tokens, t_scene *scene, int line_number)
 	sphere->material.shininess = 200.0;
 	
 	ft_lstadd_back(&scene->objects, ft_lstnew(sphere));
+	if (scene->selected_object == NULL)
+		scene->selected_object = scene->objects; // select first object by default
 }
 
 void	parse_plane(char **tokens, t_scene *scene, int line_number)
@@ -59,12 +66,16 @@ void	parse_plane(char **tokens, t_scene *scene, int line_number)
 	translation_m = translation(position.x, position.y, position.z);
 	rotation_m = rotation_from_orientation(normal);
 	set_transform(plane, matrix_product(translation_m, rotation_m));
+	free_matrix(translation_m);
+	free_matrix(rotation_m);
 	plane->material.color = parse_colors(tokens[3]);
 	plane->material.ambient = 0.1;
 	plane->material.diffuse = 0.9;
 	plane->material.specular = 0.9;
 	plane->material.shininess = 200.0;
 	ft_lstadd_back(&scene->objects, ft_lstnew(plane));
+	if (scene->selected_object == NULL)
+		scene->selected_object = scene->objects;
 }
 
 void	parse_cylinder(char **tokens, t_scene *scene, int line_number)
@@ -99,4 +110,6 @@ void	parse_cylinder(char **tokens, t_scene *scene, int line_number)
 	cylinder->material.shininess = 200.0;
 	
 	ft_lstadd_back(&scene->objects, ft_lstnew(cylinder));
+	if (scene->selected_object == NULL)
+		scene->selected_object = scene->objects;
 }

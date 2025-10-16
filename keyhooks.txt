@@ -1,0 +1,17 @@
+-ESC: close the window
+
+Camera Transformations
+	-Translation: W/A/S/D keys (forward/left/backward/right)
+ 	-Rotation: Arrows (rotate view direction)
+	-Zoom: Mouse scroll (Zoom adjustment)
+
+Object Transformations
+	-O: Cycle through objects in the scene
+	-Translation: T mode + I/K/J/;/U/M keys
+	-Rotation: R mode + I/K/J/;/U/M keys (not spheres)
+	-Resizing: Comma/Dot (diameter), H/G (cylinder height only)
+
+Light Transformations 
+	-Translation: T mode + I/K/J/;/U/M keys
+	-Brightness: +/- keys
+	-Selection: L key to cycle through lights

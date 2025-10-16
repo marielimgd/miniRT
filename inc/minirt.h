@@ -37,6 +37,19 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_L 108 //light control
+# define KEY_O 111 // object selection
+# define KEY_COMMA 44
+# define KEY_DOT 46
+# define KEY_H 104 // cylinder height increase
+# define KEY_G 103 // cylinder height decrease
+# define KEY_T 116 // translation mode toggle
+# define KEY_R 114 // rotation mode toggle
+# define KEY_I 105 // Y+ (up)
+# define KEY_K 107 // Y- (down)
+# define KEY_J 106 // X- (left)
+# define KEY_SEMICOLON 59 // X+ (right), replacing L
+# define KEY_U 117 // Z+ (forward)
+# define KEY_M 109 // Z- (backward)
 
 /* -----------------Structs--------------------------*/
 
@@ -215,8 +228,11 @@ typedef struct s_scene
 	struct s_list	*lights;
 	struct s_list	*selected_light;
 	struct s_list	*objects;
+	struct s_list	*selected_object;
 	bool			has_ambient;
 	bool			has_camera;
+	bool			translation_mode;
+	bool			rotation_mode;
 	t_mlx_data		mlx;
 }					t_scene;
 
