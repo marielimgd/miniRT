@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:13 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/13 19:49:07 by marieli          ###   ########.fr       */
+/*   Updated: 2025/10/16 17:33:22 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ t_matrix	*create_matrix(double collum, double row)
 	int			i;
 
 	i = 0;
-	matrix = safe_malloc(sizeof(t_matrix), ALLOC_TYPE_MTX);
-	mtx = safe_malloc(sizeof(double *) * row, ALLOC_TYPE_MTX);
+	matrix = malloc(sizeof(t_matrix));
+	mtx = malloc(sizeof(double *) * row);
 	while (i < row)
 	{
-		mtx[i] = safe_malloc(sizeof(double) * collum, ALLOC_TYPE_MTX);
+		mtx[i] = malloc(sizeof(double) * collum);
 		i++;
 	}
 	matrix->collum = collum;

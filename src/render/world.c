@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:10:26 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/15 18:20:06 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:33:22 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ t_intersection_list	intersect_world(t_scene *scene, t_ray ray)
 
 	all_intersections.count = 0;
 	all_intersections.capacity = 10;
-	all_intersections.intersections = safe_malloc(all_intersections.capacity
-			* sizeof(t_intersection), ALLOC_TYPE_GENERIC);
+	all_intersections.intersections = malloc(all_intersections.capacity
+			* sizeof(t_intersection));
 	current_obj = scene->objects;
 	while (current_obj)
 	{

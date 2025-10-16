@@ -8,7 +8,7 @@ The miniRT project implements a comprehensive memory management system using `fr
 
 ### 1. Allocation Tracking
 
-Every allocation is tracked via a linked list:
+Only **persistent** allocations are tracked via a linked list:
 
 ```c
 typedef struct s_allocation
@@ -31,11 +31,14 @@ void *safe_malloc(size_t size, t_alloc_type type)
 - Adds to the head of the allocation list
 - Returns the allocated pointer
 
-**Usage:**
+**Usage (for persistent allocations only):**
 ```c
 t_scene *world = safe_malloc(sizeof(t_scene), ALLOC_TYPE_SCENE);
-t_matrix *m = safe_malloc(sizeof(t_matrix), ALLOC_TYPE_MTX);
+t_object *sphere = safe_malloc(sizeof(t_object), ALLOC_TYPE_OBJECT);
+t_light *light = safe_malloc(sizeof(t_light), ALLOC_TYPE_LIGHT);
 ```
+
+**IMPORTANT:** Do NOT use `safe_malloc()` for temporary allocations that are freed during runtime (matrices, intersection lists, etc.). Use regular `malloc()` for those.
 
 ### 3. Free All Function
 
@@ -112,64 +115,78 @@ void free_scene(t_scene *scene)
 ```c
 typedef enum e_alloc_type
 {
-    ALLOC_TYPE_GENERIC,   // Use: Intersection lists, temporary data
-    ALLOC_TYPE_MTX,       // Use: All matrix structures
-    ALLOC_TYPE_STRING,    // Use: Dynamically allocated strings
-    ALLOC_TYPE_OBJECT,    // Use: Spheres, planes, cylinders
-    ALLOC_TYPE_SCENE,     // Use: Main scene structure
-    ALLOC_TYPE_LIGHT      // Use: Light structures
+    ALLOC_TYPE_GENERIC,   // Use: Persistent generic data (rarely used)
+    ALLOC_TYPE_MTX,       // DEPRECATED: Matrices now use malloc()
+    ALLOC_TYPE_STRING,    // Use: Persistent strings (if needed)
+    ALLOC_TYPE_OBJECT,    // Use: Spheres, planes, cylinders (tracked)
+    ALLOC_TYPE_SCENE,     // Use: Main scene structure (tracked)
+    ALLOC_TYPE_LIGHT      // Use: Light structures (tracked)
 } t_alloc_type;
 ```
 
+**Note:** Most temporary allocations (matrices, intersection lists) are NOT tracked and use regular `malloc()` for performance.
+
 ## Runtime vs Exit Cleanup
 
-### Runtime Cleanup (Immediate)
-These are freed immediately after use:
+### Runtime Cleanup (Immediate - NOT tracked)
+These are allocated with regular `malloc()` and freed immediately after use:
 
 **1. Temporary Matrices**
 ```c
 // In keyhooks.c, object_parser.c, camera.c
+// Allocated with malloc() via create_matrix()
 t_matrix *temp = translation(x, y, z);
 // ... use temp ...
-free_matrix(temp);  // Freed immediately
+free_matrix(temp);  // Freed immediately - NOT tracked
 ```
 
 **2. Intersection Lists**
 ```c
 // In render.c, colors.c, hit.c
+// Allocated with malloc() directly
 intersections = intersect_world(scene, ray);
 // ... use intersections ...
-free(intersections.intersections);  // Freed immediately
+free(intersections.intersections);  // Freed immediately - NOT tracked
 ```
 
-**3. Inverse Transform Matrices**
+**3. All Matrix Operations**
 ```c
 // In camera.c - ray_for_pixel()
+// Allocated with malloc() via inverse_matrix()
 inv_transform = inverse_matrix(camera->transform);
 // ... use inv_transform ...
-free_matrix(inv_transform);  // Freed immediately
+free_matrix(inv_transform);  // Freed immediately - NOT tracked
 ```
 
-### Exit Cleanup (via free_all)
-These are tracked and freed on program exit:
+**Why NOT tracked?**
+These allocations happen thousands of times per frame. Tracking them would:
+- Slow down the program significantly
+- Grow the allocation list infinitely
+- Risk double-free when free_all() is called
+- Waste memory on tracking nodes
+
+### Exit Cleanup (via free_all - TRACKED)
+These are allocated with `safe_malloc()` and tracked for cleanup on exit:
 
 **1. Scene Structure** (ALLOC_TYPE_SCENE)
-- Created in `create_world()`
+- Created in `create_world()` with `safe_malloc()`
 - Freed via `free_scene()` which handles all sub-structures
+- Sub-structures (camera transform, MLX) are freed within `free_scene()`
 
 **2. Objects** (ALLOC_TYPE_OBJECT)
-- Created in `parse_sphere()`, `parse_plane()`, `parse_cylinder()`
+- Created in `parse_sphere()`, `parse_plane()`, `parse_cylinder()` with `safe_malloc()`
 - Freed via `free_object()` which handles transform matrices
+- Transform matrices are allocated with `malloc()` (NOT tracked individually)
 
 **3. Lights** (ALLOC_TYPE_LIGHT)
-- Created in `parse_light()`
+- Created in `parse_light()` with `safe_malloc()`
 - Freed via `free_light()`
 
-**4. Persistent Matrices** (ALLOC_TYPE_MTX)
-- Object transform matrices
-- Object inverse matrices
-- Camera transform matrix
-- Freed via `free_matrix()`
+**Why tracked?**
+These are persistent allocations that exist for the lifetime of the program:
+- Created once during initialization
+- Used throughout the program
+- Only freed on exit or error
 
 ## Code Flow
 
@@ -199,48 +216,4 @@ free_all()
     │   │       └─→ free_matrix(transform, inverse, transpose)
     │   └─→ MLX cleanup
     └─→ Clear allocation list
-```
-
-## Error Handling
-
-### On Parse Error
-```c
-void parse_error(int line, char *msg)
-{
-    // Print error message
-    free_all();  // Clean up all allocations
-    exit(1);
-}
-```
-
-### On Runtime Error
-```c
-void print_error(char *msg)
-{
-    // Print error message
-    free_all();  // Clean up all allocations
-    exit(1);
-}
-```
-
-### On Normal Exit
-```c
-int main(int argc, char **argv)
-{
-    // ... program logic ...
-    free_all();  // Clean up before exit
-    return (0);
-}
-```
-
-## Memory Leak Testing
-
-### Run Valgrind
-```bash
-# Quick 2-second test
-make valgrind-quick SCENE=scenes/your_scene.rt
-
-# Full test with log file
-make valgrind SCENE=scenes/your_scene.rt
-cat valgrind-out.txt
 ```
