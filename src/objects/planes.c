@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 20:49:29 by marieli           #+#    #+#             */
-/*   Updated: 2025/10/15 18:44:04 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:24:53 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_object	*create_plane(void)
 	plane->transform = identity_matrix();
 	plane->inverse_transform = inverse_matrix(plane->transform);
 	plane->transpose_inverse_transform = transpose_matrix(plane->inverse_transform);
+	plane->origin = create_point(0, 0, 0);
 	return (plane);
 }
 

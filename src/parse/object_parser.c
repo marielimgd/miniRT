@@ -6,9 +6,11 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/15 18:40:50 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:44:19 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minirt.h"
 
 #include "minirt.h"
 
@@ -16,16 +18,17 @@ void	parse_sphere(char **tokens, t_scene *scene, int line_number)
 {
 	t_object	*sphere;
 	double		diameter;
+	t_vector	position;
 
 	if (count_tokens(tokens) != 4)
 		parse_error(line_number, "Invalid sphere parameters");
 		
 	sphere = create_sphere();
-	sphere->origin = string_to_vector(tokens[1], 1.0);
+	position = string_to_vector(tokens[1], 1.0); 
 	diameter = ft_atof(tokens[2]);
 	if (diameter <= 0.0)
 		parse_error(line_number, "Sphere diameter must be greater than 0");
-	t_matrix *translation_m = translation(sphere->origin.x, sphere->origin.y, sphere->origin.z);
+	t_matrix *translation_m = translation(position.x, position.y, position.z);
 	t_matrix *scaling_m = scaling(diameter / 2.0, diameter / 2.0, diameter / 2.0);
 	set_transform(sphere, matrix_product(translation_m, scaling_m));
 	sphere->material.color = parse_colors(tokens[3]);
@@ -43,16 +46,17 @@ void	parse_plane(char **tokens, t_scene *scene, int line_number)
 	t_vector	normal;
 	t_matrix	*rotation_m;
 	t_matrix	*translation_m;
+	t_vector	position; 
 
 	if (count_tokens(tokens) != 4)
 		parse_error(line_number, "Invalid plane parameters");
 	plane = create_plane();
-	plane->origin = string_to_vector(tokens[1], 1.0);
+	position = string_to_vector(tokens[1], 1.0); 
 	normal = string_to_vector(tokens[2], 0.0);
 	if (normal.x < -1.0 || normal.x > 1.0 || normal.y < -1.0
 		|| normal.y > 1.0 || normal.z < -1.0 || normal.z > 1.0)
 		parse_error(line_number, "Plane normal vector values must be in range [-1.0, 1.0]");
-	translation_m = translation(plane->origin.x, plane->origin.y, plane->origin.z);
+	translation_m = translation(position.x, position.y, position.z);
 	rotation_m = rotation_from_orientation(normal);
 	set_transform(plane, matrix_product(translation_m, rotation_m));
 	plane->material.color = parse_colors(tokens[3]);
