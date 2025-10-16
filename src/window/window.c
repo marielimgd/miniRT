@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 14:00:56 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:51:05 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	close_window(t_scene *scene)
 {
-	mlx_destroy_image(scene->mlx.mlx_ptr, scene->mlx.img_ptr);
-	mlx_destroy_window(scene->mlx.mlx_ptr, scene->mlx.win_ptr);
-	mlx_destroy_display(scene->mlx.mlx_ptr);
-	free(scene->mlx.mlx_ptr);
+	(void)scene;
 	free_all();
 	exit(0);
 	return (0);

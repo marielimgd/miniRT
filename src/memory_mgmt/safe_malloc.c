@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:22:04 by jhualves          #+#    #+#             */
-/*   Updated: 2025/10/16 16:58:20 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:51:05 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,19 @@ void	free_matrix(t_matrix *m)
 {
 	int	i;
 
-	i = 0;
-	while (i < m->row)
+	if (!m)
+		return ;
+	if (m->matrix)
 	{
-		free(m->matrix[i]);
-		i++;
+		i = 0;
+		while (i < m->row)
+		{
+			if (m->matrix[i])
+				free(m->matrix[i]);
+			i++;
+		}
+		free(m->matrix);
 	}
-	free(m->matrix);
 	free(m);
 }
 

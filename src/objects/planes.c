@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 20:49:29 by marieli           #+#    #+#             */
-/*   Updated: 2025/10/16 17:33:22 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:51:05 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_object	*create_plane(void)
 {
 	t_object	*plane;
 
-	plane = safe_malloc(sizeof(t_object), ALLOC_TYPE_OBJECT);
+	plane = malloc(sizeof(t_object));
 	plane->type = PLANE;
 	plane->transform = identity_matrix();
 	plane->inverse_transform = inverse_matrix(plane->transform);

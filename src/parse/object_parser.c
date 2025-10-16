@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 14:43:45 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:51:05 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	parse_cylinder(char **tokens, t_scene *scene, int line_number)
 		parse_error(line_number, "Invalid cylinder parameters");
 
 	// create a create_cylinder() constructor later and remove the following block
-	cylinder = safe_malloc(sizeof(t_object), ALLOC_TYPE_OBJECT);
+	cylinder = malloc(sizeof(t_object));
 	if (!cylinder)
 		parse_error(line_number, "Memory allocation failed for a new cylinder");
 	cylinder->type = CYLINDER;
