@@ -41,7 +41,7 @@ clean:
 
 # Remove objects and the final executable
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) render.bmp
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@echo "Full clean complete."
 
