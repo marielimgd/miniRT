@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 19:23:20 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 14:00:56 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ static void	init_mlx_image(t_mlx_data *mlx)
 
 static void	setup_hooks(t_scene *scene)
 {
-	mlx_key_hook(scene->mlx.win_ptr, handle_keypress, scene);
+	/* Use mlx_hook for KeyPress (event 2) with mask (1L<<0) to ensure
+	   non-printable keys like arrow keys are delivered correctly. */
+	mlx_hook(scene->mlx.win_ptr, 2, (1L<<0), handle_keypress, scene);
 	mlx_mouse_hook(scene->mlx.win_ptr, handle_mouse_scroll, scene);
 	mlx_hook(scene->mlx.win_ptr, 17, 0, close_window, scene);
 }

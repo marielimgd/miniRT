@@ -39,5 +39,7 @@ typedef struct s_bmp_info_header
 # pragma pack(pop)
 
 void	export_to_bitmap(char *filename, t_scene *scene);
-
+void	validate_scene(t_scene *scene);
+void	validate_filename(char *filename);
+void	export_bmp(t_scene *world);
 #endif

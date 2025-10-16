@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 17:55:31 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/15 17:41:33 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 14:07:43 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,18 +122,25 @@ int	handle_mouse_scroll(int button, int x, int y, t_scene *scene)
 {
 	(void)x;
 	(void)y;
+	/* change fov in radians (5 degrees step) and recompute camera internals */
 	if (button == MOUSE_SCROLL_UP)
 	{
-		scene->camera.fov -= 5;
-		if (scene->camera.fov < 1)
-			scene->camera.fov = 1;
+		double	step = 5.0 * (M_PI / 180.0);
+		scene->camera.fov -= step;
+		if (scene->camera.fov < 1.0 * (M_PI / 180.0))
+			scene->camera.fov = 1.0 * (M_PI / 180.0);
+		camera_init(&scene->camera, WIDTH, HEIGHT, scene->camera.fov);
+		update_camera_transform(&scene->camera);
 		render_scene(scene);
 	}
 	else if (button == MOUSE_SCROLL_DOWN)
 	{
-		scene->camera.fov += 5;
-		if (scene->camera.fov > 179)
-			scene->camera.fov = 179;
+		double	step = 5.0 * (M_PI / 180.0);
+		scene->camera.fov += step;
+		if (scene->camera.fov > 179.0 * (M_PI / 180.0))
+			scene->camera.fov = 179.0 * (M_PI / 180.0);
+		camera_init(&scene->camera, WIDTH, HEIGHT, scene->camera.fov);
+		update_camera_transform(&scene->camera);
 		render_scene(scene);
 	}
 	return (0);
