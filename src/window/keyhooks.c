@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 17:55:31 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 15:55:51 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:18:06 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ static void	update_camera_transform(t_camera *cam)
 	if (cam->transform)
 		free_matrix(cam->transform);
 	normalization(&cam->orientation, &cam->orientation);
+	if (fabs(cam->orientation.y) > 0.999)
+		cam->up = create_vector(0, 0, 1);
+	else
+		cam->up = create_vector(0, 1, 0);
 	add_tuples(&to, &cam->from, &cam->orientation);
 	cam->transform = view_transform(cam->from, to, cam->up);
 }
@@ -346,7 +350,7 @@ int	handle_keypress(int keycode, t_scene *scene)
 	bool	needs_rerender;
 
 	needs_rerender = false;
-	printf("Keycode pressed: %d\n", keycode);
+	printf("Keycode pressed: %d\n", keycode); //tirar depois
 	if (keycode == ESC_KEY)
 		close_window(scene);
 	if (keycode == KEY_T)

@@ -1,0 +1,36 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    random_z_axis.rt                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/10/16 16:50:00 by mmariano          #+#    #+#              #
+#    Updated: 2025/10/16 16:17:43 by mmariano         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# Ambient lighting
+A  0.35  255,245,240
+
+# Camera positioned along Z axis (at z=10), pointing toward origin (0,0,0)
+# Direction vector from (0,0,10) to (0,0,0) is (0,0,-1)
+C  0,0,10   0,0,-1   75
+
+# Light source
+L  6,8,12   0.75     255,255,255
+
+# Sphere at origin
+sp 0,0,0    2.8     150,100,200
+
+# Sphere upper left
+sp -3,3,-1    1.6     255,150,100
+
+# Sphere lower right
+sp 2.5,-2.5,1    1.9     100,200,180
+
+# Sphere small front
+sp -1,1,2    1.0     255,200,80
+
+# Plane (floor)
+pl 0,-5,0   0,1,0   160,160,160

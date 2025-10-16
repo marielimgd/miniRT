@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:05:48 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 14:43:45 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:17:43 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ void	export_bmp(t_scene *world)
 	world->mlx.addr = mlx_get_data_addr(world->mlx.img_ptr, &world->mlx.bpp,
 			&world->mlx.line_len, &world->mlx.endian);
 	normalization(&world->camera.orientation, &world->camera.orientation);
+	if (fabs(world->camera.orientation.y) > 0.999)
+		world->camera.up = create_vector(0, 0, 1);
+	else
+		world->camera.up = create_vector(0, 1, 0);
 	add_tuples(&to, &world->camera.from, &world->camera.orientation);
 	world->camera.transform = view_transform(world->camera.from, to,
 			world->camera.up);

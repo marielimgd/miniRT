@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/15 17:32:33 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:17:43 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	parse_camera(char **tokens, t_scene *scene, int line_number)
 	scene->has_camera = true;
 	scene->camera.from = string_to_vector(tokens[1], 1.0);
 	scene->camera.orientation = string_to_vector(tokens[2], 0.0);
-	scene->camera.up = create_vector(0, 1, 0);
+	if (fabs(scene->camera.orientation.y) > 0.999)
+		scene->camera.up = create_vector(0, 0, 1);
+	else
+		scene->camera.up = create_vector(0, 1, 0);
 	fov = ft_atoi(tokens[3]);
 	if (scene->camera.orientation.x < -1.0 || scene->camera.orientation.x > 1.0 || scene->camera.orientation.y < -1.0
 		|| scene->camera.orientation.y > 1.0 || scene->camera.orientation.z < -1.0 || scene->camera.orientation.z > 1.0)
