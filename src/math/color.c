@@ -12,7 +12,6 @@
 
 #include "../../inc/minirt.h"
 
-
 t_color	max_color(t_color c)
 {
 	t_color	final;

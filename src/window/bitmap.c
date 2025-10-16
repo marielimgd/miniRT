@@ -57,7 +57,7 @@ static void	write_pixel_data(int fd, t_scene *scene)
 		x = 0;
 		while (x < WIDTH)
 		{
-			color = *(int *)(scene->mlx.addr + (y * scene->mlx.line_len 
+			color = *(int *)(scene->mlx.addr + (y * scene->mlx.line_len
 				+ x * (scene->mlx.bpp / 8)));
 			pixel[0] = (color) & 0xFF;
 			pixel[1] = (color >> 8) & 0xFF;

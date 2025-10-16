@@ -15,7 +15,7 @@
 t_intersection	create_intersection(double t, t_object *obj)
 {
 	t_intersection	i;
-	
+
 	i.t = t;
 	i.object = obj;
 	return(i);
@@ -45,7 +45,7 @@ t_intersection	intersect_object(t_object *object, t_ray ray)
 {
 	t_intersection 			empty;
 	t_intersection_list 	sphere_list;
-	
+
 	if (object->type == SPHERE)
 	{
 		sphere_list = intersect_sphere(object, ray);
@@ -62,7 +62,7 @@ t_intersection		*find_hit(t_intersection_list *list)
 {
 	int				i;
 	t_intersection	*closest_hit;
-	
+
 	closest_hit = NULL;
 	i = 0;
 	while(i < list->count)

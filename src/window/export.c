@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:05:48 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 16:17:43 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:05:40 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,8 @@ void	validate_scene(t_scene *scene)
 		parse_error(0, "Scene must have at least one light 'L'");
 }
 
-void	print_initial_object_selection(t_scene *scene)
+static void	print_controls(void)
 {
-	t_object	*obj;
-	double		pos_x;
-	double		pos_y;
-	double		pos_z;
-
-	if (!scene->selected_object || !scene->selected_object->data)
-	{
-		printf("\nNo objects in scene to select.\n");
-		return ;
-	}
-	obj = (t_object *)scene->selected_object->data;
-	/* Extract position from transform matrix */
-	pos_x = obj->transform->matrix[0][3];
-	pos_y = obj->transform->matrix[1][3];
-	pos_z = obj->transform->matrix[2][3];
-	
-	printf("\n=== Initial Object Selection ===\n");
-	if (obj->type == SPHERE)
-		printf("Selected: SPHERE | Diameter: %.2f | Position: (%.1f, %.1f, %.1f)\n",
-			obj->prop.sphere.radius * 2.0, pos_x, pos_y, pos_z);
-	else if (obj->type == PLANE)
-		printf("Selected: PLANE | Position: (%.1f, %.1f, %.1f)\n",
-			pos_x, pos_y, pos_z);
-	else if (obj->type == CYLINDER)
-		printf("Selected: CYLINDER | Diameter: %.2f | Height: %.2f | Position: (%.1f, %.1f, %.1f)\n",
-			obj->prop.cylinder.diameter, obj->prop.cylinder.height,
-			pos_x, pos_y, pos_z);
 	printf("\nControls:\n");
 	printf("  O: Cycle selected object\n");
 	printf("  , (comma): Decrease diameter\n");
@@ -59,35 +32,36 @@ void	print_initial_object_selection(t_scene *scene)
 	printf("  G: Decrease cylinder height\n\n");
 }
 
-void	validate_filename(char *filename)
+static void	print_selected_object(t_object *obj, double pos[3])
 {
-	const char	*extension = ".rt";
-	int			file_len;
-	int			ext_len;
-
-	file_len = ft_strlen(filename);
-	ext_len = ft_strlen(extension);
-	if (file_len <= ext_len
-		|| ft_strcmp(filename + file_len - ext_len, extension) != 0)
-		parse_error(0, "Scene file must have a .rt extension");
+	printf("\n=== Initial Object Selection ===\n");
+	if (obj->type == SPHERE)
+		printf("Selected: SPHERE | Diameter: %.2f | Position: (%.1f, %.1f, %.1f)\n",
+			obj->prop.sphere.radius * 2.0, pos[0], pos[1], pos[2]);
+	else if (obj->type == PLANE)
+		printf("Selected: PLANE | Position: (%.1f, %.1f, %.1f)\n",
+			pos[0], pos[1], pos[2]);
+	else if (obj->type == CYLINDER)
+		printf("Selected: CYLINDER | Diameter: %.2f | Height: %.2f"
+			" | Position: (%.1f, %.1f, %.1f)\n",
+			obj->prop.cylinder.diameter, obj->prop.cylinder.height,
+			pos[0], pos[1], pos[2]);
 }
 
-void	export_bmp(t_scene *world)
+void	print_initial_object_selection(t_scene *scene)
 {
-	t_vector	to;
+	t_object	*obj;
+	double		pos[3];
 
-	world->mlx.mlx_ptr = mlx_init();
-	world->mlx.img_ptr = mlx_new_image(world->mlx.mlx_ptr, WIDTH, HEIGHT);
-	world->mlx.addr = mlx_get_data_addr(world->mlx.img_ptr, &world->mlx.bpp,
-			&world->mlx.line_len, &world->mlx.endian);
-	normalization(&world->camera.orientation, &world->camera.orientation);
-	if (fabs(world->camera.orientation.y) > 0.999)
-		world->camera.up = create_vector(0, 0, 1);
-	else
-		world->camera.up = create_vector(0, 1, 0);
-	add_tuples(&to, &world->camera.from, &world->camera.orientation);
-	world->camera.transform = view_transform(world->camera.from, to,
-			world->camera.up);
-	render_scene(world);
-	export_to_bitmap("render.bmp", world);
+	if (!scene->selected_object || !scene->selected_object->data)
+	{
+		printf("\nNo objects in scene to select.\n");
+		return ;
+	}
+	obj = (t_object *)scene->selected_object->data;
+	pos[0] = obj->transform->matrix[0][3];
+	pos[1] = obj->transform->matrix[1][3];
+	pos[2] = obj->transform->matrix[2][3];
+	print_selected_object(obj, pos);
+	print_controls();
 }

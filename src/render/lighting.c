@@ -26,7 +26,7 @@ static t_color	compute_specular(t_material m, t_light *light,
 
 	if (reflect_dot_eye <= 0)
 		return ((t_color){0, 0, 0});
-		
+
 	factor = pow(reflect_dot_eye, m.shininess);
 	return (scale_color(light->color, m.specular * factor));
 }

@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 20:49:29 by marieli           #+#    #+#             */
-/*   Updated: 2025/10/16 17:51:05 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 18:37:22 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_object	*create_plane(void)
 	plane->type = PLANE;
 	plane->transform = identity_matrix();
 	plane->inverse_transform = inverse_matrix(plane->transform);
-	plane->transpose_inverse_transform = transpose_matrix(plane->inverse_transform);
+	plane->transpose_inverse_transform = transpose_matrix(
+			plane->inverse_transform);
 	plane->origin = create_point(0, 0, 0);
 	return (plane);
 }
@@ -37,7 +38,7 @@ t_intersection_list	intersect_plane(t_object *plane, t_ray ray)
 	if (fabs(transformed_ray.direction.y) < EPSILON)
 	{
 		intersections.count = 0;
-		intersections.intersections = NULL; 
+		intersections.intersections = NULL;
 		return (intersections);
 	}
 	t = -transformed_ray.origin.y / transformed_ray.direction.y;

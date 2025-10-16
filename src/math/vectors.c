@@ -41,7 +41,7 @@ void	normalization(t_vector *result, t_vector *u_vector)
 	{
 		result->x = u_vector->x/magnitute;
 		result->y = u_vector->y/magnitute;
-		result->z = u_vector->z/magnitute;	
+		result->z = u_vector->z/magnitute;
 	}
 	result->w = u_vector->w;
 }
@@ -58,7 +58,7 @@ void	negative_vector(t_vector *result, t_vector *vector)
 bool	are_vectors_equal(t_vector a, t_vector b)
 {
 	bool	result;
-	
+
 	result = is_equal(a.x, b.x)
 		&& is_equal(a.y, b.y)
 		&& is_equal(a.z, b.z)

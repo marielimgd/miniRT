@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/10/16 16:58:21 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:30:04 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_vector	multiply_matrix_by_tuple(t_matrix *m, t_vector t);
 t_matrix	*rotation_x(double radians);
 t_matrix	*rotation_y(double radians);
 t_matrix	*rotation_z(double radians);
-t_matrix	*rotation_from_orientation(t_vector orientation); // Add this line
+t_matrix	*rotation_from_orientation(t_vector orientation);
 double		cofactor(t_matrix *m, int row, int col);
 double		determinant(t_matrix *m);
 
@@ -59,8 +59,8 @@ t_color	    color_at(t_scene *world, t_ray ray);
 
 // --- Scene ---
 t_scene	    *create_world(void);
-void	    create_default_world(t_scene *world); // ONLY FOR TESTING
-t_color	    lighting(t_material m, t_light *light, t_comps *comps, bool in_shadow);
+t_color	    lighting(t_material m, t_light *light, t_comps *comps,
+				bool in_shadow);
 void	    reflect(t_vector *result,t_vector *in, t_vector *normal);
 
 // --- Window ---
@@ -72,12 +72,12 @@ int	    handle_keypress(int keycode, t_scene *scene);
 
 // --- Rendering ---
 void		render_scene(struct s_scene *scene);
-void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y, struct s_color color);
+void		my_mlx_pixel_put(struct s_mlx_data *data, int x, int y,
+				struct s_color color);
 void	    prepare_computations(t_comps *comps, t_intersection *i, t_ray *ray);
 
 
 // --- Ray ---
-t_vector	calculate_ray_direction(t_camera *camera, int x, int y);
 t_ray		create_ray(t_vector origin, t_vector direction);
 t_vector	ray_position(t_ray ray, double t);
 t_ray		transform(t_ray ray, t_matrix *m);
@@ -88,7 +88,8 @@ void		set_transform(t_object *s, t_matrix *t);
 void		camera_init(t_camera *cam, int hsize, int vsize, double fov);
 t_matrix	*view_transform(t_vector from, t_vector to, t_vector up);
 t_matrix	*create_orientation_matrix(t_orientation_vectors *vecs);
-void		calculate_orientation_vectors(t_orientation_vectors *vecs, t_vector from, t_vector to, t_vector up);
+void		calculate_orientation_vectors(t_orientation_vectors *vecs,
+				t_vector from, t_vector to, t_vector up);
 t_ray	    ray_for_pixel(t_camera *camera, int px, int py);
 
 

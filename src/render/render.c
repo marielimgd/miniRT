@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 16:48:01 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:35:00 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	process_pixel(t_scene *scene, int x, int y)
 	if (hit == NULL)
 	{
 		pixel_color = (t_color){0, 0, 0}; //black background
-		pixel_color = (t_color){255, 255, 255}; //white background
+		//pixel_color = (t_color){255, 255, 255}; //white background
 	}
 	else
 	{

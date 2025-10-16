@@ -6,29 +6,11 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:41 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 14:55:53 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:37:50 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-/* int	main(int argc, char **argv)
-{
-	t_scene	*world;
-
-	if (argc != 2)
-		parse_error(0, "Usage: ./minirt <scene.rt>");
-	world = create_world();
-	parse_scene(argv[1], world);
-	world->selected_light = world->lights;
-	init_window(world);
-	render_scene(world);
-	mlx_loop(world->mlx.mlx_ptr);
-	free_all();
-	return (0);
-} */
-//----------------------------------------------TEST AREA----------------------------------------
-
 
 int	main(int argc, char **argv)
 {
@@ -38,7 +20,8 @@ int	main(int argc, char **argv)
 	if (argc < 2 || argc > 3)
 		parse_error(0, "Usage: ./minirt <scene.rt> [--save]");
 	if (argc == 3 && ft_strcmp(argv[2], "--save") != 0)
-		parse_error(0, "Invalid argument. Use '--save' to create a BMP file.");
+		parse_error(0,
+			"Invalid argument. Use '--save' to create a BMP file.");
 	save_to_bmp = (argc == 3);
 	validate_filename(argv[1]);
 	world = create_world();

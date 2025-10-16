@@ -15,7 +15,7 @@
 double	dot_product(t_vector *a, t_vector *b)
 {
 	double	result;
-	
+
 	// if (a->w != 0 || b->w != 0)
 	// 	print_error("Wrong Vector Passed");
 	result = (a->x * b->x) + (a->y * b->y) + (a->z * b->z);

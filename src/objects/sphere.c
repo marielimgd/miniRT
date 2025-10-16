@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 17:51:05 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:32:06 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 t_object	*create_sphere(void)
 {
 	t_object *sphere;
-	
+
 	sphere = malloc(sizeof(t_object));
 	sphere->type = SPHERE;
 	sphere->transform = identity_matrix();
 	sphere->inverse_transform = inverse_matrix(sphere->transform);
-	sphere->transpose_inverse_transform = transpose_matrix(sphere->inverse_transform);
+	sphere->transpose_inverse_transform = transpose_matrix(
+			sphere->inverse_transform);
 	sphere->origin = (t_vector){0, 0, 0, 1};
 	sphere->prop.sphere.radius = 1.0;
 	return(sphere);

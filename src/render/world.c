@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:10:26 by marieli           #+#    #+#             */
-/*   Updated: 2025/10/16 17:33:22 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:35:29 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,20 @@ t_intersection_list	intersect_world(t_scene *scene, t_ray ray)
 	}
 	sort_intersections(&all_intersections);
 	return (all_intersections);
+}
+
+t_scene	*create_world(void)
+{
+	t_scene	*world;
+
+	world = safe_malloc(sizeof(t_scene), ALLOC_TYPE_SCENE);
+	world->lights = NULL;
+	world->objects = NULL;
+	world->selected_object = NULL;
+	world->has_ambient = false;
+	world->has_camera = false;
+	world->translation_mode = false;
+	world->rotation_mode = false;
+	return (world);
 }
 

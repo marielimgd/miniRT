@@ -22,7 +22,6 @@ void	parse_error(int line_number, char *message)
 	exit(1);
 }
 
-
 void free_tokens(char **tokens)
 {
 	int index;
@@ -40,7 +39,7 @@ void free_tokens(char **tokens)
 int count_tokens(char **tokens)
 {
 	int index;
-	
+
 	index = 0;
 	if (!tokens || !*tokens)
 		return (0);

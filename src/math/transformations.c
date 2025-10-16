@@ -21,7 +21,6 @@ t_ray	transform(t_ray ray, t_matrix *m)
 	return (new_ray);
 }
 
-
 void	set_transform(t_object *s, t_matrix *t)
 {
 	if (s->transform)

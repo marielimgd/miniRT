@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:16:02 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 17:48:32 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 18:32:40 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ t_vector	normal_at_sphere(t_object *sphere, t_vector world_point)
 	t_vector	object_normal;
 	t_vector	world_normal;
 
-	object_point = multiply_matrix_by_tuple(sphere->inverse_transform, world_point);
+	object_point = multiply_matrix_by_tuple(sphere->inverse_transform,
+			world_point);
 	subtract_tuples(&object_normal, &object_point, &sphere->origin);
-	world_normal = multiply_matrix_by_tuple(sphere->transpose_inverse_transform, object_normal);
+	world_normal = multiply_matrix_by_tuple(
+			sphere->transpose_inverse_transform, object_normal);
 	world_normal.w = 0;
-	
+
 	normalization(&world_normal, &world_normal);
 	return (world_normal);
 }
@@ -37,7 +39,7 @@ t_vector	normal_at_plane(t_object *plane, t_vector world_point)
 	world_normal = multiply_matrix_by_tuple(plane->transpose_inverse_transform,
 			object_normal);
 	world_normal.w = 0;
-	
+
 	normalization(&world_normal, &world_normal);
 	return (world_normal);
 }
@@ -50,6 +52,6 @@ t_vector	normal_at(t_object *object, t_vector world_point)
 		return (normal_at_plane(object, world_point));
 	// else if (object->type == CYLINDER)
 	// 	return (normal_at_cylinder(object, world_point));
-	
+
 	return (create_vector(0, 0, 0));
 }

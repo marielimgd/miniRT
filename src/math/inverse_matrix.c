@@ -12,7 +12,6 @@
 
 #include "minirt.h"
 
-
 static t_matrix	*submatrix(t_matrix *a, int row_to_remove, int col_to_remove)
 {
 	t_matrix	*sub;
@@ -22,7 +21,7 @@ static t_matrix	*submatrix(t_matrix *a, int row_to_remove, int col_to_remove)
 	int			sub_c;
 
 	sub = create_matrix(a->collum - 1, a->row - 1);
-	
+
 	sub_r = 0;
 	r = -1;
 	while (++r < a->row)
@@ -83,9 +82,9 @@ t_matrix	*inverse_matrix(t_matrix *m)
 	if (is_equal(det, 0))
 	{
 		print_error("Matrix is not invertible");
-		return (NULL); 
+		return (NULL);
 	}
-	
+
 	inv = create_matrix(m->collum, m->row);
 	row = 0;
 	while (row < m->row)
