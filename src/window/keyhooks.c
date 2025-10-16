@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 17:55:31 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 14:48:29 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:55:51 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,14 +346,13 @@ int	handle_keypress(int keycode, t_scene *scene)
 	bool	needs_rerender;
 
 	needs_rerender = false;
+	printf("Keycode pressed: %d\n", keycode);
 	if (keycode == ESC_KEY)
 		close_window(scene);
-	
-	/* Mode toggles */
 	if (keycode == KEY_T)
 	{
 		scene->translation_mode = !scene->translation_mode;
-		scene->rotation_mode = false; /* Disable rotation mode */
+		scene->rotation_mode = false;
 		printf("\n=== Translation Mode: %s ===\n",
 			scene->translation_mode ? "ON" : "OFF");
 		if (scene->translation_mode)
@@ -363,19 +362,15 @@ int	handle_keypress(int keycode, t_scene *scene)
 	if (keycode == KEY_R)
 	{
 		scene->rotation_mode = !scene->rotation_mode;
-		scene->translation_mode = false; /* Disable translation mode */
+		scene->translation_mode = false;
 		printf("\n=== Rotation Mode: %s ===\n",
 			scene->rotation_mode ? "ON" : "OFF");
 		if (scene->rotation_mode)
 			printf("Use I/K (X-axis), J/; (Y-axis), U/M (Z-axis) to rotate selected object\n");
 		return (0);
 	}
-	
-	/* Handle transforms/rotations in active mode */
 	handle_object_transform_rotation(keycode, scene, &needs_rerender);
 	handle_light_transform(keycode, scene, &needs_rerender);
-	
-	/* Standard controls */
 	handle_camera_controls(keycode, scene, &needs_rerender);
 	handle_object_controls(keycode, scene, &needs_rerender);
 	handle_camera_rotation(keycode, scene, &needs_rerender);
@@ -393,7 +388,7 @@ int	handle_mouse_scroll(int button, int x, int y, t_scene *scene)
 {
 	(void)x;
 	(void)y;
-	/* change fov in radians (5 degrees step) and recompute camera internals */
+
 	if (button == MOUSE_SCROLL_UP)
 	{
 		double	step = 5.0 * (M_PI / 180.0);

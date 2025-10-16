@@ -47,7 +47,7 @@
 # define KEY_I 105 // Y+ (up)
 # define KEY_K 107 // Y- (down)
 # define KEY_J 106 // X- (left)
-# define KEY_SEMICOLON 59 // X+ (right), replacing L
+# define KEY_SEMICOLON 47 // X+ (right), replacing L
 # define KEY_U 117 // Z+ (forward)
 # define KEY_M 109 // Z- (backward)
 

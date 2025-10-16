@@ -1,17 +1,24 @@
 -ESC: close the window
 
-Camera Transformations
-	-Translation: W/A/S/D keys (forward/left/backward/right)
- 	-Rotation: Arrows (rotate view direction)
-	-Zoom: Mouse scroll (Zoom adjustment)
+Camera
+	-Move(translation):	W (forward), A (left), S (back), D (right)
+	-Rotate view:	Arrow keys
+	-Zoom:	Mouse scroll
 
-Object Transformations
-	-O: Cycle through objects in the scene
-	-Translation: T mode + I/K/J/;/U/M keys
-	-Rotation: R mode + I/K/J/;/U/M keys (not spheres)
-	-Resizing: Comma/Dot (diameter), H/G (cylinder height only)
+Objects
+	-Select:	O
+	-Translate: T -> then:
+		I (Y+/up), K (Y-/down)
+		J (X-/left), ; (X+/right)
+		U (Z+/toward camera), M (Z-/away from camera)
+	-Rotate:	R -> then I/K/J/;/U/M (not spheres)
+	-Resize diameter:	, (decrease), . (increase)
+	-Resize height:	H (increase), G (decrease) - cylinders only
 
-Light Transformations 
-	-Translation: T mode + I/K/J/;/U/M keys
-	-Brightness: +/- keys
-	-Selection: L key to cycle through lights
+Lights
+	-Select:	L
+	-Translate:	T -> then:
+		I (Y+/up), K (Y-/down)
+		J (X-/left), ; (X+/right)
+		U (Z+/forward), M (Z-/backward)
+	-Brightness:	+ (increase), - (decrease)
