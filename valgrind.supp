@@ -1,0 +1,121 @@
+# Valgrind suppression file for MinilibX (MLX) library
+# These are known leaks from the MLX library that can be safely ignored
+
+{
+   mlx_init_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_init
+}
+
+{
+   mlx_new_window_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_new_window
+}
+
+{
+   mlx_new_image_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_new_image
+}
+
+{
+   mlx_get_data_addr_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_get_data_addr
+}
+
+{
+   mlx_put_image_to_window_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_put_image_to_window
+}
+
+{
+   mlx_loop_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_loop
+}
+
+{
+   mlx_hook_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_hook
+}
+
+{
+   mlx_key_hook_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_key_hook
+}
+
+{
+   mlx_mouse_hook_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_mouse_hook
+}
+
+{
+   mlx_string_put_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_string_put
+}
+
+{
+   mlx_pixel_put_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_pixel_put
+}
+
+{
+   mlx_xpm_file_to_image_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_xpm_file_to_image
+}
+
+{
+   x11_leak
+   Memcheck:Leak
+   ...
+   obj:*/libX11.so.*
+}
+
+{
+   x11_xcb_leak
+   Memcheck:Leak
+   ...
+   obj:*/libxcb.so.*
+}
+
+{
+   x11_xext_leak
+   Memcheck:Leak
+   ...
+   obj:*/libXext.so.*
+}
+
+{
+   fontconfig_leak
+   Memcheck:Leak
+   ...
+   obj:*/libfontconfig.so.*
+}
+
+{
+   freetype_leak
+   Memcheck:Leak
+   ...
+   obj:*/libfreetype.so.*
+}

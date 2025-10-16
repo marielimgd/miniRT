@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 13:57:30 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:48:01 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	process_pixel(t_scene *scene, int x, int y)
 		prepare_computations(&comps, hit, &ray);
 		pixel_color = shade_hit(scene, &comps);
 	}
+	free(intersections.intersections);
 		my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/09/15 19:26:07 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:58:21 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,11 @@ t_vector	        normal_at_plane(t_object *plane, t_vector world_point);
 // --- Safe_Malloc ---
 void			*safe_malloc(size_t size, t_alloc_type u_type);
 void			free_all(void);
-t_allocation	*get_alloc();
-void		    free_matrix(t_matrix *m);
-void	        free_object(void *obj_ptr);
-void	        free_scene(t_scene *scene);
+t_allocation	**get_alloc_head(void);
+void			free_matrix(t_matrix *m);
+void			free_object(void *obj_ptr);
+void			free_light(void *light_ptr);
+void			free_scene(t_scene *scene);
 
 
 // --- Error ---

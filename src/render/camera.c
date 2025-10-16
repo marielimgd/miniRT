@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 18:54:53 by marieli           #+#    #+#             */
-/*   Updated: 2025/09/13 19:06:40 by marieli          ###   ########.fr       */
+/*   Updated: 2025/10/16 16:48:01 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_matrix	*view_transform(t_vector from, t_vector to, t_vector up)
 	orientation = create_orientation_matrix(&vecs);
 	translation_m = translation(-from.x, -from.y, -from.z);
 	view = matrix_product(orientation, translation_m);
+	free_matrix(orientation);
+	free_matrix(translation_m);
 	return (view);
 }
 
@@ -86,6 +88,7 @@ t_ray	ray_for_pixel(t_camera *camera, int px, int py)
 	t_matrix	*inv_transform;
 	double		world_x;
 	double		world_y;
+	t_ray		ray;
 
 	world_x = camera->half_width - (px + 0.5) * camera->pixel_size;
 	world_y = camera->half_height - (py + 0.5) * camera->pixel_size;
@@ -95,5 +98,7 @@ t_ray	ray_for_pixel(t_camera *camera, int px, int py)
 	origin = multiply_matrix_by_tuple(inv_transform, create_point(0, 0, 0));
 	subtract_tuples(&direction, &pixel, &origin);
 	normalization(&direction, &direction);
-	return (create_ray(origin, direction));
+	ray = create_ray(origin, direction);
+	free_matrix(inv_transform);
+	return (ray);
 }

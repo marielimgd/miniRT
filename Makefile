@@ -48,5 +48,26 @@ fclean: clean
 # Rebuild everything from scratch
 re: fclean all
 
+# Run valgrind with MLX suppression
+valgrind: $(NAME)
+	@echo "Running valgrind with MLX suppression..."
+	@valgrind --leak-check=full \
+			  --show-leak-kinds=all \
+			  --track-origins=yes \
+			  --suppressions=valgrind.supp \
+			  --log-file=valgrind-out.txt \
+			  ./$(NAME) $(SCENE)
+	@echo "Valgrind output saved to valgrind-out.txt"
+	@echo "Usage: make valgrind SCENE=scenes/your_scene.rt"
+
+# Quick valgrind check (exits immediately, good for leak checking)
+valgrind-quick: $(NAME)
+	@echo "Running quick valgrind check..."
+	@timeout 2s valgrind --leak-check=full \
+						 --show-leak-kinds=definite,indirect \
+						 --suppressions=valgrind.supp \
+						 ./$(NAME) $(SCENE) || true
+	@echo "Quick check complete. For full report use: make valgrind SCENE=..."
+
 # Phony targets are rules that don't represent actual files
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re valgrind valgrind-quick
