@@ -1,0 +1,25 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    sphere_sidelight.rt                                :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/10/16 17:30:00 by mmariano          #+#    #+#              #
+#    Updated: 2025/10/16 16:21:18 by mmariano         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# Ambient lighting - low level to see side lighting effect
+A  0.2  255,255,255
+
+# Camera positioned in front of sphere, looking at origin
+# Camera at z=8, pointing toward (0,0,0)
+C  0,0,8   0,0,-1   70
+
+# Light source positioned to the right of camera for sideways illumination
+# At the same Z as camera (8) but shifted right (X+)
+L  6,2,8   0.8     255,255,255
+
+# Sphere at origin
+sp 0,0,0    3.0     180,100,220
