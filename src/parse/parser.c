@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:09:57 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/23 17:17:55 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/10/23 18:56:17 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	parse_scene(char *file, t_scene *scene)
 static void	parse_scene_utils(char ***tokens, char **line, \
 	int line_number, t_scene *scene)
 {
-	tokens = ft_split(line, ' ');
-	if (!tokens)
+	*tokens = ft_split(*line, ' ');
+	if (!(*tokens))
 		parse_error(line_number, "Memory allocation failed during parsing");
-	parse_elements(tokens, scene, line_number);
+	parse_elements(*tokens, scene, line_number);
 }
