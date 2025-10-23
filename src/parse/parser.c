@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:09:57 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/23 18:56:17 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/23 19:25:15 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,42 @@ void	parse_scene(char *file, t_scene *scene)
 		parse_error(0, "Failed to open the scene file");
 	line_number = 0;
 	line = get_next_line(fd);
-	while (line != NULL && line_number++ >= 0)
+	while (line != NULL)
 	{
-		if (line[0] == '\0' || line[0] == '#')
+		line_number++;
+		if (line[0] != '\0' && line[0] != '#' && line[0] != '\n')
 		{
-			free(line);
-			continue ;
+			parse_scene_utils(&tokens, &line, line_number, scene);
+			free_tokens(tokens);
 		}
-		parse_scene_utils(&tokens, &line, line_number, scene);
-		free_tokens(tokens);
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	close(fd);
 }
 
 static void	parse_scene_utils(char ***tokens, char **line, \
 	int line_number, t_scene *scene)
 {
-	*tokens = ft_split(*line, ' ');
-	if (!(*tokens))
-		parse_error(line_number, "Memory allocation failed during parsing");
+	char	*trimmed;
+	int		len;
+
+	*tokens = NULL;
+	len = ft_strlen(*line);
+	if (len > 0 && ((*line)[len - 1] == '\n' || (*line)[len - 1] == '\r'))
+		(*line)[len - 1] = '\0';
+	if (len > 1 && (*line)[len - 2] == '\r')
+		(*line)[len - 2] = '\0';
+	trimmed = ft_strtrim(*line, " \t\r\n");
+	if (!trimmed || trimmed[0] == '\0')
+	{
+		if (trimmed)
+			free(trimmed);
+		return ;
+	}
+	*tokens = ft_split(trimmed, ' ');
+	free(trimmed);
+	if (!(*tokens) || !(*tokens)[0])
+		return ;
 	parse_elements(*tokens, scene, line_number);
 }
