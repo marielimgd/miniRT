@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:05:48 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 19:05:40 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/23 12:28:17 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -36,8 +36,9 @@ static void	print_selected_object(t_object *obj, double pos[3])
 {
 	printf("\n=== Initial Object Selection ===\n");
 	if (obj->type == SPHERE)
-		printf("Selected: SPHERE | Diameter: %.2f | Position: (%.1f, %.1f, %.1f)\n",
-			obj->prop.sphere.radius * 2.0, pos[0], pos[1], pos[2]);
+		printf("Selected: SPHERE | Diameter: %.2f | Position: \
+(%.1f, %.1f, %.1f)\n", \
+obj->prop.sphere.radius * 2.0, pos[0], pos[1], pos[2]);
 	else if (obj->type == PLANE)
 		printf("Selected: PLANE | Position: (%.1f, %.1f, %.1f)\n",
 			pos[0], pos[1], pos[2]);

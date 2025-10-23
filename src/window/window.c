@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:32 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 19:29:01 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/23 12:30:17 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -41,7 +41,7 @@ static void	init_mlx_image(t_mlx_data *mlx)
 
 static void	setup_hooks(t_scene *scene)
 {
-	mlx_hook(scene->mlx.win_ptr, 2, (1L<<0), handle_keypress, scene);
+	mlx_hook(scene->mlx.win_ptr, 2, (1L << 0), handle_keypress, scene);
 	mlx_mouse_hook(scene->mlx.win_ptr, handle_mouse_scroll, scene);
 	mlx_hook(scene->mlx.win_ptr, 17, 0, close_window, scene);
 }

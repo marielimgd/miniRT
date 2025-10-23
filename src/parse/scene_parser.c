@@ -1,21 +1,21 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   scene_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:42:09 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 19:05:41 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/23 11:05:51 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
-t_vector string_to_vector(char *str, double w)
+t_vector	string_to_vector(char *str, double w)
 {
-	t_vector 	vector;
-	char 		**values;
+	t_vector	vector;
+	char		**values;
 
 	values = ft_split(str, ',');
 	if (!values)
@@ -72,7 +72,8 @@ void	parse_camera(char **tokens, t_scene *scene, int line_number)
 	fov = ft_atoi(tokens[3]);
 	validate_camera_orientation(scene, line_number);
 	if (fov < 0 || fov > 180)
-		parse_error(line_number, "Camera FOV must be between 0 and 180 degrees");
+		parse_error(line_number, \
+"Camera FOV must be between 0 and 180 degrees");
 	camera_init(&scene->camera, WIDTH, HEIGHT, fov * (M_PI / 180.0));
 	setup_camera_transform(scene);
 }

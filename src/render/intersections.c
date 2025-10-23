@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:28:07 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 17:33:22 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/23 11:52:51 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -18,7 +18,7 @@ t_intersection	create_intersection(double t, t_object *obj)
 
 	i.t = t;
 	i.object = obj;
-	return(i);
+	return (i);
 }
 
 t_intersection_list	create_intersections_list(int count, ...)
@@ -43,8 +43,8 @@ t_intersection_list	create_intersections_list(int count, ...)
 
 t_intersection	intersect_object(t_object *object, t_ray ray)
 {
-	t_intersection 			empty;
-	t_intersection_list 	sphere_list;
+	t_intersection			empty;
+	t_intersection_list		sphere_list;
 
 	if (object->type == SPHERE)
 	{
@@ -52,20 +52,19 @@ t_intersection	intersect_object(t_object *object, t_ray ray)
 		if (sphere_list.count > 0)
 			return (sphere_list.intersections[0]);
 	}
-
 	empty.t = -1;
 	empty.object = NULL;
 	return (empty);
 }
 
-t_intersection		*find_hit(t_intersection_list *list)
+t_intersection	*find_hit(t_intersection_list *list)
 {
 	int				i;
 	t_intersection	*closest_hit;
 
 	closest_hit = NULL;
 	i = 0;
-	while(i < list->count)
+	while (i < list->count)
 	{
 		if (list->intersections[i].t >= 0)
 		{
@@ -76,5 +75,5 @@ t_intersection		*find_hit(t_intersection_list *list)
 		}
 		i++;
 	}
-	return(closest_hit);
+	return (closest_hit);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:15:50 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/23 10:02:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/23 10:59:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -24,11 +24,11 @@ void	parse_error(int line_number, char *message)
 
 void	free_tokens(char **tokens)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	if (!tokens)
-		return;
+		return ;
 	while (tokens[index])
 	{
 		free(tokens[index]);
@@ -36,9 +36,10 @@ void	free_tokens(char **tokens)
 	}
 	free(tokens);
 }
-int count_tokens(char **tokens)
+
+int	count_tokens(char **tokens)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	if (!tokens || !*tokens)

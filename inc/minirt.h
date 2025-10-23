@@ -8,6 +8,11 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "parser.h"
+# include "window.h"
+# include "raytracer.h"
+# include "multithreading.h"
+# include "bitmap.h"
 # include <time.h>
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -53,8 +58,8 @@
 
 /* -----------------Structs--------------------------*/
 
-struct s_object;
-struct s_list;
+struct	s_object;
+struct	s_list;
 
 typedef struct s_vector
 {
@@ -77,7 +82,6 @@ typedef struct s_matrix
 	double			collum;
 	double			row;
 }					t_matrix;
-
 
 // --- Rendering ---
 typedef struct s_ray
@@ -119,7 +123,7 @@ typedef struct s_camera
 	int			hsize;
 	int			vsize;
 	double		fov;
-	t_matrix	*transform; 
+	t_matrix	*transform;
 	t_vector	from;
 	t_vector	orientation;
 	t_vector	up;
@@ -141,7 +145,6 @@ typedef struct s_light
 	double			brightness;
 	t_color			color;
 }					t_light;
-
 
 typedef enum e_object_type
 {
@@ -236,7 +239,6 @@ typedef struct s_scene
 	t_mlx_data		mlx;
 }					t_scene;
 
-
 // --- Safe Allocation ---
 
 typedef enum e_alloc_type
@@ -251,16 +253,9 @@ typedef enum e_alloc_type
 
 typedef struct s_allocation
 {
-	t_alloc_type	type;
-	void			*ptr;
+	t_alloc_type		type;
+	void				*ptr;
 	struct s_allocation	*next;
 }	t_allocation;
-
-
-# include "parser.h"
-# include "window.h"
-# include "raytracer.h"
-# include "multithreading.h"
-# include "bitmap.h"
 
 #endif

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 19:35:00 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/23 12:22:13 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -21,8 +21,8 @@ static void	process_pixel(t_scene *scene, int x, int y)
 	t_color				pixel_color;
 
 	ray = ray_for_pixel(&scene->camera, x, y);
-		intersections = intersect_world(scene, ray);
-		hit = find_hit(&intersections);
+	intersections = intersect_world(scene, ray);
+	hit = find_hit(&intersections);
 	if (hit == NULL)
 	{
 		pixel_color = (t_color){0, 0, 0}; //black background
@@ -34,7 +34,7 @@ static void	process_pixel(t_scene *scene, int x, int y)
 		pixel_color = shade_hit(scene, &comps);
 	}
 	free(intersections.intersections);
-		my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
+	my_mlx_pixel_put(&scene->mlx, x, y, pixel_color);
 }
 
 static void	*render_thread(void *thread_arg)
