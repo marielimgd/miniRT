@@ -78,10 +78,7 @@ void	parse_cylinder(char **tokens, t_scene *scene, int line_number)
 
 	if (count_tokens(tokens) != 6)
 		parse_error(line_number, "Invalid cylinder parameters");
-	cylinder = malloc(sizeof(t_object));
-	if (!cylinder)
-		parse_error(line_number, "Memory allocation failed for a new cylinder");
-	cylinder->type = CYLINDER;
+	cylinder = create_cylinder();
 	init_cylinder_properties(cylinder, tokens, line_number);
 	set_transform(cylinder, translation(cylinder->origin.x,
 			cylinder->origin.y, cylinder->origin.z));

@@ -97,8 +97,6 @@ t_ray				ray_for_pixel(t_camera *camera, int px, int py);
 
 // --- Intersections ---
 t_intersection		intersect_object(t_object *object, t_ray ray);
-t_intersection_list	intersect_cylinder(t_object *cylinder, t_ray ray);
-t_vector		normal_at_cylinder(t_object *cylinder, t_vector world_point);
 t_intersection		create_intersection(double t, t_object *obj);
 t_intersection_list	create_intersections_list(int count, ...);
 t_intersection		*find_hit(t_intersection_list *list);
@@ -113,6 +111,10 @@ t_vector			normal_at_sphere(t_object *sphere, t_vector world_point);
 t_object			*create_plane(void);
 t_intersection_list	intersect_plane(t_object *plane, t_ray ray);
 t_vector			normal_at_plane(t_object *plane, t_vector world_point);
+t_object			*create_cylinder(void);
+t_intersection_list	intersect_cylinder(t_object *cylinder, t_ray ray);
+t_vector			normal_at_cylinder(t_object *cylinder, \
+						t_vector world_point);
 
 // --- Safe_Malloc ---
 void				*safe_malloc(size_t size, t_alloc_type u_type);
