@@ -17,6 +17,8 @@ t_object	*create_sphere(void)
 	t_object	*sphere;
 
 	sphere = malloc(sizeof(t_object));
+	if (!sphere)
+		print_error("allocation failure at sphere");
 	sphere->type = SPHERE;
 	sphere->transform = identity_matrix();
 	sphere->inverse_transform = inverse_matrix(sphere->transform);
