@@ -15,24 +15,29 @@
 /*
 / 	t_matrix	*scaling_m -> t_matrix *scale[0];
 	t_matrix	*rot_scale -> t_matrix *scale[1];
+	t_matrix	*translation_m -> t_matrix *matrices[0];
+	t_matrix	*rotation_m -> t_matrix *matrices[1];
+	t_matrix	*transform_m -> t_matrix *matrices[2];
 */
 void	set_cylinder_transform(t_object *cylinder, t_vector origin, \
-t_vector orientation, double diameter, double height)
+t_vector orientation)
 {
-	t_matrix	*translation_m;
-	t_matrix	*rotation_m;
-	t_matrix	*transform;
+	t_matrix	*matrices[3];
 	t_matrix	*scale[2];
+	double		diameter;
+	double		height;
 
-	rotation_m = NULL;
-	rotation_m = set_cylinder_transform_utils(rotation_m, &orientation);
-	translation_m = translation(origin.x, origin.y, origin.z);
+	diameter = cylinder->prop.cylinder.diameter;
+	height = cylinder->prop.cylinder.height;
+	matrices[1] = NULL;
+	matrices[1] = set_cylinder_transform_utils(matrices[1], &orientation);
+	matrices[0] = translation(origin.x, origin.y, origin.z);
 	scale[0] = scaling(diameter / 2.0, height / 2.0, diameter / 2.0);
-	scale[1] = matrix_product(rotation_m, scale[0]);
-	transform = matrix_product(translation_m, scale[1]);
-	set_transform(cylinder, transform);
-	free_matrix(translation_m);
-	free_matrix(rotation_m);
+	scale[1] = matrix_product(matrices[1], scale[0]);
+	matrices[2] = matrix_product(matrices[0], scale[1]);
+	set_transform(cylinder, matrices[2]);
+	free_matrix(matrices[0]);
+	free_matrix(matrices[1]);
 	free_matrix(scale[0]);
 	free_matrix(scale[1]);
 }
