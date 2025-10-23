@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:09:57 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 18:08:17 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/22 22:39:42 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -44,7 +44,8 @@ void	parse_scene(char *file, t_scene *scene)
 	if (fd < 0)
 		parse_error(0, "Failed to open the scene file");
 	line_number = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		line_number++;
 		if (line[0] == '\0' || line[0] == '#')
@@ -58,6 +59,8 @@ void	parse_scene(char *file, t_scene *scene)
 		parse_elements(tokens, scene, line_number);
 		free_tokens(tokens);
 		free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
 	close(fd);
 }
