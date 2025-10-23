@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 22:10:55 by jhualves          #+#    #+#             */
-/*   Updated: 2025/10/22 21:27:26 by marvin           ###   ########.fr       */
+/*   Created: 2025/10/23 15:23:31 by jhualves          #+#    #+#             */
+/*   Updated: 2025/10/23 15:23:31 by jhualves         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -58,9 +58,14 @@ bool	are_vectors_equal(t_vector a, t_vector b)
 {
 	bool	result;
 
-	result = is_equal(a.x, b.x)
-		&& is_equal(a.y, b.y)
-		&& is_equal(a.z, b.z)
-		&& is_equal(a.w, b.w);
+	if (is_equal(a.x, b.x) \
+	&& is_equal(a.y, b.y) \
+	&& is_equal(a.z, b.z) \
+	&& is_equal(a.w, b.w))
+	{
+		result = true;
+	}
+	else
+		result = false;
 	return (result);
 }

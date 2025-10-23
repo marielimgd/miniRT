@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   bitmap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 18:09:54 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/23 12:24:37 by marvin           ###   ########.fr       */
+/*   Created: 2025/10/23 15:22:41 by jhualves          #+#    #+#             */
+/*   Updated: 2025/10/23 15:22:41 by jhualves         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -58,7 +58,7 @@ static void	write_pixel_data(int fd, t_scene *scene)
 		while (x < WIDTH)
 		{
 			color = *(int *)(scene->mlx.addr + \
-(y * scene->mlx.line_len + x * (scene->mlx.bpp / 8)));
+			(y * scene->mlx.line_len + x * (scene->mlx.bpp / 8)));
 			pixel[0] = (color) & 0xFF;
 			pixel[1] = (color >> 8) & 0xFF;
 			pixel[2] = (color >> 16) & 0xFF;

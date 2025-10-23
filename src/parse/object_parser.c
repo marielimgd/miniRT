@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/14 19:10:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 19:16:51 by mmariano         ###   ########.fr       */
+/*   Created: 2025/10/23 15:37:26 by jhualves          #+#    #+#             */
+/*   Updated: 2025/10/23 15:37:26 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
