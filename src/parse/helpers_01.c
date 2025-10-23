@@ -24,6 +24,7 @@ t_vector orientation, double diameter, double height)
 	t_matrix	*rot_scale;
 	t_matrix	*transform;
 
+	rotation_m = NULL;
 	rotation_m = set_cylinder_transform_utils(rotation_m, &orientation);
 	translation_m = translation(origin.x, origin.y, origin.z);
 	scaling_m = scaling(diameter / 2.0, height / 2.0, diameter / 2.0);

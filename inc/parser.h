@@ -1,19 +1,26 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 12:35:43 by marvin            #+#    #+#             */
-/*   Updated: 2025/10/23 12:40:41 by marvin           ###   ########.fr       */
+/*   Created: 2025/10/23 15:18:20 by jhualves          #+#    #+#             */
+/*   Updated: 2025/10/23 15:18:20 by jhualves         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "minirt.h"
+# include <stdarg.h>
+
+/* Forward declarations to avoid circular includes with minirt.h */
+typedef struct s_scene t_scene;
+typedef struct s_object t_object;
+typedef struct s_vector t_vector;
+typedef struct s_matrix t_matrix;
+typedef struct s_color t_color;
 
 // --- Element parsers ---
 void		parse_scene(char *file, t_scene *scene);
@@ -34,10 +41,10 @@ void		set_plane_material(t_object *plane, char *color_str);
 void		set_cylinder_material(t_object *cylinder, char *color_str);
 void		init_cylinder_properties(t_object *cylinder, char **tokens,
 				int line_number);
-void		set_cylinder_transform(t_object *cylinder, t_vector orientation, \
-double diameter, double height);
+void		set_cylinder_transform(t_object *cylinder, t_vector origin, \
+				t_vector orientation, double diameter, double height);
 t_matrix	*set_cylinder_transform_utils(t_matrix *rotation_m, \
-t_vector *orientation);
+				t_vector *orientation);
 
 // --- Utility functions ---
 void		parse_error(int line_number, char *message);

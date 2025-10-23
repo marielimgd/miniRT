@@ -52,6 +52,12 @@ t_intersection	intersect_object(t_object *object, t_ray ray)
 		if (sphere_list.count > 0)
 			return (sphere_list.intersections[0]);
 	}
+	else if (object->type == CYLINDER)
+	{
+		sphere_list = intersect_cylinder(object, ray);
+		if (sphere_list.count > 0)
+			return (sphere_list.intersections[0]);
+	}
 	empty.t = -1;
 	empty.object = NULL;
 	return (empty);

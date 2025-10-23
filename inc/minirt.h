@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/23 15:18:35 by jhualves          #+#    #+#             */
+/*   Updated: 2025/10/23 15:18:35 by jhualves         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -8,11 +20,6 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "parser.h"
-# include "window.h"
-# include "raytracer.h"
-# include "multithreading.h"
-# include "bitmap.h"
 # include <time.h>
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -257,5 +264,12 @@ typedef struct s_allocation
 	void				*ptr;
 	struct s_allocation	*next;
 }	t_allocation;
+
+/* Include subsystem headers after types to avoid circular dependencies */
+# include "parser.h"
+# include "window.h"
+# include "raytracer.h"
+# include "multithreading.h"
+# include "bitmap.h"
 
 #endif

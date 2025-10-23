@@ -61,6 +61,8 @@ static void	intersect_object_and_append(t_object *obj, t_ray ray,
 		obj_hits = intersect_sphere(obj, ray);
 	else if (obj->type == PLANE)
 		obj_hits = intersect_plane(obj, ray);
+	else if (obj->type == CYLINDER)
+		obj_hits = intersect_cylinder(obj, ray);
 	i = 0;
 	while (i < obj_hits.count)
 	{

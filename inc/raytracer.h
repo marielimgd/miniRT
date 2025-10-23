@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   raytracer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/02 21:36:30 by jhualves          #+#    #+#             */
-/*   Updated: 2025/10/23 12:49:06 by marvin           ###   ########.fr       */
+/*   Created: 2025/10/23 15:18:47 by jhualves          #+#    #+#             */
+/*   Updated: 2025/10/23 15:18:47 by jhualves         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef RAYTRACER_H
 # define RAYTRACER_H
@@ -97,6 +97,8 @@ t_ray				ray_for_pixel(t_camera *camera, int px, int py);
 
 // --- Intersections ---
 t_intersection		intersect_object(t_object *object, t_ray ray);
+t_intersection_list	intersect_cylinder(t_object *cylinder, t_ray ray);
+t_vector		normal_at_cylinder(t_object *cylinder, t_vector world_point);
 t_intersection		create_intersection(double t, t_object *obj);
 t_intersection_list	create_intersections_list(int count, ...);
 t_intersection		*find_hit(t_intersection_list *list);
