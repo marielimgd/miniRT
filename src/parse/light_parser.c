@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   light_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 19:30:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 19:30:00 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/22 22:12:22 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -32,7 +32,7 @@ void	parse_ambient_light(char **tokens, t_scene *scene, int line_number)
 
 void	parse_light(char **tokens, t_scene *scene, int line_number)
 {
-	t_light	*light;
+	t_light		*light;
 	double		brightness;
 
 	if (count_tokens(tokens) != 4)

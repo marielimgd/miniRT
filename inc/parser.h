@@ -22,6 +22,10 @@ void		set_plane_material(t_object *plane, char *color_str);
 void		set_cylinder_material(t_object *cylinder, char *color_str);
 void		init_cylinder_properties(t_object *cylinder, char **tokens,
 				int line_number);
+void		set_cylinder_transform(t_object *cylinder, t_vect \
+t_vector orientation, double diameter, double height)
+t_matrix	*set_cylinder_transform_utils(t_matrix *rotation_m, \
+t_vector *orientation)
 
 // --- Utility functions ---
 void	parse_error(int line_number, char *message);

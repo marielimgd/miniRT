@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   inverse_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marieli <marieli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:26:48 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/13 19:48:49 by marieli          ###   ########.fr       */
+/*   Updated: 2025/10/22 20:16:01 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -21,7 +21,6 @@ static t_matrix	*submatrix(t_matrix *a, int row_to_remove, int col_to_remove)
 	int			sub_c;
 
 	sub = create_matrix(a->collum - 1, a->row - 1);
-
 	sub_r = 0;
 	r = -1;
 	while (++r < a->row)
@@ -84,7 +83,6 @@ t_matrix	*inverse_matrix(t_matrix *m)
 		print_error("Matrix is not invertible");
 		return (NULL);
 	}
-
 	inv = create_matrix(m->collum, m->row);
 	row = 0;
 	while (row < m->row)

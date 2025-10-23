@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 22:10:55 by jhualves          #+#    #+#             */
-/*   Updated: 2025/10/15 19:21:39 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:27:26 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -31,7 +31,7 @@ void	normalization(t_vector *result, t_vector *u_vector)
 	double	magnitute;
 
 	magnitute = get_magnitude(u_vector);
-	if(magnitute < EPSILON)
+	if (magnitute < EPSILON)
 	{
 		result->x = 0.0f;
 		result->y = 0.0f;
@@ -39,20 +39,19 @@ void	normalization(t_vector *result, t_vector *u_vector)
 	}
 	else
 	{
-		result->x = u_vector->x/magnitute;
-		result->y = u_vector->y/magnitute;
-		result->z = u_vector->z/magnitute;
+		result->x = u_vector->x / magnitute;
+		result->y = u_vector->y / magnitute;
+		result->z = u_vector->z / magnitute;
 	}
 	result->w = u_vector->w;
 }
 
 void	negative_vector(t_vector *result, t_vector *vector)
 {
-	result->x = - vector->x;
-	result->y = - vector->y;
-	result->z = - vector->z;
-	result->w = - vector->w;
-
+	result->x = -vector->x;
+	result->y = -vector->y;
+	result->z = -vector->z;
+	result->w = -vector->w;
 }
 
 bool	are_vectors_equal(t_vector a, t_vector b)

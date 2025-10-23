@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:55:10 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 13:51:25 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:32:09 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -33,4 +33,3 @@ void	set_transform(t_object *s, t_matrix *t)
 		free_matrix(s->transpose_inverse_transform);
 	s->transpose_inverse_transform = transpose_matrix(s->inverse_transform);
 }
-

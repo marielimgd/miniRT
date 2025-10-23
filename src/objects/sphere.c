@@ -1,20 +1,20 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:59:26 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 19:32:06 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:32:10 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
 t_object	*create_sphere(void)
 {
-	t_object *sphere;
+	t_object	*sphere;
 
 	sphere = malloc(sizeof(t_object));
 	sphere->type = SPHERE;
@@ -24,7 +24,7 @@ t_object	*create_sphere(void)
 			sphere->inverse_transform);
 	sphere->origin = (t_vector){0, 0, 0, 1};
 	sphere->prop.sphere.radius = 1.0;
-	return(sphere);
+	return (sphere);
 }
 
 static t_intersection_list	make_intersections(double t1, double t2,
@@ -52,10 +52,10 @@ static void	calculate_sphere_coeffs(t_ray *ray, double *coeffs)
 
 t_intersection_list	intersect_sphere(t_object *sphere, t_ray ray)
 {
-	t_ray		transformed_ray;
-	double		coeffs[3];
-	double		discriminant;
-	t_intersection_list empty_list;
+	t_ray				transformed_ray;
+	double				coeffs[3];
+	double				discriminant;
+	t_intersection_list	empty_list;
 
 	transformed_ray = transform(ray, sphere->inverse_transform);
 	calculate_sphere_coeffs(&transformed_ray, coeffs);

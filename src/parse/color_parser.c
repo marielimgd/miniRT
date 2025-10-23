@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:08:15 by mmariano          #+#    #+#             */
-/*   Updated: 2025/09/15 19:20:14 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:33:20 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -38,8 +38,8 @@ static void	validate_rgb_values(char **rgb_values)
 
 t_color	parse_colors(char *str)
 {
-	t_color color;
-	char **rgb_values;
+	t_color	color;
+	char	**rgb_values;
 
 	rgb_values = ft_split(str, ',');
 	if (!rgb_values || !rgb_values[0] || !rgb_values[1] || !rgb_values[2])

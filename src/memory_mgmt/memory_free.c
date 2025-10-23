@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   memory_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 19:30:00 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/16 19:31:17 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/22 21:05:09 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../../inc/minirt.h"
 
@@ -34,7 +34,7 @@ void	free_matrix(t_matrix *m)
 
 void	free_object(void *obj_ptr)
 {
-	t_object *obj;
+	t_object	*obj;
 
 	obj = (t_object *)obj_ptr;
 	if (obj)
@@ -82,7 +82,7 @@ void	free_scene(t_scene *scene)
 
 void	print_error(char *s)
 {
-	printf("\033[1;31m%s\033[0m\n",s);
+	printf("\033[1;31m%s\033[0m\n", s);
 	free_all();
 	EXIT_FAILURE;
 }
