@@ -12,10 +12,10 @@
 
 #include "minirt.h"
 
-static bool	is_shadowed(t_scene *scene, t_vector point, t_light *light)
+static bool	is_shadowed(t_scene *scene, t_vector point, t_light *light, \
+	double distance)
 {
 	t_vector			v;
-	double				distance;
 	t_vector			direction;
 	t_ray				shadow_ray;
 	t_intersection_list	intersections;
@@ -51,7 +51,7 @@ t_color	shade_hit(t_scene *world, t_comps *comps)
 	while (current_light)
 	{
 		is_in_shadow = is_shadowed(world, comps->over_point,
-				current_light->data);
+				current_light->data, 0.00);
 		final_color = add_color(final_color,
 				lighting(comps->object->material, current_light->data, comps,
 					is_in_shadow));

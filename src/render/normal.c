@@ -42,6 +42,36 @@ t_vector	normal_at_plane(t_object *plane, t_vector world_point)
 	return (world_normal);
 }
 
+/*
+/ transform the world point into object space
+/ check caps first (top and bottom) using EPSILON for numerical stability
+/ double		half_height => double size[0];
+/ double		radius => double size[1];
+*/
+t_vector	normal_at_cylinder(t_object *cylinder, t_vector world_point)
+{
+	t_vector	object_point;
+	t_vector	object_normal;
+	t_vector	world_normal;
+	double		size[2];
+
+	object_point = multiply_matrix_by_tuple(cylinder->inverse_transform,
+			world_point);
+	size[1] = cylinder->prop.cylinder.diameter / 2.0;
+	size[0] = cylinder->prop.cylinder.height / 2.0;
+	if (object_point.y >= size[0] - EPSILON)
+		object_normal = create_vector(0, 1, 0);
+	else if (object_point.y <= -size[0] + EPSILON)
+		object_normal = create_vector(0, -1, 0);
+	else
+		object_normal = create_vector(object_point.x, 0, object_point.z);
+	world_normal = multiply_matrix_by_tuple(
+			cylinder->transpose_inverse_transform, object_normal);
+	world_normal.w = 0;
+	normalization(&world_normal, &world_normal);
+	return (world_normal);
+}
+
 t_vector	normal_at(t_object *object, t_vector world_point)
 {
 	if (object->type == SPHERE)

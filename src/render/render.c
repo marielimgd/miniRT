@@ -12,6 +12,8 @@
 
 #include "minirt.h"
 
+//pixel_color = (t_color){255, 255, 255}; //white background
+//pixel_color = (t_color){0, 0, 0}; //black background
 static void	process_pixel(t_scene *scene, int x, int y)
 {
 	t_ray				ray;
@@ -24,10 +26,7 @@ static void	process_pixel(t_scene *scene, int x, int y)
 	intersections = intersect_world(scene, ray);
 	hit = find_hit(&intersections);
 	if (hit == NULL)
-	{
-		pixel_color = (t_color){0, 0, 0}; //black background
-		//pixel_color = (t_color){255, 255, 255}; //white background
-	}
+		pixel_color = (t_color){0, 0, 0};
 	else
 	{
 		prepare_computations(&comps, hit, &ray);

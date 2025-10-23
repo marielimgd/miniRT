@@ -80,25 +80,29 @@ void	camera_init(t_camera *cam, int hsize, int vsize, double fov)
 	cam->pixel_size = (cam->half_width * 2.0) / (double)hsize;
 }
 
+/*
+	t_vector	pixel -> vector[0];
+	t_vector	origin -> vector[1];
+	t_vector	direction -> vector[2];
+	double		world_x -> world[0];
+	double		world_y -> world[1];
+*/
 t_ray	ray_for_pixel(t_camera *camera, int px, int py)
 {
-	t_vector	pixel;
-	t_vector	origin;
-	t_vector	direction;
 	t_matrix	*inv_transform;
-	double		world_x;
-	double		world_y;
+	t_vector	vector[3];
+	double		world[2];
 	t_ray		ray;
 
-	world_x = camera->half_width - (px + 0.5) * camera->pixel_size;
-	world_y = camera->half_height - (py + 0.5) * camera->pixel_size;
+	world[0] = camera->half_width - (px + 0.5) * camera->pixel_size;
+	world[1] = camera->half_height - (py + 0.5) * camera->pixel_size;
 	inv_transform = inverse_matrix(camera->transform);
-	pixel = multiply_matrix_by_tuple(inv_transform,
-			create_point(world_x, world_y, -1));
-	origin = multiply_matrix_by_tuple(inv_transform, create_point(0, 0, 0));
-	subtract_tuples(&direction, &pixel, &origin);
-	normalization(&direction, &direction);
-	ray = create_ray(origin, direction);
+	vector[0] = multiply_matrix_by_tuple(inv_transform,
+			create_point(world[0], world[1], -1));
+	vector[1] = multiply_matrix_by_tuple(inv_transform, create_point(0, 0, 0));
+	subtract_tuples(&vector[2], &vector[0], &vector[1]);
+	normalization(&vector[2], &vector[2]);
+	ray = create_ray(vector[1], vector[2]);
 	free_matrix(inv_transform);
 	return (ray);
 }

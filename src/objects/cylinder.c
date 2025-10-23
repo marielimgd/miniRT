@@ -16,9 +16,9 @@
  * create_cylinder
  * Allocates and initializes a cylinder object with default diameter=2 height=2
  */
-t_object *create_cylinder(void)
+t_object	*create_cylinder(void)
 {
-	t_object *cylinder;
+	t_object	*cylinder;
 
 	cylinder = malloc(sizeof(t_object));
 	if (!cylinder)
@@ -26,7 +26,8 @@ t_object *create_cylinder(void)
 	cylinder->type = CYLINDER;
 	cylinder->transform = identity_matrix();
 	cylinder->inverse_transform = inverse_matrix(cylinder->transform);
-	cylinder->transpose_inverse_transform = transpose_matrix(cylinder->inverse_transform);
+	cylinder->transpose_inverse_transform = \
+	transpose_matrix(cylinder->inverse_transform);
 	cylinder->origin = (t_vector){0, 0, 0, 1};
 	cylinder->prop.cylinder.diameter = 2.0;
 	cylinder->prop.cylinder.height = 2.0;
@@ -40,8 +41,8 @@ t_object *create_cylinder(void)
  */
 t_intersection_list intersect_cylinder(t_object *cylinder, t_ray ray)
 {
-	
 
 
-	
+
+
 }

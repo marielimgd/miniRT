@@ -6,11 +6,14 @@
 /*   By: jhualves <jhualves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:09:57 by mmariano          #+#    #+#             */
-/*   Updated: 2025/10/23 15:35:21 by jhualves         ###   ########.fr       */
+/*   Updated: 2025/10/23 17:17:55 by jhualves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static void	parse_scene_utils(char ***tokens, char **line, \
+	int line_number, t_scene *scene);
 
 static void	parse_elements(char **tokens, t_scene *scene, int line_number)
 {
@@ -45,22 +48,27 @@ void	parse_scene(char *file, t_scene *scene)
 		parse_error(0, "Failed to open the scene file");
 	line_number = 0;
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL && line_number++ >= 0)
 	{
-		line_number++;
 		if (line[0] == '\0' || line[0] == '#')
 		{
 			free(line);
 			continue ;
 		}
-		tokens = ft_split(line, ' ');
-		if (!tokens)
-			parse_error(line_number, "Memory allocation failed during parsing");
-		parse_elements(tokens, scene, line_number);
+		parse_scene_utils(&tokens, &line, line_number, scene);
 		free_tokens(tokens);
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);
+}
+
+static void	parse_scene_utils(char ***tokens, char **line, \
+	int line_number, t_scene *scene)
+{
+	tokens = ft_split(line, ' ');
+	if (!tokens)
+		parse_error(line_number, "Memory allocation failed during parsing");
+	parse_elements(tokens, scene, line_number);
 }
