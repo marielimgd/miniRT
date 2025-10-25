@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:03:13 by marielidias       #+#    #+#             */
-/*   Updated: 2025/08/19 15:21:42 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:19:26 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -96,6 +96,6 @@ int					ft_isspace(int c);
 int					ft_strcmp(const char *s1, const char *s2);
 // char				*ft_strtok(char *str, const char *delim, char **saveptr);
 char				*ft_strndup(const char *s1, size_t n);
-double  			ft_atof(const char *str);
+double				ft_atof(const char *str);
 
 #endif

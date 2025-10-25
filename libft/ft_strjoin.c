@@ -1,42 +1,33 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:04:21 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 15:08:59 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:16:26 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "libft.h"
 
-char	*ft_strjoin(char *str1, char *str2)
+char	*ft_strjoin(char *s1, char *s2)
 {
+	int		size;
+	char	*s3;
+	char	*result;
 
-	if (!str1 || !str2)
+	if (!s1 || !s2)
 		return (NULL);
-	int len1 = ft_strlen(str1);
-	int len2 = ft_strlen(str2);
-	char *result = malloc(len1 + len2 + 1);
-	if (!result)
-		return (NULL);
-
-	int index1 = 0;
-	while (str1[index1])
-	{
-		result[index1] = str1[index1];
-		index1++;
-	}
-
-	int index2 = 0;
-	while (str2[index2])
-	{
-		result[index1] = str2[index2];
-		index1++;
-		index2++;
-	}
-	result[index1] = '\0';
+	size = ft_strlen(s1);
+	size += ft_strlen(s2);
+	s3 = malloc(size + 1);
+	result = s3;
+	while (*s1)
+		*s3++ = *s1++;
+	while (*s2)
+		*s3++ = *s2++;
+	*s3 = '\0';
 	return (result);
 }
