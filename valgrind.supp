@@ -119,3 +119,24 @@
    ...
    obj:*/libfreetype.so.*
 }
+
+{
+   mlx_xcb_writev_param
+   Memcheck:Param
+   ...
+   fun:__writev
+   fun:writev
+   fun:xcb_writev
+   fun:_XSend
+   fun:XSync
+   fun:XCloseDisplay
+}
+
+{
+   mlx_minilibx_cleanup_uninit
+   Memcheck:Param
+   ...
+   fun:__writev
+   fun:writev
+   obj:*/libxcb.so.*
+}

@@ -1,0 +1,8 @@
+==106187== Memcheck, a memory error detector
+==106187== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==106187== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==106187== Command: ./minirt scenes/plane.rt
+==106187== 
+==106187== FATAL: in suppressions file "valgrind.supp" near line 126:
+==106187==    bad or missing extra suppression info
+==106187== exiting now.
