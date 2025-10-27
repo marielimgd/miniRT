@@ -6,37 +6,44 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:04:21 by mmariano          #+#    #+#             */
-/*   Updated: 2025/08/19 15:08:59 by mmariano         ###   ########.fr       */
+/*   Updated: 2025/10/27 16:25:59 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static void	copy_into(char *dest, char *s1, char *s2)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (s1[i])
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		dest[i++] = s2[j++];
+	}
+	dest[i] = '\0';
+}
+
 char	*ft_strjoin(char *str1, char *str2)
 {
+	int		len1;
+	int		len2;
+	char	*result;
 
 	if (!str1 || !str2)
 		return (NULL);
-	int len1 = ft_strlen(str1);
-	int len2 = ft_strlen(str2);
-	char *result = malloc(len1 + len2 + 1);
+	len1 = ft_strlen(str1);
+	len2 = ft_strlen(str2);
+	result = malloc(len1 + len2 + 1);
 	if (!result)
 		return (NULL);
-
-	int index1 = 0;
-	while (str1[index1])
-	{
-		result[index1] = str1[index1];
-		index1++;
-	}
-
-	int index2 = 0;
-	while (str2[index2])
-	{
-		result[index1] = str2[index2];
-		index1++;
-		index2++;
-	}
-	result[index1] = '\0';
+	copy_into(result, str1, str2);
 	return (result);
 }

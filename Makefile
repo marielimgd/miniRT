@@ -69,5 +69,9 @@ valgrind-quick: $(NAME)
 						 ./$(NAME) $(SCENE) || true
 	@echo "Quick check complete. For full report use: make valgrind SCENE=..."
 
+norminette:
+	@echo "Running norminette on $(LIBFT_DIR) and $(SRC_DIR)..."
+	@norminette $(LIBFT_DIR) $(SRC_DIR)
+
 # Phony targets are rules that don't represent actual files
 .PHONY: all clean fclean re valgrind valgrind-quick
