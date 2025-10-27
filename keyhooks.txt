@@ -10,7 +10,7 @@ Objects
 	-Translate: T -> then:
 		I (Y+/up), K (Y-/down)
 		J (X-/left), ; (X+/right)
-		U (Z+/toward camera), M (Z-/away from camera)
+		U (Z-/away from camera), M(Z+/toward camera)
 	-Rotate:	R -> then I/K/J/;/U/M (not spheres)
 	-Resize diameter:	, (decrease), . (increase)
 	-Resize height:	H (increase), G (decrease) - cylinders only

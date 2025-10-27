@@ -1,0 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    intersect_sphere_cylinder.rt                       :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: auto-generated                                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/10/27  by assistant                      #+#    #+#              #
+#    Updated: 2025/10/27  by assistant                     ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+A  0.2 255,255,255
+# camera: positioned back and slightly above, looking toward +z
+C  0,1.2,-8   0,0,1   60
+# single strong light to reveal intersection shading
+L  -6,6,-6   0.9   255,255,255
+
+# Cylinder centered slightly below origin so it intersects the sphere
+# Format: cy <point> <orientation> <radius> <height> <r,g,b>
+cy 0,-0.5,0   0,1,0   1.0 3.0   160,220,200
+
+# Sphere positioned to touch the cylinder on its side (tangent)
+# Cylinder center: (0,-0.5,0), cyl radius: 1.0 -> sphere radius 0.6 => center x = 1.6
+# Format: sp <center> <diameter> <r,g,b>
+sp 1.6,-0.5,0   1.2     220,90,90
+
+# A small ground plane to give context (optional)
+pl 0,-2,0   0,1,0   152,251,152
